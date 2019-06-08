@@ -4,6 +4,7 @@ using System.Reflection;
 using System.Runtime.Serialization;
 using System.Text;
 using Domain.Model.Lookups;
+using Domain.Model.Stud;
 
 namespace Domain.Model.AddLookups
 {
@@ -25,6 +26,8 @@ namespace Domain.Model.AddLookups
         [IgnoreDataMember] public ICollection<LkpTour> LkpTours { get; set; }
         [IgnoreDataMember] public ICollection<LkpBus> LkpBusses { get; set; }
         [IgnoreDataMember] public ICollection<LkpClass> LkpClasses { get; set; }
+
+        [IgnoreDataMember] public ICollection<StudMaster> SchoolStudMasters { get; set; }
 
     }
 }

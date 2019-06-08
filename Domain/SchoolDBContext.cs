@@ -1,10 +1,12 @@
 ﻿ using System;
 using System.Collections.Generic;
-using System.Text;
+ using System.Data;
+ using System.Text;
 using Domain.Config;
  using Domain.Model.AddLookups;
  using Domain.Model.Lookups;
-using Microsoft.EntityFrameworkCore;
+ using Domain.Model.Stud;
+ using Microsoft.EntityFrameworkCore;
 
 namespace Domain
 {
@@ -38,6 +40,10 @@ namespace Domain
         public  DbSet<LkpTour> LkpTours { get; set; }
         public  DbSet<LkpBus> LkpBusses { get; set; }
         public DbSet<LkpClass> LkpClasses { get; set; }
+        
+        //================Stud Module =========================
+        public DbSet<StudParent> StudParents { get; set; }
+        public DbSet<StudMaster> StudMasters { get; set; }
 
     }
 }

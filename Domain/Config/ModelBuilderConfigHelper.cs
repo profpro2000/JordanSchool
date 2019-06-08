@@ -26,6 +26,7 @@ namespace Domain.Config
             
             //======= Student Tables ======================================
             modelBuilder.ApplyConfiguration(new StudParentConfig());
+            modelBuilder.ApplyConfiguration(new StudMasterConfig());
 
             return modelBuilder;
 

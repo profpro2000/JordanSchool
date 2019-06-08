@@ -26,5 +26,11 @@ namespace Domain.Model.Lookups
         [IgnoreDataMember] public ICollection<StudParent> FatherEducationParents { get; set; }
         [IgnoreDataMember] public ICollection<StudParent> MatherEducationParents { get; set; }
         [IgnoreDataMember] public ICollection<StudParent> ParentRelationParents { get; set; }
+
+        [IgnoreDataMember] public ICollection<StudMaster> GenderStudMasters { get; set; }
+        [IgnoreDataMember] public ICollection<StudMaster> JoinYearStudMasters { get; set; }
+        [IgnoreDataMember] public ICollection<StudMaster> JoinTermStudMasters { get; set; }
+        [IgnoreDataMember] public ICollection<StudMaster> JoinClassSeqStudMasters { get; set; }
+        [IgnoreDataMember] public ICollection<StudMaster> HealthStudMasters { get; set; }
     }
 }

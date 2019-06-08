@@ -30,6 +30,7 @@ namespace School.ServiceLayer.MappingConfigs
             CreateMap<LkpClass, LkpClassVw>().ReverseMap();
             //============Stud Mapping================
             CreateMap<StudParent, StudParentVw>().ReverseMap();
+            CreateMap<StudMaster, StudMasterVw>().ReverseMap();
 
         }
     }

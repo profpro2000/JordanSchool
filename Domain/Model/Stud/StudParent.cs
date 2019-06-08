@@ -1,4 +1,5 @@
-﻿using Domain.Model.Lookups;
+﻿using System.Collections.Generic;
+using Domain.Model.Lookups;
 
 namespace Domain.Model.Stud
 {
@@ -46,6 +47,8 @@ namespace Domain.Model.Stud
         public string ParentEmail { get; set; }
         public string ParentFace { get; set; }
         public string Note { get; set; }
+
+        public ICollection<StudMaster> StudMasters { get; set; }
 
     }
 

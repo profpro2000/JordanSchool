@@ -1,4 +1,5 @@
-﻿using Core.IStud;
+﻿
+using Core.IStudRepo;
 using Domain;
 using Domain.Model.Stud;
 

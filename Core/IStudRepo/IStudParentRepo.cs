@@ -1,6 +1,6 @@
 ﻿using Domain.Model.Stud;
 
-namespace Core.IStud
+namespace Core.IStudRepo
 {
     public interface IStudParentRepo:IRepo<StudParent>
     {

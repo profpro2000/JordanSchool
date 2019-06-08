@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using Core.IAddLookupsRepo;
 using Core.ILookupRepo;
-using Core.IStud;
+using Core.IStudRepo;
 using Domain;
 
 using Microsoft.AspNetCore.Builder;
@@ -70,6 +70,8 @@ namespace School
             //======= Stud Module =============
             services.AddScoped<IStudParentRepo, StudParentRepo>();
             services.AddScoped<StudParentService>();
+            services.AddScoped<IStudMasterRepo, StudMasterRepo>();
+            services.AddScoped<StudMasterService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
