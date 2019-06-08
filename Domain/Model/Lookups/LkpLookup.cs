@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.Serialization;
 using System.Text;
 using Domain.Model.AddLookups;
-using Domain.Model.Stud;
+using Domain.Model.Reg;
 
 namespace Domain.Model.Lookups
 {
@@ -20,17 +20,17 @@ namespace Domain.Model.Lookups
         [IgnoreDataMember] public  ICollection<LkpSchool> LkpSchool { get; set; }
         [IgnoreDataMember] public ICollection<LkpClass> LkpClasses { get; set; }
 
-        [IgnoreDataMember] public ICollection<StudParent> ReligionParents { get; set; }
-        [IgnoreDataMember] public ICollection<StudParent> NationalityParents { get; set; }
-        [IgnoreDataMember] public ICollection<StudParent> CityParents { get; set; }
-        [IgnoreDataMember] public ICollection<StudParent> FatherEducationParents { get; set; }
-        [IgnoreDataMember] public ICollection<StudParent> MatherEducationParents { get; set; }
-        [IgnoreDataMember] public ICollection<StudParent> ParentRelationParents { get; set; }
+        [IgnoreDataMember] public ICollection<RegParent> ReligionParents { get; set; }
+        [IgnoreDataMember] public ICollection<RegParent> NationalityParents { get; set; }
+        [IgnoreDataMember] public ICollection<RegParent> CityParents { get; set; }
+        [IgnoreDataMember] public ICollection<RegParent> FatherEducationParents { get; set; }
+        [IgnoreDataMember] public ICollection<RegParent> MatherEducationParents { get; set; }
+        [IgnoreDataMember] public ICollection<RegParent> ParentRelationParents { get; set; }
 
-        [IgnoreDataMember] public ICollection<StudMaster> GenderStudMasters { get; set; }
-        [IgnoreDataMember] public ICollection<StudMaster> JoinYearStudMasters { get; set; }
-        [IgnoreDataMember] public ICollection<StudMaster> JoinTermStudMasters { get; set; }
-        [IgnoreDataMember] public ICollection<StudMaster> JoinClassSeqStudMasters { get; set; }
-        [IgnoreDataMember] public ICollection<StudMaster> HealthStudMasters { get; set; }
+        [IgnoreDataMember] public ICollection<RegStud> GenderStudMasters { get; set; }
+        [IgnoreDataMember] public ICollection<RegStud> JoinYearStudMasters { get; set; }
+        [IgnoreDataMember] public ICollection<RegStud> JoinTermStudMasters { get; set; }
+        [IgnoreDataMember] public ICollection<RegStud> JoinClassSeqStudMasters { get; set; }
+        [IgnoreDataMember] public ICollection<RegStud> HealthStudMasters { get; set; }
     }
 }

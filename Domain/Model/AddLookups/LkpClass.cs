@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Domain.Model.Lookups;
-using Domain.Model.Stud;
+using Domain.Model.Reg;
 
 namespace Domain.Model.AddLookups
 {
@@ -20,7 +20,7 @@ namespace Domain.Model.AddLookups
         public int YearId { get; set; }
         public LkpLookup YearsLookup { get; set; }
 
-        [IgnoreDataMember] public ICollection<StudMaster> ClassStudMasters { get; set; }
+        [IgnoreDataMember] public ICollection<RegStud> ClassRegStuds { get; set; }
 
 
     }

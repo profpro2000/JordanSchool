@@ -1,19 +1,20 @@
-﻿using Domain.Model.Stud;
+﻿using Domain.Model.Reg;
 using  Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-namespace Domain.Config.Stud
+namespace Domain.Config.Reg
+
 {
-    public class StudMasterConfig:IEntityTypeConfiguration<StudMaster>
+    public class RegStudConfig:IEntityTypeConfiguration<RegStud>
     {
-        public void Configure(EntityTypeBuilder<StudMaster> builder)
+        public void Configure(EntityTypeBuilder<RegStud> builder)
         {
-            builder.ToTable("Stud_Master");
+            builder.ToTable("Reg_Stud");
             builder.HasKey(k => k.Id);
             builder.Property(u => u.StudNo).IsRequired();
             builder.HasIndex(p => p.StudNo).IsUnique();
             builder.Property(p => p.FirstName).IsRequired().HasMaxLength(75);
-            builder.HasOne(p => p.StudParent)
-                .WithMany(p => p.StudMasters)
+            builder.HasOne(p => p.RegParent)
+                .WithMany(p => p.RegStuds)
                 .HasForeignKey(k => k.ParentId)
                 .OnDelete(DeleteBehavior.Restrict);
             builder.HasOne(p => p.GenderLookup)
@@ -29,15 +30,15 @@ namespace Domain.Config.Stud
                 .HasForeignKey(k => k.JoinTermId)
                 .OnDelete(DeleteBehavior.Restrict);
             builder.HasOne(p => p.LkpSchool)
-                .WithMany(p => p.SchoolStudMasters)
+                .WithMany(p => p.SchoolRegStuds)
                 .HasForeignKey(k => k.SchoolId)
                 .OnDelete(DeleteBehavior.Restrict);
             builder.HasOne(p => p.LkpSection)
-                .WithMany(p => p.SectionStudMasters)
+                .WithMany(p => p.SectionRegStuds)
                 .HasForeignKey(k => k.SectionId)
                 .OnDelete(DeleteBehavior.Restrict);
             builder.HasOne(p => p.LkpClass)
-                .WithMany(p => p.ClassStudMasters)
+                .WithMany(p => p.ClassRegStuds)
                 .HasForeignKey(k => k.SectionId)
                 .OnDelete(DeleteBehavior.Restrict);
             builder.HasOne(p => p.JoinClassSeqLookup)

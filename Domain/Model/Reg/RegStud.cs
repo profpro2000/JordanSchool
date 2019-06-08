@@ -1,15 +1,16 @@
 ﻿using System;
 using Domain.Model.AddLookups;
 using Domain.Model.Lookups;
+using Domain.Model.Reg;
 
-namespace Domain.Model.Stud
+namespace Domain.Model.Reg
 {
-    public class StudMaster: AuditModel
+    public class RegStud: AuditModel
     {
         public int Id { get; set; }
         public int StudNo { get; set; }
         public  int ParentId { get; set; }//StudParent
-        public StudParent StudParent { get; set; }
+        public RegParent RegParent { get; set; }
         public int IdNum { get; set; }
         public string FirstName { get; set; }
         public string FirstLName { get; set; }

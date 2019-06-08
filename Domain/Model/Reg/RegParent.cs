@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using Domain.Model.Lookups;
 
-namespace Domain.Model.Stud
+namespace Domain.Model.Reg
 {
-    public class StudParent : AuditModel
+    public class RegParent : AuditModel
     {
         public int Id { get; set; }
         public string IdNum { get; set; }
@@ -48,7 +48,7 @@ namespace Domain.Model.Stud
         public string ParentFace { get; set; }
         public string Note { get; set; }
 
-        public ICollection<StudMaster> StudMasters { get; set; }
+        public ICollection<RegStud> RegStuds { get; set; }
 
     }
 

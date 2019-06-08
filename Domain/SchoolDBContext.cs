@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using Domain.Config;
  using Domain.Model.AddLookups;
  using Domain.Model.Lookups;
- using Domain.Model.Stud;
+ using Domain.Model.Reg;
  using Microsoft.EntityFrameworkCore;
 
 namespace Domain
@@ -42,8 +42,8 @@ namespace Domain
         public DbSet<LkpClass> LkpClasses { get; set; }
         
         //================Stud Module =========================
-        public DbSet<StudParent> StudParents { get; set; }
-        public DbSet<StudMaster> StudMasters { get; set; }
+        public DbSet<RegParent> RegParents { get; set; }
+        public DbSet<RegStud> RegStuds { get; set; }
 
     }
 }

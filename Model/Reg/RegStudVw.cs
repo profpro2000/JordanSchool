@@ -1,11 +1,11 @@
 ﻿using System;
 using Domain.Model.AddLookups;
 using Domain.Model.Lookups;
-using Domain.Model.Stud;
+using Domain.Model.Reg;
 
-namespace Model.Stud
+namespace Model.Reg
 {
-    public class StudMasterVw
+    public class RegStudVw
     {
 
         public int Id { get; set; }

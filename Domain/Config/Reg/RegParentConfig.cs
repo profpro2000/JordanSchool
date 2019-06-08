@@ -1,14 +1,14 @@
-﻿using Domain.Model.Stud;
+﻿using Domain.Model.Reg;
 using  Microsoft.EntityFrameworkCore;
 using  Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Domain.Config.Stud
+namespace Domain.Config.Reg
 {
-    public class StudParentConfig:IEntityTypeConfiguration<StudParent>
+    public class RegParentConfig:IEntityTypeConfiguration<RegParent>
     {
-        public void Configure(EntityTypeBuilder<StudParent> builder)
+        public void Configure(EntityTypeBuilder<RegParent> builder)
         {
-            builder.ToTable("Stud_Parent");
+            builder.ToTable("Reg_Parent");
             builder.HasKey(key => key.Id);
             builder.Property(p => p.FirstName).IsRequired().HasMaxLength(100);
             builder.Property(p => p.SecondName).IsRequired().HasMaxLength(100);

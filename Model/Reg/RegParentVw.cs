@@ -1,8 +1,8 @@
 ﻿using Domain.Model.Lookups;
 
-namespace Model.Stud
+namespace Model.Reg
 {
-    public class StudParentVw
+    public class RegParentVw
     {
 
         public int Id { get; set; }

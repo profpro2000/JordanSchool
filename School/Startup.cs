@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using Core.IAddLookupsRepo;
 using Core.ILookupRepo;
-using Core.IStudRepo;
+using Core.IRegRepo;
 using Domain;
 
 using Microsoft.AspNetCore.Builder;
@@ -11,10 +11,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Persistence.AddLookupsRepo;
 using Persistence.LookupsRepo;
-using Persistence.StudRepo;
+using Persistence.RegRepo;
 using School.ServiceLayer.Services.AddLookupServices;
 using School.ServiceLayer.Services.LookupsServices;
-using School.ServiceLayer.Services.StudServices;
+using School.ServiceLayer.Services.RegServices;
 using IConfiguration = Microsoft.Extensions.Configuration.IConfiguration;
 
 
@@ -68,10 +68,10 @@ namespace School
             services.AddScoped<LkpClassService>();
 
             //======= Stud Module =============
-            services.AddScoped<IStudParentRepo, StudParentRepo>();
-            services.AddScoped<StudParentService>();
-            services.AddScoped<IStudMasterRepo, StudMasterRepo>();
-            services.AddScoped<StudMasterService>();
+            services.AddScoped<IRegParentRepo, RegParentRepo>();
+            services.AddScoped<RegParentService>();
+            services.AddScoped<IRegStudRepo, RegStudRepo>();
+            services.AddScoped<RegStudService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

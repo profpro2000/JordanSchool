@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using System.Text;
-using Domain.Model.Stud;
+using Domain.Model.Reg;
 
 namespace Domain.Model.AddLookups
 {
@@ -17,6 +17,6 @@ namespace Domain.Model.AddLookups
         public LkpSchool LkpSchool { get; set; }
 
         public ICollection<LkpClass> LkpClasses { get; set; }
-        [IgnoreDataMember] public ICollection<StudMaster> SectionStudMasters { get; set; }
+        [IgnoreDataMember] public ICollection<RegStud> SectionRegStuds { get; set; }
     }
 }

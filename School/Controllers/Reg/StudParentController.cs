@@ -3,21 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Core;
-using Domain.Model.Stud;
+using Domain.Model.Reg;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Model.Stud;
-using School.ServiceLayer.Services.StudServices;
+using Model.Reg;
+using School.ServiceLayer.Services.RegServices;
 
-namespace School.Controllers.Stud
+namespace School.Controllers.Reg
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class StudParentController : ControllerBase
+    public class RegParentController : ControllerBase
     {
-        private StudParentService _service;
+        private RegParentService _service;
 
-        public StudParentController(StudParentService service)
+        public RegParentController(RegParentService service)
         {
             _service = service;
         }
@@ -50,7 +50,7 @@ namespace School.Controllers.Stud
 
         // POST: api/StudParent
         [HttpPost]
-        public  async Task<IActionResult> Post(StudParentVw obj)
+        public  async Task<IActionResult> Post(RegParentVw obj)
         {
             if (!ModelState.IsValid)
             {
@@ -63,7 +63,7 @@ namespace School.Controllers.Stud
 
         // PUT: api/StudParent/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> Put(int id, StudParentVw obj)
+        public async Task<IActionResult> Put(int id, RegParentVw obj)
         {
 
             if (!ModelState.IsValid)
