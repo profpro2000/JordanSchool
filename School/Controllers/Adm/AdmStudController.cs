@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using School.ServiceLayer.Services.AdmServices;
-//test 0000123
+//test 0000123456
 namespace School.Controllers.Adm
 {
     [Route("api/[controller]")]
