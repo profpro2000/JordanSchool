@@ -24,9 +24,14 @@ namespace School.ServiceLayer.MappingConfigs
             CreateMap<LkpTour, LkpTourVw>().ReverseMap();
             CreateMap<LkpBus, LkpBusVw>().ReverseMap();
             CreateMap<LkpClass, LkpClassVw>().ReverseMap();
+            CreateMap<LkpDocument, LkpDocumentVw>().ReverseMap();
+
+
             //============Stud Mapping================
             CreateMap<RegParent, RegParentVw>().ReverseMap();
             CreateMap<RegStud, RegStudVw>().ReverseMap();
+
+
 
         }
     }

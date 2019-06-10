@@ -67,6 +67,10 @@ namespace School
             services.AddScoped<ILkpClassRepo, LkpClassRepo>();
             services.AddScoped<LkpClassService>();
 
+
+            services.AddScoped<ILkpDocumentRepo, LkpDocumentRepo>();
+            services.AddScoped<LkpDocumentService>();
+
             //======= Stud Module =============
             services.AddScoped<IRegParentRepo, RegParentRepo>();
             services.AddScoped<RegParentService>();

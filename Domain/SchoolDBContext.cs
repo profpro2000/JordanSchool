@@ -34,6 +34,8 @@ namespace Domain
         public  DbSet<LkpCalendar> LkpCalendars { get; set; }
         public  DbSet<LkpLookupType> LkpLookupTypes { get; set; }
         public DbSet<LkpLookup> LkpLookups { get; set; }
+
+        public DbSet<LkpDocument> LkpDocuments { set; get; }
         //==================Additional Lookups =================
         public  DbSet<LkpSchool> LkpSchools { get; set; }
         public  DbSet<LkpSection> LkpSections { get; set; }

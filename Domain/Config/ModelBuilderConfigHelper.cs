@@ -23,6 +23,7 @@ namespace Domain.Config
             modelBuilder.ApplyConfiguration(new LkpTourConfig());
             modelBuilder.ApplyConfiguration(new LkpBusConfig());
             modelBuilder.ApplyConfiguration(new LkpClassConfig());
+            modelBuilder.ApplyConfiguration(new LkpDocumentConfig());
             
             //======= Student Tables ======================================
             modelBuilder.ApplyConfiguration(new RegParentConfig());

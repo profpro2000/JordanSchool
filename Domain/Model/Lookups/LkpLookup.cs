@@ -32,5 +32,12 @@ namespace Domain.Model.Lookups
         [IgnoreDataMember] public ICollection<RegStud> JoinTermStudMasters { get; set; }
         [IgnoreDataMember] public ICollection<RegStud> JoinClassSeqStudMasters { get; set; }
         [IgnoreDataMember] public ICollection<RegStud> HealthStudMasters { get; set; }
+        [IgnoreDataMember] public ICollection<LkpDocument> DocumentMasters { get; set; }
+        [IgnoreDataMember] public ICollection<LkpDocument> SectionMasters { get; set; }
+
+        [IgnoreDataMember] public ICollection<LkpDocument> MandatoryMasters { set; get; }
+
+        [IgnoreDataMember] public ICollection<LkpDocument> ActiveMasters { set; get; }
+
     }
 }
