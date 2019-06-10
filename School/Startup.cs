@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Core.IAddLookupsRepo;
+using Core.IAdmRepo;
 using Core.ILookupRepo;
 using Core.IRegRepo;
 using Domain;
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Persistence.AddLookupsRepo;
+using Persistence.AdmRepo;
 using Persistence.LookupsRepo;
 using Persistence.RegRepo;
 using School.ServiceLayer.Services.AddLookupServices;
+using School.ServiceLayer.Services.AdmServices;
 using School.ServiceLayer.Services.LookupsServices;
 using School.ServiceLayer.Services.RegServices;
 using IConfiguration = Microsoft.Extensions.Configuration.IConfiguration;
@@ -76,6 +79,14 @@ namespace School
             services.AddScoped<RegParentService>();
             services.AddScoped<IRegStudRepo, RegStudRepo>();
             services.AddScoped<RegStudService>();
+
+
+
+            //=========================Adm Module==============================//
+
+            services.AddScoped<IAdmStudRepo, AdmStudRepo>();
+            services.AddScoped<AdmStudService>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

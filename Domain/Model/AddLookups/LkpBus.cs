@@ -1,4 +1,8 @@
-﻿namespace Domain.Model.AddLookups
+﻿using System.Collections.Generic;
+using System.Runtime.Serialization;
+using Domain.Model.Adm;
+
+namespace Domain.Model.AddLookups
 {
     public class LkpBus:AuditModel
     {
@@ -10,6 +14,10 @@
         public string EvningSuper { get; set; }
         public int SchoolId { get; set; }
         public LkpSchool LkpSchool { get; set; }
-        
+
+
+        [IgnoreDataMember] public ICollection<AdmStud> BusAdmStuds { get; set; }
+
+
     }
 }
