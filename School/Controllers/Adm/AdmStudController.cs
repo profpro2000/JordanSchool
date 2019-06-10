@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using School.ServiceLayer.Services.AdmServices;
-
+//test 
 namespace School.Controllers.Adm
 {
     [Route("api/[controller]")]
