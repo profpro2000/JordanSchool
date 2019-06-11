@@ -13,7 +13,7 @@ namespace School.Controllers.Adm
     public class AdmStudController : ControllerBase
     {
 
-
+        //ee
         private AdmStudService _service;
 
         public AdmStudController(AdmStudService service)
