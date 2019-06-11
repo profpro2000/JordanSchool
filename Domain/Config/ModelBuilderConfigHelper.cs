@@ -1,6 +1,7 @@
 ﻿
 using Domain.Config.AddLookupsConfig;
 using Domain.Config.Adm;
+using Domain.Config.Fin;
 using Domain.Config.LookupConfig;
 using Domain.Config.Reg;
 using Microsoft.EntityFrameworkCore;
@@ -31,7 +32,14 @@ namespace Domain.Config
             modelBuilder.ApplyConfiguration(new RegStudConfig());
 
             //=============================Adm Tables==============
-            modelBuilder.ApplyConfiguration(new AdmStudConfig());
+            modelBuilder.ApplyConfiguration(new AdmStudConfig());       
+            
+            
+            //=============================Fin Tables==============
+            modelBuilder.ApplyConfiguration(new FinItemConfig());
+
+
+
 
             return modelBuilder;
 

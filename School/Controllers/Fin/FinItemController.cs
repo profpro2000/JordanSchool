@@ -4,30 +4,29 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using School.ServiceLayer.Services.AdmServices;
+using School.ServiceLayer.Services.FinServices;
 
-namespace School.Controllers.Adm
+namespace School.Controllers.Fin
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AdmStudController : ControllerBase
+    public class FinItemController : ControllerBase
     {
 
-        //ee
-        private AdmStudService _service;
 
-        public AdmStudController(AdmStudService service)
+
+        private FinItemService _service;
+
+        public FinItemController(FinItemService service)
         {
             _service = service;
         }
 
 
 
-
-
-
-        // GET: api/AdmStud
+        // GET: api/FinItem
         [HttpGet]
+       
         public async Task<IActionResult> Get()
         {
             var result = await _service.GetAll();
@@ -40,18 +39,17 @@ namespace School.Controllers.Adm
         }
 
 
-
-
  
 
 
-        // POST: api/AdmStud
+
+        // POST: api/FinItem
         [HttpPost]
         public void Post([FromBody] string value)
         {
         }
 
-        // PUT: api/AdmStud/5
+        // PUT: api/FinItem/5
         [HttpPut("{id}")]
         public void Put(int id, [FromBody] string value)
         {

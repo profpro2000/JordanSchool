@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Core.IAddLookupsRepo;
 using Core.IAdmRepo;
+using Core.IFinRepo;
 using Core.ILookupRepo;
 using Core.IRegRepo;
 using Domain;
@@ -12,10 +13,12 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Persistence.AddLookupsRepo;
 using Persistence.AdmRepo;
+using Persistence.FinRepo;
 using Persistence.LookupsRepo;
 using Persistence.RegRepo;
 using School.ServiceLayer.Services.AddLookupServices;
 using School.ServiceLayer.Services.AdmServices;
+using School.ServiceLayer.Services.FinServices;
 using School.ServiceLayer.Services.LookupsServices;
 using School.ServiceLayer.Services.RegServices;
 using IConfiguration = Microsoft.Extensions.Configuration.IConfiguration;
@@ -86,6 +89,15 @@ namespace School
 
             services.AddScoped<IAdmStudRepo, AdmStudRepo>();
             services.AddScoped<AdmStudService>();
+
+
+
+
+
+            //=========================Fin Module==============================//
+
+            services.AddScoped<IFinItemRepo, FinItemRepo>();
+            services.AddScoped<FinItemService>();
 
         }
 

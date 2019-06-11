@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using Domain.Config;
  using Domain.Model.AddLookups;
 using Domain.Model.Adm;
+using Domain.Model.Fin;
 using Domain.Model.Lookups;
  using Domain.Model.Reg;
  using Microsoft.EntityFrameworkCore;
@@ -51,7 +52,14 @@ namespace Domain
 
         //=========================Adm Module========================
 
-        public DbSet<AdmStud> AdmStuds { get; set; }
+        public DbSet<AdmStud> AdmStuds { get; set; } 
+        
+        
+        
+        
+        //=========================Fin Module========================
+
+        public DbSet<FinItem> FinItems { get; set; }
 
     }
 }

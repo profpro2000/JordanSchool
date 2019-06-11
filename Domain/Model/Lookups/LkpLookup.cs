@@ -4,6 +4,7 @@ using System.Runtime.Serialization;
 using System.Text;
 using Domain.Model.AddLookups;
 using Domain.Model.Adm;
+using Domain.Model.Fin;
 using Domain.Model.Reg;
 
 namespace Domain.Model.Lookups
@@ -52,7 +53,9 @@ namespace Domain.Model.Lookups
         [IgnoreDataMember] public ICollection<LkpDocument> ActiveMasters { set; get; }
 
 
-
+        //=============================FinItem==================================
+        [IgnoreDataMember] public ICollection<FinItem> FinItemTypeMasters { set; get; }
+        [IgnoreDataMember] public ICollection<FinItem> VisibleToMasters { set; get; }
 
     }
 }
