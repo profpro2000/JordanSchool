@@ -13,8 +13,9 @@ namespace Domain.Model.Lookups
         public string AName { get; set; }
         public string LName { get; set; }
         public string Value { get; set; }
-        public int ParentId { get; set; }
+        public int? ParentId { get; set; }
         public int TypeId { get; set; }
+        public int? DefaultValue { get; set; }
         public LkpLookupType LkpLookupType { get; set; }
 
         [IgnoreDataMember] public  ICollection<LkpSchool> LkpSchool { get; set; }

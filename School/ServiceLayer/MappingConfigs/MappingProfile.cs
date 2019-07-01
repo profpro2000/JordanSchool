@@ -19,7 +19,8 @@ namespace School.ServiceLayer.MappingConfigs
             CreateMap<LkpCalendar, LkpCalendarVw>().ReverseMap();
             CreateMap<LkpLookupType, LkpLookupTypeVw>().ReverseMap();
             CreateMap<LkpLookup, LkpLookupVw>().ReverseMap();
-            CreateMap<LkpSchool, LkpSchoolVw>().ReverseMap();
+            CreateMap<LkpSchool, LkpSchoolVw>()
+                .ReverseMap();
             CreateMap<LkpSection, LkpSectionVw>().ReverseMap();
             CreateMap<LkpTour, LkpTourVw>().ReverseMap();
             CreateMap<LkpBus, LkpBusVw>().ReverseMap();

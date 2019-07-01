@@ -66,7 +66,8 @@ namespace Core
         Task DeleteAll(IEnumerable<int> obj);
 
         void SaveChanges();
-       // void Delete(int id);
+        Task DeleteAsync(TEntity entity);
+        // void Delete(int id);
 
     }
 }

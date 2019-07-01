@@ -1,9 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
 using Core.IRegRepo;
 using Domain.Model.Reg;
 using Model.Reg;
+using ServicesAndMiddleware.Services;
 
 namespace School.ServiceLayer.Services.RegServices
 {
@@ -11,11 +13,14 @@ namespace School.ServiceLayer.Services.RegServices
     {
         private IMapper _mapper;
         private IRegStudRepo _interface;
+        private UserService _userService;
 
-        public RegStudService(IMapper mapper, IRegStudRepo @interface)
+        public RegStudService(IMapper mapper, IRegStudRepo @interface, UserService userService)
         {
             _mapper = mapper;
             _interface = @interface;
+            _userService = userService;
+            _userService.Id=101;  //For Testing
         }
 
         public async Task<List<RegStudVw>> GetAll()
@@ -36,6 +41,9 @@ namespace School.ServiceLayer.Services.RegServices
         public void Insert(RegStudVw obj)
         {
             var table = _mapper.Map<RegStud>(obj);
+            table.InsertDate = DateTime.Now;
+            table.InsertUser = _userService.Id;
+
             _interface.Add(table);
             _interface.SaveChanges();
         }
@@ -43,6 +51,9 @@ namespace School.ServiceLayer.Services.RegServices
         public void Update(int id, RegStudVw obj)
         {
             var table = _mapper.Map<RegStud>(obj);
+            table.UpdateDate=DateTime.Now;
+            table.UpdateUser = _userService.Id;
+
             _interface.Update(id, table);
             _interface.SaveChanges();
         }

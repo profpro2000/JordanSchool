@@ -15,6 +15,7 @@ using Persistence.RegRepo;
 using School.ServiceLayer.Services.AddLookupServices;
 using School.ServiceLayer.Services.LookupsServices;
 using School.ServiceLayer.Services.RegServices;
+using ServicesAndMiddleware.Services;
 using IConfiguration = Microsoft.Extensions.Configuration.IConfiguration;
 
 
@@ -72,6 +73,8 @@ namespace School
             services.AddScoped<RegParentService>();
             services.AddScoped<IRegStudRepo, RegStudRepo>();
             services.AddScoped<RegStudService>();
+            //===========Users Scope
+            services.AddScoped<UserService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

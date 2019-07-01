@@ -53,5 +53,40 @@ namespace School.ServiceLayer.Services.AddLookupServices
             _lkpSchoolRepo.SaveChanges();
         }
 
+        public async  Task<IEnumerable<object>> getTest()
+        {
+
+            var vw =   _lkpSchoolRepo.GetTest();
+            var table =   _mapper.Map<List<LkpSchoolVw>>(vw);
+            return table;
+           /* return table.Select(x => new
+            {
+               SchoolName= x.Aname,
+               CityId= x.CityId,
+               CityName=  x.CitesLookup.Aname
+            }).ToList();
+            */
+        }
+
+        public async Task<IEnumerable<object>> getTest3()
+        {
+
+            var vw = await _lkpSchoolRepo.GetTest3();
+           // var table = _mapper.Map<List<LkpSchoolVw>>(vw).ToList();
+            return vw;
+            
+        }
+
+        public LkpSchoolVw getTest2()
+        {
+            var vw = _lkpSchoolRepo.GetTest2();
+            var table = _mapper.Map<LkpSchoolVw>(vw);
+
+
+            return table;
+           
+
+        }
+
     }
 }

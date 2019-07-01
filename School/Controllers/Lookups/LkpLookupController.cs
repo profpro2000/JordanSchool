@@ -56,16 +56,33 @@ namespace School.Controllers.Lookups
             _lookupService.Add(obj);
         }
 
-        [HttpPost("Update/{id}")]
+        [HttpPut("{id}")]
         public void Update(int id, LkpLookup obj)
         {
             _lookupService.Update(id,obj);
         }
 
         [HttpDelete("{id}")]
-        public void Delete(int id)
+       /* public void Delete(int id)
         {
             _lookupService.Delete(id);
+        }
+        */
+        public async Task<IActionResult> Delete(int id)
+       {
+
+           try
+           {
+               _lookupService.Delete(id);
+            }
+           catch (Exception e)
+           {
+               
+               Console.WriteLine(e);
+               throw;
+           }
+          
+            return NoContent();
         }
     }
 }

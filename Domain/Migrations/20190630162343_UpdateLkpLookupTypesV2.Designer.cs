@@ -4,14 +4,16 @@ using Domain;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Domain.Migrations
 {
     [DbContext(typeof(SchoolDbContext))]
-    partial class SchoolDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190630162343_UpdateLkpLookupTypesV2")]
+    partial class UpdateLkpLookupTypesV2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -278,9 +280,9 @@ namespace Domain.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("AName");
-
-                    b.Property<int?>("DefaultValue");
+                    b.Property<string>("AName")
+                        .IsRequired()
+                        .HasMaxLength(200);
 
                     b.Property<DateTime?>("InsertDate");
 
@@ -288,7 +290,7 @@ namespace Domain.Migrations
 
                     b.Property<string>("LName");
 
-                    b.Property<int?>("ParentId");
+                    b.Property<int>("ParentId");
 
                     b.Property<int>("TypeId");
 
@@ -311,15 +313,16 @@ namespace Domain.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("Code");
-
-                    b.Property<int?>("Editable")
+                    b.Property<int>("Editable")
                         .HasMaxLength(1);
 
                     b.Property<string>("Name")
-                        .IsRequired();
+                        .IsRequired()
+                        .HasMaxLength(100);
 
-                    b.Property<int?>("ParentId");
+                    b.Property<int>("ParentId");
+
+                    b.Property<int>("value");
 
                     b.HasKey("Id");
 

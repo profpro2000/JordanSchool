@@ -243,6 +243,12 @@ namespace Persistence
             return Task.CompletedTask;
         }
 
+        public async Task DeleteAsync(TEntity entity)
+        {
+            _db.Set<TEntity>().Remove(entity);
+            //await _db.SaveChanges();
+        }
+
         public void SaveChanges() => _db.SaveChanges();
 
         public Task Delete(Expression<Func<TEntity, bool>> predicate)

@@ -49,11 +49,19 @@ namespace School.ServiceLayer.Services.LookupsServices
           _lkpLookupRepo.SaveChanges();
         }
 
-        public void Delete(int id)
+         public void Delete(int id)
+         {
+             _lkpLookupRepo.Delete(id);
+             _lkpLookupRepo.SaveChanges();
+         }
+      /*  public async Task DeleteAsync(int id)
         {
-            _lkpLookupRepo.Delete(id);
+            var _id = await _lkpLookupRepo.GetAsyncById(id);
+            // await  _lkpLookupRepo.DeleteAsync(_id);
+            _lkpLookupRepo.Delete(_id);
             _lkpLookupRepo.SaveChanges();
         }
+        */
 
         public void Update(int id, LkpLookup obj)
         {
