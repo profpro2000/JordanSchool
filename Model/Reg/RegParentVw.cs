@@ -1,6 +1,7 @@
 ﻿using Domain.Model.Lookups;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System.ComponentModel.DataAnnotations;
+using System.Runtime.Serialization;
 
 namespace Model.Reg
 {
@@ -10,10 +11,13 @@ namespace Model.Reg
         [Key]
         public int Id { get; set; }
         public string IdNum { get; set; }
+
+        public string FatherName { get { return FirstName+" "+SecondName+" "+FamilyName; } }
         [StringLength(100)][Required]
         public string FirstName { get; set; }
         [StringLength(100)]
         public string SecondName { get; set; }
+        public string FatherLName { get { return FirstLName + " " + SecondLName + " " + FamilyLName; } }
         [StringLength(100)]
         public string FamilyName { get; set; }
         [StringLength(100)]
@@ -25,7 +29,7 @@ namespace Model.Reg
         public LkpLookup ReligionLookup { get; set; }
         public string ReligionName { get { return ReligionLookup != null ? ReligionLookup.AName : ""; } set { } }
         public int? NationalityId { get; set; } //Lookup
-        public LkpLookup NationalityLookup { get; set; }
+       [IgnoreDataMember] public LkpLookup NationalityLookup { get; set; }
 
         public string NationalityName => NationalityLookup != null ? NationalityLookup.AName : "";
 

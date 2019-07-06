@@ -21,7 +21,7 @@ namespace School.ServiceLayer.Services.RegServices
 
         public async Task<List<RegParentVw>> GetAll()
         {
-            var vw = await _interface.GetAllAsync();
+            var vw = await _interface.GetAll();
             var result = _mapper.Map<List<RegParentVw>>(vw);
             return result;
         }
@@ -31,6 +31,14 @@ namespace School.ServiceLayer.Services.RegServices
             var vw = await _interface.GetAllWhereAsync(p => p.Id == id);
             var result = _mapper.Map<List<RegParentVw>>(vw);
             return result;
+        }
+
+        
+        public async Task<IEnumerable<object>> ParentDetail(int id)
+        {
+            var data = await _interface.ParentDetail(id);
+            return data;
+
         }
 
         public void Insert(RegParentVw obj)

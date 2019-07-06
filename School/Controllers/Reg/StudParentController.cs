@@ -47,6 +47,11 @@ namespace School.Controllers.Reg
 
             return Ok(result);
         }
+        [HttpGet("Detail/{id}")]
+        public async Task<IEnumerable<object>> GetParentDetail(int id)
+        {
+            return await _service.ParentDetail(id);
+        }
 
         // POST: api/StudParent
         [HttpPost]

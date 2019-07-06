@@ -5,6 +5,8 @@ using Domain.Model.Lookups;
 using Microsoft.AspNetCore.Mvc;
 using Model.Lookups;
 using School.ServiceLayer.Services.LookupsServices;
+using ServicesAndMiddleware.Filters;
+using ServicesAndMiddleware.Helper;
 
 namespace School.Controllers.Lookups
 {
@@ -50,6 +52,28 @@ namespace School.Controllers.Lookups
             
             return result;
         }
+
+        [HttpPost("GetListByType")]
+        public async Task<IEnumerable<LkpLookupVw>> GetByListType(LookupTypes id)
+        {
+              var result = await _lookupService.GetByListType(id);
+
+           
+
+            return await _lookupService.GetByListType(id);
+        }
+        
+
+        [HttpPost("GetLookups")]
+        public async Task<IEnumerable<LkpLookupVw>> GetLookups([FromBody] FilterLookupsType filter)
+        {
+            var result = await _lookupService.GetByListType2(filter);
+
+
+
+            return result;
+        }
+
         [HttpPost]
         public void Add(LkpLookup obj)
         {

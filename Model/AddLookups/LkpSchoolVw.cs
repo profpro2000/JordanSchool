@@ -6,6 +6,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel;
 using Model.Lookups;
+using Model.Reg;
 
 namespace Model.AddLookups
 {
@@ -29,6 +30,7 @@ namespace Model.AddLookups
         public string WebPage { get; set; }
         public string FaceBook { get; set; }
         [IgnoreDataMember] public ICollection<LkpSectionVw> LkpSections { get; set; }
+      
 
     }
 }

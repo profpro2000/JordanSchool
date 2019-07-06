@@ -29,5 +29,8 @@ namespace Domain.Model.AddLookups
 
         [IgnoreDataMember] public ICollection<RegStud> SchoolRegStuds { get; set; }
 
+      
+
+
     }
 }

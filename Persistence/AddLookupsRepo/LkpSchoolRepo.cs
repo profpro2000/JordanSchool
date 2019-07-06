@@ -34,12 +34,16 @@ namespace Persistence.AddLookupsRepo
         }
         public async  Task<IEnumerable<object>> GetTest3()
         {
+
             
-            var data2 =  _db.LkpSchools.Select(x => new {
+            var data2 = _db.LkpSchools.Select(x => new {
                 x.Id,
                 x.Aname,
-                CityName = x.CitesLookup.AName,
-               
+                CityName = x.CitesLookup.AName ,
+               // parent= x.RegParents.FirstName
+                // .FirstOrDefault().ToString():""
+
+
 
             }).ToList();
             return  data2;
