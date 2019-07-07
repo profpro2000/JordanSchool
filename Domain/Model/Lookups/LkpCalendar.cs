@@ -18,6 +18,7 @@ namespace Domain.Model.Lookups
         public  string Note { get; set; }
        
 // my comment
+//my local comment
 
     }
 }
