@@ -4,14 +4,16 @@ using Domain;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Domain.Migrations
 {
     [DbContext(typeof(SchoolDbContext))]
-    partial class SchoolDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190707194342_07072019-2")]
+    partial class _070720192
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -521,54 +523,6 @@ namespace Domain.Migrations
                     b.ToTable("Reg_Stud");
                 });
 
-            modelBuilder.Entity("Domain.Model.library.Author", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("ArName");
-
-                    b.Property<DateTime?>("InsertDate");
-
-                    b.Property<int?>("InsertUser");
-
-                    b.Property<string>("LaName");
-
-                    b.Property<DateTime?>("UpdateDate");
-
-                    b.Property<int?>("UpdateUser");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Author");
-                });
-
-            modelBuilder.Entity("Domain.Model.library.Book", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("AuthorId");
-
-                    b.Property<DateTime?>("InsertDate");
-
-                    b.Property<int?>("InsertUser");
-
-                    b.Property<string>("Title");
-
-                    b.Property<DateTime?>("UpdateDate");
-
-                    b.Property<int?>("UpdateUser");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AuthorId");
-
-                    b.ToTable("Book");
-                });
-
             modelBuilder.Entity("Domain.Model.AddLookups.LkpBus", b =>
                 {
                     b.HasOne("Domain.Model.AddLookups.LkpSchool", "LkpSchool")
@@ -714,14 +668,6 @@ namespace Domain.Migrations
                         .WithMany("HealthStudMasters")
                         .HasForeignKey("StudHealthId")
                         .OnDelete(DeleteBehavior.Restrict);
-                });
-
-            modelBuilder.Entity("Domain.Model.library.Book", b =>
-                {
-                    b.HasOne("Domain.Model.library.Author", "BookAuthor")
-                        .WithMany("AuthorBooks")
-                        .HasForeignKey("AuthorId")
-                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }
