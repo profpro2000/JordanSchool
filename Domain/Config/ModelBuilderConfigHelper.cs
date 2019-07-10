@@ -1,5 +1,6 @@
 ﻿
 using Domain.Config.AddLookupsConfig;
+using Domain.Config.Financial;
 using Domain.Config.Library;
 using Domain.Config.LookupConfig;
 using Domain.Config.Reg;
@@ -33,6 +34,14 @@ namespace Domain.Config
             //==================================
             modelBuilder.ApplyConfiguration(new BookConfig());
             modelBuilder.ApplyConfiguration(new AuthorConfig());
+
+
+
+            ///=====================Financial tables=================
+            modelBuilder.ApplyConfiguration(new FinItemConfig());
+            modelBuilder.ApplyConfiguration(new SchoolFeeConfig());
+            modelBuilder.ApplyConfiguration(new ClassFeeConfig());
+            modelBuilder.ApplyConfiguration(new StudentFeeConfig());
 
 
 

@@ -31,6 +31,8 @@ namespace School.Controllers.AddLookups
             return Ok(result);
         }
 
+
+
         // GET: api/LkpBus/5
         [HttpGet("{id}")]
         public async Task<IActionResult>Get (int id)

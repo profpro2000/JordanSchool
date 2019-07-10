@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.Serialization;
 using System.Text;
 using Domain.Model.AddLookups;
+using Domain.Model.Financial;
 using Domain.Model.Reg;
 
 namespace Domain.Model.Lookups
@@ -33,5 +34,8 @@ namespace Domain.Model.Lookups
         [IgnoreDataMember] public ICollection<RegStud> JoinTermStudMasters { get; set; }
         [IgnoreDataMember] public ICollection<RegStud> JoinClassSeqStudMasters { get; set; }
         [IgnoreDataMember] public ICollection<RegStud> HealthStudMasters { get; set; }
+         [IgnoreDataMember] public ICollection<SchoolFee> SchoolFees { get; set; }
+        [IgnoreDataMember] public ICollection<ClassFee> ClassFees { get; set; }
+        [IgnoreDataMember] public ICollection<StudentFee> StudentFees { get; set; }
     }
 }

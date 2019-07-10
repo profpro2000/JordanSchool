@@ -4,6 +4,7 @@ using System.Collections.Generic;
  using System.Text;
 using Domain.Config;
  using Domain.Model.AddLookups;
+using Domain.Model.Financial;
 using Domain.Model.library;
 using Domain.Model.Lookups;
  using Domain.Model.Reg;
@@ -49,6 +50,14 @@ namespace Domain
         //===================Library=====================
         public DbSet<Book> Books { set; get; }
         public DbSet<Author> Authors { set; get; }
+
+        //==================financial=============
+        public DbSet<FinItem> FinItems { set; get; }
+        public DbSet<SchoolFee> SchoolFees { set; get; }
+        public DbSet<ClassFee> ClassFees { set; get; }
+        public DbSet<StudentFee> StudentFees { set; get; }
+
+
 
     }
 }

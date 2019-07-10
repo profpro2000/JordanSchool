@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Runtime.Serialization;
 using Domain.Model.AddLookups;
+using Domain.Model.Financial;
 using Domain.Model.Lookups;
 using Domain.Model.Reg;
 
@@ -41,6 +44,8 @@ namespace Domain.Model.Reg
         public string DiseaseName { get; set; }
         public string MedicamentName { get; set; }
         public string Note { get; set; }
+
+        [IgnoreDataMember] public ICollection<StudentFee> StudentFees { get; set; }
 
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Runtime.Serialization;
+using Domain.Model.Financial;
 using Domain.Model.Lookups;
 using Domain.Model.Reg;
 
@@ -21,6 +22,7 @@ namespace Domain.Model.AddLookups
         public LkpLookup YearsLookup { get; set; }
 
         [IgnoreDataMember] public ICollection<RegStud> ClassRegStuds { get; set; }
+        [IgnoreDataMember] public ICollection<ClassFee> ClassFees { get; set; }
 
 
     }
