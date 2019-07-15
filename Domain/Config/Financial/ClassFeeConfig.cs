@@ -14,6 +14,23 @@ namespace Domain.Config.Financial
             builder.ToTable("Class_fees");
             builder.HasKey(key => key.Id);
 
+            builder.HasOne(p => p.Class)
+               .WithMany(p => p.ClassFees)
+               .HasForeignKey(k => k.ClassId)
+               .OnDelete(DeleteBehavior.Restrict);
+
+            builder.HasOne(p => p.Section)
+               .WithMany(p => p.ClassFees)
+               .HasForeignKey(k => k.SectionId)
+               .OnDelete(DeleteBehavior.Restrict);
+
+
+
+            builder.HasOne(p => p.FinItem)
+   .WithMany(p => p.ClassFees)
+   .HasForeignKey(k => k.FinItemId)
+   .OnDelete(DeleteBehavior.Restrict);
+
         }
     }
 }

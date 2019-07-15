@@ -7,7 +7,7 @@ using Domain.Model.Financial;
 
 namespace Persistence.FinancialRepo
 {
-    class SchoolFeeRepo:DbOperation<SchoolFee>,ISchoolFeeRepo
+  public  class SchoolFeeRepo:DbOperation<SchoolFee>,ISchoolFeeRepo
     {
         private SchoolDbContext _db;
 

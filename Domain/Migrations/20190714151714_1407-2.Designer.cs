@@ -4,14 +4,16 @@ using Domain;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Domain.Migrations
 {
     [DbContext(typeof(SchoolDbContext))]
-    partial class SchoolDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190714151714_1407-2")]
+    partial class _14072
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -230,23 +232,25 @@ namespace Domain.Migrations
 
                     b.Property<int?>("InsertUser");
 
+                    b.Property<int?>("LkpClassId");
+
+                    b.Property<int?>("LkpSectionId");
+
                     b.Property<int>("SectionId");
 
                     b.Property<DateTime?>("UpdateDate");
 
                     b.Property<int?>("UpdateUser");
 
-                    b.Property<int>("Value");
-
                     b.Property<int>("YearId");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ClassId");
-
                     b.HasIndex("FinItemId");
 
-                    b.HasIndex("SectionId");
+                    b.HasIndex("LkpClassId");
+
+                    b.HasIndex("LkpSectionId");
 
                     b.HasIndex("YearId");
 
@@ -751,20 +755,18 @@ namespace Domain.Migrations
 
             modelBuilder.Entity("Domain.Model.Financial.ClassFee", b =>
                 {
-                    b.HasOne("Domain.Model.AddLookups.LkpClass", "Class")
-                        .WithMany("ClassFees")
-                        .HasForeignKey("ClassId")
-                        .OnDelete(DeleteBehavior.Restrict);
-
                     b.HasOne("Domain.Model.Financial.FinItem", "FinItem")
                         .WithMany("ClassFees")
                         .HasForeignKey("FinItemId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("Domain.Model.AddLookups.LkpSection", "Section")
+                    b.HasOne("Domain.Model.AddLookups.LkpClass", "LkpClass")
                         .WithMany("ClassFees")
-                        .HasForeignKey("SectionId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .HasForeignKey("LkpClassId");
+
+                    b.HasOne("Domain.Model.AddLookups.LkpSection", "LkpSection")
+                        .WithMany("ClassFees")
+                        .HasForeignKey("LkpSectionId");
 
                     b.HasOne("Domain.Model.Lookups.LkpLookup", "Year")
                         .WithMany("ClassFees")

@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Core.IAddLookupsRepo;
+using Core.IFinancial;
 using Core.ILookupRepo;
 using Core.IRegRepo;
 using Domain;
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Persistence.AddLookupsRepo;
+using Persistence.FinancialRepo;
 using Persistence.LookupsRepo;
 using Persistence.RegRepo;
 using School.ServiceLayer.Services.AddLookupServices;
+using School.ServiceLayer.Services.FinancialServices;
 using School.ServiceLayer.Services.LookupsServices;
 using School.ServiceLayer.Services.RegServices;
 using ServicesAndMiddleware.Services;
@@ -75,6 +78,22 @@ namespace School
             services.AddScoped<RegStudService>();
             //===========Users Scope
             services.AddScoped<UserService>();
+
+
+            //===================Financial
+            services.AddScoped<IFinItemRepo, FinItemRepo>();
+            services.AddScoped<FinItemService>();
+
+            services.AddScoped<ISchoolFeeRepo, SchoolFeeRepo>();
+            services.AddScoped<SchoolFeeService>();
+
+            services.AddScoped<IClassFeeRepo, ClassFeeRepo>();
+            services.AddScoped<ClassFeeService>();
+
+            services.AddScoped<IStudentFeeRepo, StudentFeeRepo>();
+            services.AddScoped<StudentFeeService>();
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
