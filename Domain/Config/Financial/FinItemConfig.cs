@@ -15,6 +15,18 @@ namespace Domain.Config.Financial
             builder.HasKey(key => key.Id);
 
 
+            builder.HasOne(p => p.vpTypeLookup)
+    .WithMany(p => p.VpTypes)
+    .HasForeignKey(k => k.vpTypeId)
+    .OnDelete(DeleteBehavior.Restrict);
+
+
+            builder.HasOne(p => p.cdTypeLookup)
+.WithMany(p => p.CdTypes)
+.HasForeignKey(k => k.cdTypeId)
+.OnDelete(DeleteBehavior.Restrict);
+
+
         }
     }
 }

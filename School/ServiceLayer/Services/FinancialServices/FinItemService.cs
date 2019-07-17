@@ -22,7 +22,8 @@ namespace School.ServiceLayer.Services.FinancialServices
 
         public async Task<List<FinItemVw>> GetAll()
         {
-            var vw = await _interface.GetAllAsync();
+            var vw = await _interface.GetAll();
+           // var vw = await _interface.GetAllAsync();
             var result = _mapper.Map<List<FinItemVw>>(vw);
             return result;
         }
