@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Runtime.Serialization;
+using Domain.Model.Adm;
 using Domain.Model.Financial;
 using Domain.Model.Lookups;
 using Domain.Model.Reg;
@@ -11,7 +12,7 @@ namespace Domain.Model.AddLookups
         public int Id { get; set; }
         public string Aname { get; set; }
         public string Lname { get; set; }
-        public int Amt { get; set; }
+        public int Amt { get; set; }  // Not used
         public int Capacity { get; set; }
         public float Age { get; set; }
         public int SchoolId { get; set; }
@@ -22,6 +23,7 @@ namespace Domain.Model.AddLookups
         public LkpLookup YearsLookup { get; set; }
 
         [IgnoreDataMember] public ICollection<RegStud> ClassRegStuds { get; set; }
+        [IgnoreDataMember] public ICollection<AdmStud> ClassAdm { get; set; }
         [IgnoreDataMember] public ICollection<ClassFee> ClassFees { get; set; }
 
 

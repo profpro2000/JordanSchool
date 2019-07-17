@@ -4,6 +4,8 @@ using System.Collections.Generic;
  using System.Text;
 using Domain.Config;
  using Domain.Model.AddLookups;
+using Domain.Model.Adm;
+using Domain.Model.Lookups;
 using Domain.Model.Financial;
 using Domain.Model.library;
 using Domain.Model.Lookups;
@@ -46,6 +48,10 @@ namespace Domain
         //================Stud Module =========================
         public DbSet<RegParent> RegParents { get; set; }
         public DbSet<RegStud> RegStuds { get; set; }
+
+        //=========== Admission Module===================
+        public DbSet<AdmStud> AdmStuds { get; set; }
+
 
         //===================Library=====================
         public DbSet<Book> Books { set; get; }

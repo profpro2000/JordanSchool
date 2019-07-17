@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Core.IAddLookupsRepo;
+using Core.IAdmStudRepo;
 using Core.IFinancial;
 using Core.ILookupRepo;
 using Core.IRegRepo;
@@ -11,10 +12,12 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Persistence.AddLookupsRepo;
+using Persistence.AdmRepo;
 using Persistence.FinancialRepo;
 using Persistence.LookupsRepo;
 using Persistence.RegRepo;
 using School.ServiceLayer.Services.AddLookupServices;
+using School.ServiceLayer.Services.AdmStudServices;
 using School.ServiceLayer.Services.FinancialServices;
 using School.ServiceLayer.Services.LookupsServices;
 using School.ServiceLayer.Services.RegServices;
@@ -78,6 +81,9 @@ namespace School
             services.AddScoped<RegStudService>();
             //===========Users Scope
             services.AddScoped<UserService>();
+            //=======Admisiion Module
+            services.AddScoped<IAdmStudRepo, AdmStudRepo>();
+            services.AddScoped<AdmStudService>();
 
 
             //===================Financial

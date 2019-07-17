@@ -1,9 +1,11 @@
 ﻿using AutoMapper;
 using Domain.Model.AddLookups;
+using Domain.Model.Adm;
 using Domain.Model.Financial;
 using Domain.Model.Lookups;
 using Domain.Model.Reg;
 using Model.AddLookups;
+using Model.Adm;
 using Model.Financial;
 using Model.Lookups;
 using Model.Reg;
@@ -30,6 +32,8 @@ namespace School.ServiceLayer.MappingConfigs
             //============Stud Mapping================
             CreateMap<RegParent, RegParentVw>().ReverseMap();
             CreateMap<RegStud, RegStudVw>().ReverseMap();
+            //=========== Stud Admission
+            CreateMap<AdmStud, AdmStudVw>().ReverseMap();
 
 
             //==============Financial==================

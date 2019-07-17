@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.Serialization;
 using System.Text;
 using Domain.Model.AddLookups;
+using Domain.Model.Adm;
 using Domain.Model.Financial;
 using Domain.Model.Reg;
 
@@ -39,6 +40,19 @@ namespace Domain.Model.Lookups
         [IgnoreDataMember] public ICollection<FinItem> CdTypes { get; set; }
         [IgnoreDataMember] public ICollection<FinItem> VpTypes { get; set; }
         [IgnoreDataMember] public ICollection<SchoolFee> SchoolFees { get; set; }
+
+        // Adm
+        [IgnoreDataMember] public ICollection<AdmStud> ReligionAdm { get; set; }
+        [IgnoreDataMember] public ICollection<AdmStud> GenderAdm { get; set; }
+        [IgnoreDataMember] public ICollection<AdmStud> NationalityAdm { get; set; }
+        [IgnoreDataMember] public ICollection<AdmStud> ClassSeqAdm { get; set; }
+        [IgnoreDataMember] public ICollection<AdmStud> ApprovedAdm { get; set; }
+        [IgnoreDataMember] public ICollection<AdmStud> BrotherDescountTypeAdm { get; set; }
+        [IgnoreDataMember] public ICollection<AdmStud> YearsAdm { get; set; }
+        [IgnoreDataMember] public ICollection<AdmStud> TourType { get; set; }
+
+
+         [IgnoreDataMember] public ICollection<SchoolFee> SchoolFees { get; set; }
         [IgnoreDataMember] public ICollection<ClassFee> ClassFees { get; set; }
         [IgnoreDataMember] public ICollection<StudentFee> StudentFees { get; set; }
     }
