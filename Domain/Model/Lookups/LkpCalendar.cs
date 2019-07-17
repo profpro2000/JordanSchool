@@ -17,7 +17,12 @@ namespace Domain.Model.Lookups
         public  DateTime ToDate { get; set; }
         public  string Note { get; set; }
        
+// my comment
+//my local comment
 
+// new remote change
+
+//change 09072019
 
     }
 }

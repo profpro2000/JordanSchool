@@ -4,6 +4,7 @@ using System.Reflection;
 using System.Runtime.Serialization;
 using System.Text;
 using Domain.Model.Adm;
+using Domain.Model.Financial;
 using Domain.Model.Lookups;
 using Domain.Model.Reg;
 
@@ -30,6 +31,7 @@ namespace Domain.Model.AddLookups
 
         [IgnoreDataMember] public ICollection<RegStud> SchoolRegStuds { get; set; }
         [IgnoreDataMember] public ICollection<AdmStud> SchoolAdm { get; set; }
+        [IgnoreDataMember] public ICollection<SchoolFee> SchoolFees { get; set; }
 
 
 

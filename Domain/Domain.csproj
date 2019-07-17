@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
@@ -7,6 +7,32 @@
   <ItemGroup>
     <Compile Remove="Migrations\20190603090250_LkpCalendar4.cs" />
     <Compile Remove="Migrations\20190603090250_LkpCalendar4.Designer.cs" />
+    <Compile Remove="Migrations\20190709085845_09072016-2.cs" />
+    <Compile Remove="Migrations\20190709085845_09072016-2.Designer.cs" />
+    <Compile Remove="Migrations\20190709090030_09072016-3.cs" />
+    <Compile Remove="Migrations\20190709090030_09072016-3.Designer.cs" />
+    <Compile Remove="Migrations\20190709101835_09072016-4.cs" />
+    <Compile Remove="Migrations\20190709101835_09072016-4.Designer.cs" />
+    <Compile Remove="Migrations\20190709123200_09072016-5.cs" />
+    <Compile Remove="Migrations\20190709123200_09072016-5.Designer.cs" />
+    <Compile Remove="Migrations\20190709123252_09072016-5.cs" />
+    <Compile Remove="Migrations\20190709123252_09072016-5.Designer.cs" />
+    <Compile Remove="Migrations\20190709125002_d.cs" />
+    <Compile Remove="Migrations\20190709125002_d.Designer.cs" />
+    <Compile Remove="Migrations\20190709125250_09072016-v1.cs" />
+    <Compile Remove="Migrations\20190709125250_09072016-v1.Designer.cs" />
+    <Compile Remove="Migrations\20190709125950_now-v1.cs" />
+    <Compile Remove="Migrations\20190709125950_now-v1.Designer.cs" />
+    <Compile Remove="Migrations\20190709130315_now-v2.cs" />
+    <Compile Remove="Migrations\20190709130315_now-v2.Designer.cs" />
+    <Compile Remove="Migrations\20190709130709_now-v3.cs" />
+    <Compile Remove="Migrations\20190709130709_now-v3.Designer.cs" />
+    <Compile Remove="Migrations\20190709132900_fin-v1.cs" />
+    <Compile Remove="Migrations\20190709132900_fin-v1.Designer.cs" />
+    <Compile Remove="Migrations\20190714150011_1407-1.cs" />
+    <Compile Remove="Migrations\20190714150011_1407-1.Designer.cs" />
+    <Compile Remove="Migrations\20190714151421_1407-1.cs" />
+    <Compile Remove="Migrations\20190714151421_1407-1.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

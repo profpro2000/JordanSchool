@@ -9,7 +9,7 @@ using ServicesAndMiddleware.Services;
 
 namespace School.ServiceLayer.Services.RegServices
 {
-    public class RegStudService
+    public class RegStudService 
     {
         private IMapper _mapper;
         private IRegStudRepo _interface;

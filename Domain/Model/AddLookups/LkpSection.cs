@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.Serialization;
 using System.Text;
 using Domain.Model.Adm;
+using Domain.Model.Financial;
 using Domain.Model.Reg;
 
 namespace Domain.Model.AddLookups
@@ -20,5 +21,6 @@ namespace Domain.Model.AddLookups
         public ICollection<LkpClass> LkpClasses { get; set; }
         [IgnoreDataMember] public ICollection<RegStud> SectionRegStuds { get; set; }
         [IgnoreDataMember] public ICollection<AdmStud> SectionAdm { get; set; }
+        [IgnoreDataMember] public ICollection<ClassFee> ClassFees { get; set; }
     }
 }

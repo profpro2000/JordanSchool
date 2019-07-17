@@ -1,8 +1,10 @@
 ﻿
 using Domain.Config.AddLookupsConfig;
-using Domain.Config.Adm;
+using Domain.Config.Financial;
+using Domain.Config.Library;
 using Domain.Config.LookupConfig;
 using Domain.Config.Reg;
+using Domain.Model.library;
 using Microsoft.EntityFrameworkCore;
 
 namespace Domain.Config
@@ -28,7 +30,20 @@ namespace Domain.Config
             //======= Student Tables ======================================
             modelBuilder.ApplyConfiguration(new RegParentConfig());
             modelBuilder.ApplyConfiguration(new RegStudConfig());
-            modelBuilder.ApplyConfiguration(new AdmStudConfig());
+
+            //==================================
+            modelBuilder.ApplyConfiguration(new BookConfig());
+            modelBuilder.ApplyConfiguration(new AuthorConfig());
+
+
+
+            ///=====================Financial tables=================
+            modelBuilder.ApplyConfiguration(new FinItemConfig());
+            modelBuilder.ApplyConfiguration(new SchoolFeeConfig());
+            modelBuilder.ApplyConfiguration(new ClassFeeConfig());
+            modelBuilder.ApplyConfiguration(new StudentFeeConfig());
+
+
 
             return modelBuilder;
 
