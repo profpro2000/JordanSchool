@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.Serialization;
 using System.Text;
 using Domain.Model.AddLookups;
+using Domain.Model.Adm;
 using Domain.Model.Reg;
 
 namespace Domain.Model.Lookups
@@ -33,5 +34,17 @@ namespace Domain.Model.Lookups
         [IgnoreDataMember] public ICollection<RegStud> JoinTermStudMasters { get; set; }
         [IgnoreDataMember] public ICollection<RegStud> JoinClassSeqStudMasters { get; set; }
         [IgnoreDataMember] public ICollection<RegStud> HealthStudMasters { get; set; }
+
+        // Adm
+        [IgnoreDataMember] public ICollection<AdmStud> ReligionAdm { get; set; }
+        [IgnoreDataMember] public ICollection<AdmStud> GenderAdm { get; set; }
+        [IgnoreDataMember] public ICollection<AdmStud> NationalityAdm { get; set; }
+        [IgnoreDataMember] public ICollection<AdmStud> ClassSeqAdm { get; set; }
+        [IgnoreDataMember] public ICollection<AdmStud> ApprovedAdm { get; set; }
+        [IgnoreDataMember] public ICollection<AdmStud> BrotherDescountTypeAdm { get; set; }
+        [IgnoreDataMember] public ICollection<AdmStud> YearsAdm { get; set; }
+        [IgnoreDataMember] public ICollection<AdmStud> TourType { get; set; }
+
+
     }
 }

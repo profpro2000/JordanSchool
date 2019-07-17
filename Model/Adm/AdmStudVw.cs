@@ -1,17 +1,24 @@
-﻿using System;
-using System.Runtime.Serialization;
+﻿using Domain.Model;
 using Domain.Model.AddLookups;
 using Domain.Model.Lookups;
 using Domain.Model.Reg;
+using System;
+using System.Collections.Generic;
+using System.Runtime.Serialization;
+using System.Text;
 
-namespace Domain.Model.Adm
+namespace Model.Adm
 {
-    public class AdmStud : AuditModel
+    public class AdmStudVw : AuditModel
     {
         public int Id { get; set; }
         public string FirstName { get; set; }
         public int ParentId { get; set; }
         [IgnoreDataMember] public RegParent Parent { get; set; }
+        public string FatherFirstName { get { return Parent != null  ? Parent.FirstName: ""; } }
+        public string FatherSecondName { get { return Parent != null ? Parent.SecondName : ""; } }
+        public string FatherFamilyName { get { return Parent != null ? Parent.FamilyName : ""; } }
+        public string FatherFullName { get {return Parent !=null ? FirstName+" "+Parent.FirstName + " " + Parent.SecondName + " " + Parent.FamilyName :""; } }
         public int? StudNo { get; set; }
         public int SchoolId { get; set; }
         public LkpSchool LkpSchool { get; set; }
@@ -24,7 +31,7 @@ namespace Domain.Model.Adm
         public LkpLookup Religion { get; set; }
         public DateTime? BirthDate { get; set; }
         public int? GenderId { get; set; }
-        public LkpLookup Gender {get;set;}
+        public LkpLookup Gender { get; set; }
         public int? YearId { get; set; }
         public LkpLookup Years { get; set; }
         public int? ClassId { get; set; }

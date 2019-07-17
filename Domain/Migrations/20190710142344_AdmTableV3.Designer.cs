@@ -4,14 +4,16 @@ using Domain;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Domain.Migrations
 {
     [DbContext(typeof(SchoolDbContext))]
-    partial class SchoolDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190710142344_AdmTableV3")]
+    partial class AdmTableV3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -222,19 +224,19 @@ namespace Domain.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime?>("ApprovedDate");
+                    b.Property<DateTime>("ApprovedDate");
 
-                    b.Property<int?>("ApprovedId");
+                    b.Property<int>("ApprovedId");
 
-                    b.Property<DateTime?>("BirthDate");
+                    b.Property<DateTime>("BirthDate");
 
-                    b.Property<int?>("BrotherDescountType");
+                    b.Property<int>("BrotherDescountType");
 
-                    b.Property<int?>("BusId");
+                    b.Property<int>("BusId");
 
                     b.Property<string>("BusNote");
 
-                    b.Property<int?>("ClassId");
+                    b.Property<int>("ClassId");
 
                     b.Property<int?>("ClassSeqId");
 
@@ -244,7 +246,7 @@ namespace Domain.Migrations
                         .IsRequired()
                         .HasMaxLength(100);
 
-                    b.Property<int?>("GenderId");
+                    b.Property<int>("GenderId");
 
                     b.Property<DateTime?>("InsertDate");
 
@@ -252,33 +254,33 @@ namespace Domain.Migrations
 
                     b.Property<int?>("LkpLookupId");
 
-                    b.Property<int?>("NationalityId");
+                    b.Property<int>("NationalityId");
 
                     b.Property<string>("Note");
 
                     b.Property<int>("ParentId");
 
-                    b.Property<int?>("ReligionId");
+                    b.Property<int>("ReligionId");
 
                     b.Property<int>("SchoolId");
 
                     b.Property<int>("SectionId");
 
-                    b.Property<int?>("StudNo");
+                    b.Property<int>("StudNo");
 
-                    b.Property<int?>("StudentBrotherSeq");
+                    b.Property<int>("StudentBrotherSeq");
 
-                    b.Property<int?>("TourId");
+                    b.Property<int>("TourId");
 
-                    b.Property<int?>("TourPrice");
+                    b.Property<int>("TourPrice");
 
-                    b.Property<int?>("TourTypeId");
+                    b.Property<int>("TourTypeId");
 
                     b.Property<DateTime?>("UpdateDate");
 
                     b.Property<int?>("UpdateUser");
 
-                    b.Property<int?>("YearId");
+                    b.Property<int>("YearId");
 
                     b.HasKey("Id");
 
@@ -682,7 +684,8 @@ namespace Domain.Migrations
 
                     b.HasOne("Domain.Model.AddLookups.LkpClass", "Class")
                         .WithMany("ClassAdm")
-                        .HasForeignKey("ClassId");
+                        .HasForeignKey("ClassId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("Domain.Model.Lookups.LkpLookup", "ClassSeq")
                         .WithMany("ClassSeqAdm")

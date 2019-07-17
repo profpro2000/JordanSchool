@@ -26,10 +26,10 @@ namespace School.ServiceLayer.Services.RegServices
             return result;
         }
 
-        public async Task<List<RegParentVw>> GetById(int id)
+        public async Task<RegParentVw> GetById(int id)
         {
-            var vw = await _interface.GetAllWhereAsync(p => p.Id == id);
-            var result = _mapper.Map<List<RegParentVw>>(vw);
+            var vw = await _interface.GetAsync(p => p.Id == id);
+            var result = _mapper.Map<RegParentVw>(vw);
             return result;
         }
 

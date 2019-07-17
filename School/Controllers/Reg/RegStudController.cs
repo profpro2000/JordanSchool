@@ -38,7 +38,7 @@ namespace School.Controllers.Reg
         public async Task<IActionResult> Get(int id)
         {
             var result = await _service.GetById(id);
-            if (!result.Any())
+            if (result == null)
             {
                 return NotFound("No Data Found");
             }

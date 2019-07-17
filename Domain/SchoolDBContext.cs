@@ -4,7 +4,8 @@ using System.Collections.Generic;
  using System.Text;
 using Domain.Config;
  using Domain.Model.AddLookups;
- using Domain.Model.Lookups;
+using Domain.Model.Adm;
+using Domain.Model.Lookups;
  using Domain.Model.Reg;
  using Microsoft.EntityFrameworkCore;
 
@@ -44,6 +45,10 @@ namespace Domain
         //================Stud Module =========================
         public DbSet<RegParent> RegParents { get; set; }
         public DbSet<RegStud> RegStuds { get; set; }
+
+        //=========== Admission Module===================
+        public DbSet<AdmStud> AdmStuds { get; set; }
+
 
     }
 }

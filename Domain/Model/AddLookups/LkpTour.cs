@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Domain.Model.Adm;
+using System;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 using System.Text;
 
 namespace Domain.Model.AddLookups
@@ -12,5 +14,7 @@ namespace Domain.Model.AddLookups
         public  int TourHalfPrice { get; set; }
         public  int SchoolId { get; set; }
         public LkpSchool LkpSchool { get; set; }
+
+        [IgnoreDataMember] public ICollection<AdmStud> TourAdm { get; set; }
     }
 }

@@ -1,5 +1,6 @@
 ﻿
 using Domain.Config.AddLookupsConfig;
+using Domain.Config.Adm;
 using Domain.Config.LookupConfig;
 using Domain.Config.Reg;
 using Microsoft.EntityFrameworkCore;
@@ -27,6 +28,7 @@ namespace Domain.Config
             //======= Student Tables ======================================
             modelBuilder.ApplyConfiguration(new RegParentConfig());
             modelBuilder.ApplyConfiguration(new RegStudConfig());
+            modelBuilder.ApplyConfiguration(new AdmStudConfig());
 
             return modelBuilder;
 

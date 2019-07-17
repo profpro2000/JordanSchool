@@ -1,5 +1,7 @@
 ﻿using Domain.Model.Lookups;
+using Domain.Model.Reg;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 
@@ -68,5 +70,7 @@ namespace Model.Reg
         public string ParentEmail { get; set; }
         public string ParentFace { get; set; }
         public string Note { get; set; }
+
+        public ICollection<RegStud> RegStuds { get; set; }
     }
 }

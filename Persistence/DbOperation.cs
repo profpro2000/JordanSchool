@@ -44,6 +44,8 @@ namespace Persistence
 
         public TEntity Get(int id) => DbSet.Find(id);
 
+        public async Task<TEntity> GetAsync(int id) => await DbSet.FindAsync(id);
+
         public TEntity Get(Expression<Func<TEntity, bool>> predicate, bool withDeleted = false) => DbSet.Where(predicate).FirstOrDefault();
 
         public async Task<TEntity> GetAsyncById(int id, params string[] include)

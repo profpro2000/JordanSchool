@@ -4,14 +4,16 @@ using Domain;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Domain.Migrations
 {
     [DbContext(typeof(SchoolDbContext))]
-    partial class SchoolDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190710140827_AdmTableV2")]
+    partial class AdmTableV2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -222,19 +224,19 @@ namespace Domain.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime?>("ApprovedDate");
+                    b.Property<DateTime>("ApprovedDate");
 
-                    b.Property<int?>("ApprovedId");
+                    b.Property<int>("ApprovedId");
 
-                    b.Property<DateTime?>("BirthDate");
+                    b.Property<DateTime>("BirthDate");
 
-                    b.Property<int?>("BrotherDescountType");
+                    b.Property<int>("BrotherDescountType");
 
-                    b.Property<int?>("BusId");
+                    b.Property<int>("BusId");
 
                     b.Property<string>("BusNote");
 
-                    b.Property<int?>("ClassId");
+                    b.Property<int>("ClassId");
 
                     b.Property<int?>("ClassSeqId");
 
@@ -244,7 +246,7 @@ namespace Domain.Migrations
                         .IsRequired()
                         .HasMaxLength(100);
 
-                    b.Property<int?>("GenderId");
+                    b.Property<int>("GenderId");
 
                     b.Property<DateTime?>("InsertDate");
 
@@ -252,33 +254,37 @@ namespace Domain.Migrations
 
                     b.Property<int?>("LkpLookupId");
 
-                    b.Property<int?>("NationalityId");
+                    b.Property<int?>("LkpSchoolId");
+
+                    b.Property<int?>("LkpSectionId");
+
+                    b.Property<int>("NationalityId");
 
                     b.Property<string>("Note");
 
                     b.Property<int>("ParentId");
 
-                    b.Property<int?>("ReligionId");
+                    b.Property<int>("ReligionId");
 
                     b.Property<int>("SchoolId");
 
                     b.Property<int>("SectionId");
 
-                    b.Property<int?>("StudNo");
+                    b.Property<int>("StudNo");
 
-                    b.Property<int?>("StudentBrotherSeq");
+                    b.Property<int>("StudentBrotherSeq");
 
-                    b.Property<int?>("TourId");
+                    b.Property<int>("TourId");
 
-                    b.Property<int?>("TourPrice");
+                    b.Property<int>("TourPrice");
 
-                    b.Property<int?>("TourTypeId");
+                    b.Property<int>("TourTypeId");
 
                     b.Property<DateTime?>("UpdateDate");
 
                     b.Property<int?>("UpdateUser");
 
-                    b.Property<int?>("YearId");
+                    b.Property<int>("YearId");
 
                     b.HasKey("Id");
 
@@ -294,15 +300,15 @@ namespace Domain.Migrations
 
                     b.HasIndex("LkpLookupId");
 
+                    b.HasIndex("LkpSchoolId");
+
+                    b.HasIndex("LkpSectionId");
+
                     b.HasIndex("NationalityId");
 
                     b.HasIndex("ParentId");
 
                     b.HasIndex("ReligionId");
-
-                    b.HasIndex("SchoolId");
-
-                    b.HasIndex("SectionId");
 
                     b.HasIndex("TourId");
 
@@ -676,13 +682,14 @@ namespace Domain.Migrations
                         .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("Domain.Model.AddLookups.LkpBus", "Bus")
-                        .WithMany("BusAdm")
+                        .WithMany()
                         .HasForeignKey("BusId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("Domain.Model.AddLookups.LkpClass", "Class")
-                        .WithMany("ClassAdm")
-                        .HasForeignKey("ClassId");
+                        .WithMany()
+                        .HasForeignKey("ClassId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("Domain.Model.Lookups.LkpLookup", "ClassSeq")
                         .WithMany("ClassSeqAdm")
@@ -698,13 +705,21 @@ namespace Domain.Migrations
                         .WithMany("BrotherDescountTypeAdm")
                         .HasForeignKey("LkpLookupId");
 
+                    b.HasOne("Domain.Model.AddLookups.LkpSchool", "LkpSchool")
+                        .WithMany()
+                        .HasForeignKey("LkpSchoolId");
+
+                    b.HasOne("Domain.Model.AddLookups.LkpSection", "LkpSection")
+                        .WithMany()
+                        .HasForeignKey("LkpSectionId");
+
                     b.HasOne("Domain.Model.Lookups.LkpLookup", "Nationality")
                         .WithMany("NationalityAdm")
                         .HasForeignKey("NationalityId")
                         .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("Domain.Model.Reg.RegParent", "Parent")
-                        .WithMany("ParentAdm")
+                        .WithMany()
                         .HasForeignKey("ParentId")
                         .OnDelete(DeleteBehavior.Cascade);
 
@@ -713,20 +728,10 @@ namespace Domain.Migrations
                         .HasForeignKey("ReligionId")
                         .OnDelete(DeleteBehavior.Restrict);
 
-                    b.HasOne("Domain.Model.AddLookups.LkpSchool", "LkpSchool")
-                        .WithMany("SchoolAdm")
-                        .HasForeignKey("SchoolId")
-                        .OnDelete(DeleteBehavior.Restrict);
-
-                    b.HasOne("Domain.Model.AddLookups.LkpSection", "LkpSection")
-                        .WithMany("SectionAdm")
-                        .HasForeignKey("SectionId")
-                        .OnDelete(DeleteBehavior.Restrict);
-
                     b.HasOne("Domain.Model.AddLookups.LkpTour", "Tour")
-                        .WithMany("TourAdm")
+                        .WithMany()
                         .HasForeignKey("TourId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("Domain.Model.Lookups.LkpLookup", "TourType")
                         .WithMany("TourType")
