@@ -50,6 +50,16 @@ namespace School.Controllers.AdmStuds
             { return NotFound("No Data Found"); }
             return Ok(result);
         }
+
+        [HttpGet("RegChildrens/{id}")]
+        public async Task<IActionResult> RegChildrens(int id)
+        {
+            var result = await _service.GetRegChildrens(id);
+            if (result == null)
+            { return NotFound("No Data Found"); }
+            return Ok(result);
+        }
+
         [HttpGet("ParentName/{id}")]
         public object GetByName(int id)
         {

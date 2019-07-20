@@ -11,6 +11,7 @@ using Domain.Model.library;
 using Domain.Model.Lookups;
  using Domain.Model.Reg;
  using Microsoft.EntityFrameworkCore;
+using Domain.Model.Users;
 
 namespace Domain
 {
@@ -31,6 +32,10 @@ namespace Domain
             
         }
 
+
+        //=============Users =================
+        public DbSet<Users> Users { get; set; }
+
         //========= Lookups Tables ====================================
         //public DbSet<LookupType> LookupTypes { get; set; }
 
@@ -44,7 +49,8 @@ namespace Domain
         public  DbSet<LkpTour> LkpTours { get; set; }
         public  DbSet<LkpBus> LkpBusses { get; set; }
         public DbSet<LkpClass> LkpClasses { get; set; }
-        
+        public DbSet<LkpYear> LkpYears { get; set; }
+
         //================Stud Module =========================
         public DbSet<RegParent> RegParents { get; set; }
         public DbSet<RegStud> RegStuds { get; set; }

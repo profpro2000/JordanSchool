@@ -24,7 +24,7 @@ namespace Domain.Config.AddLookupsConfig
                 .HasForeignKey(key => key.SectionId)
                 .OnDelete(DeleteBehavior.Restrict);
             builder.HasOne(p => p.YearsLookup)
-                .WithMany(p => p.LkpClasses)
+                .WithMany(p => p.Classes)
                 .HasForeignKey(key => key.YearId)
                 .OnDelete(DeleteBehavior.Restrict);
         }

@@ -4,14 +4,16 @@ using Domain;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Domain.Migrations
 {
     [DbContext(typeof(SchoolDbContext))]
-    partial class SchoolDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190717155809_LKPYearV1")]
+    partial class LKPYearV1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -83,8 +85,6 @@ namespace Domain.Migrations
 
                     b.Property<int?>("InsertUser");
 
-                    b.Property<int?>("LkpLookupId");
-
                     b.Property<string>("Lname")
                         .HasMaxLength(100);
 
@@ -99,8 +99,6 @@ namespace Domain.Migrations
                     b.Property<int>("YearId");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("LkpLookupId");
 
                     b.HasIndex("SchoolId");
 
@@ -230,7 +228,7 @@ namespace Domain.Migrations
                         .IsRequired()
                         .HasMaxLength(200);
 
-                    b.Property<int?>("Active");
+                    b.Property<int>("Active");
 
                     b.Property<string>("LName");
 
@@ -771,36 +769,6 @@ namespace Domain.Migrations
                     b.ToTable("Reg_Stud");
                 });
 
-            modelBuilder.Entity("Domain.Model.Users.Users", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("CurrentUrl");
-
-                    b.Property<string>("Email");
-
-                    b.Property<int?>("EmployeeId");
-
-                    b.Property<bool?>("IsSuperAdmin");
-
-                    b.Property<string>("Locale");
-
-                    b.Property<string>("Password")
-                        .IsRequired();
-
-                    b.Property<string>("Username")
-                        .IsRequired();
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("Username")
-                        .IsUnique();
-
-                    b.ToTable("Sys_Users");
-                });
-
             modelBuilder.Entity("Domain.Model.library.Author", b =>
                 {
                     b.Property<int>("Id")
@@ -859,10 +827,6 @@ namespace Domain.Migrations
 
             modelBuilder.Entity("Domain.Model.AddLookups.LkpClass", b =>
                 {
-                    b.HasOne("Domain.Model.Lookups.LkpLookup")
-                        .WithMany("LkpClasses")
-                        .HasForeignKey("LkpLookupId");
-
                     b.HasOne("Domain.Model.AddLookups.LkpSchool", "LkpSchool")
                         .WithMany("LkpClasses")
                         .HasForeignKey("SchoolId")
@@ -873,8 +837,8 @@ namespace Domain.Migrations
                         .HasForeignKey("SectionId")
                         .OnDelete(DeleteBehavior.Restrict);
 
-                    b.HasOne("Domain.Model.AddLookups.LkpYear", "YearsLookup")
-                        .WithMany("Classes")
+                    b.HasOne("Domain.Model.Lookups.LkpLookup", "YearsLookup")
+                        .WithMany("LkpClasses")
                         .HasForeignKey("YearId")
                         .OnDelete(DeleteBehavior.Restrict);
                 });

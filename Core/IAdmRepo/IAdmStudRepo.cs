@@ -12,5 +12,7 @@ namespace Core.IAdmStudRepo
         Task<List<AdmStud>> GetAllStud();
         Task<List<AdmStud>> GetStudByParent(int id);
         object GetParentName(int id);
+
+        Task<IEnumerable<object>> GetRegChildrens(int id);
     }
 }

@@ -4,14 +4,16 @@ using Domain;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Domain.Migrations
 {
     [DbContext(typeof(SchoolDbContext))]
-    partial class SchoolDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190719184109_UsersV1")]
+    partial class UsersV1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -783,12 +785,9 @@ namespace Domain.Migrations
 
                     b.Property<int?>("EmployeeId");
 
-                    b.Property<bool?>("IsSuperAdmin");
+                    b.Property<bool>("IsSuperAdmin");
 
                     b.Property<string>("Locale");
-
-                    b.Property<string>("Password")
-                        .IsRequired();
 
                     b.Property<string>("Username")
                         .IsRequired();

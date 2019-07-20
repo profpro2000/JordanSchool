@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Domain.Model.Lookups;
 using Microsoft.AspNetCore.Mvc;
+using MiddlewareAndServices.Filters;
+using MiddlewareAndServices.Helper;
 using Model.Lookups;
 using School.ServiceLayer.Services.LookupsServices;
-using ServicesAndMiddleware.Filters;
-using ServicesAndMiddleware.Helper;
+
 
 namespace School.Controllers.Lookups
 {

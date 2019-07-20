@@ -6,7 +6,7 @@ using Core.ILookupRepo;
 using Domain;
 using Domain.Model.Lookups;
 using System.Linq;
-using ServicesAndMiddleware.Helper;
+using MiddlewareAndServices.Helper;
 
 namespace Persistence.LookupsRepo
 {

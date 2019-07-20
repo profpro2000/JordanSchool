@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ServicesAndMiddleware.Filters
+namespace MiddlewareAndServices.Filters
 {
  public   class FilterLookupsType
     {

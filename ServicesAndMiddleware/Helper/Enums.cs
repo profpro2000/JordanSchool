@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ServicesAndMiddleware.Helper
+namespace MiddlewareAndServices.Helper
 {
    public class Enums
     {

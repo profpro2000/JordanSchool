@@ -5,7 +5,7 @@ using AutoMapper;
 using Core.IRegRepo;
 using Domain.Model.Reg;
 using Model.Reg;
-using ServicesAndMiddleware.Services;
+using School.MiddlewareAndServices.Services;
 
 namespace School.ServiceLayer.Services.RegServices
 {

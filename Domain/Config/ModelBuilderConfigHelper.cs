@@ -1,9 +1,11 @@
 ﻿
 using Domain.Config.AddLookupsConfig;
+using Domain.Config.Adm;
 using Domain.Config.Financial;
 using Domain.Config.Library;
 using Domain.Config.LookupConfig;
 using Domain.Config.Reg;
+using Domain.Config.UsersConfigs;
 using Domain.Model.library;
 using Microsoft.EntityFrameworkCore;
 
@@ -15,7 +17,10 @@ namespace Domain.Config
         public static ModelBuilder OnModelCreating(ModelBuilder modelBuilder)
         {
 
-          
+            //=========  Sys_Users ======================================
+            modelBuilder.ApplyConfiguration(new UsersConfig());
+
+
             //========== System Table & lookups configuration================
             modelBuilder.ApplyConfiguration(new LkpItemCalendarConfig());
             modelBuilder.ApplyConfiguration(new LkpCalendarConfig());
@@ -26,10 +31,15 @@ namespace Domain.Config
             modelBuilder.ApplyConfiguration(new LkpTourConfig());
             modelBuilder.ApplyConfiguration(new LkpBusConfig());
             modelBuilder.ApplyConfiguration(new LkpClassConfig());
-            
+            modelBuilder.ApplyConfiguration(new LkpYearConfig());
+
             //======= Student Tables ======================================
             modelBuilder.ApplyConfiguration(new RegParentConfig());
             modelBuilder.ApplyConfiguration(new RegStudConfig());
+
+            //=======Addmission Tables ======================================
+            modelBuilder.ApplyConfiguration(new AdmStudConfig());
+            
 
             //==================================
             modelBuilder.ApplyConfiguration(new BookConfig());
