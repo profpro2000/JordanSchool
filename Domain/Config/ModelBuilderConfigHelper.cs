@@ -1,5 +1,6 @@
 ﻿
 using Domain.Config.AddLookupsConfig;
+using Domain.Config.Adm;
 using Domain.Config.Financial;
 using Domain.Config.Library;
 using Domain.Config.LookupConfig;
@@ -26,7 +27,8 @@ namespace Domain.Config
             modelBuilder.ApplyConfiguration(new LkpTourConfig());
             modelBuilder.ApplyConfiguration(new LkpBusConfig());
             modelBuilder.ApplyConfiguration(new LkpClassConfig());
-            
+            modelBuilder.ApplyConfiguration(new AdmStudConfig());
+
             //======= Student Tables ======================================
             modelBuilder.ApplyConfiguration(new RegParentConfig());
             modelBuilder.ApplyConfiguration(new RegStudConfig());

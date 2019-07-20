@@ -52,7 +52,7 @@ namespace Domain.Model.Lookups
         [IgnoreDataMember] public ICollection<AdmStud> TourType { get; set; }
 
 
-         [IgnoreDataMember] public ICollection<SchoolFee> SchoolFees { get; set; }
+      //   [IgnoreDataMember] public ICollection<SchoolFee> SchoolFees { get; set; }
         [IgnoreDataMember] public ICollection<ClassFee> ClassFees { get; set; }
         [IgnoreDataMember] public ICollection<StudentFee> StudentFees { get; set; }
     }
