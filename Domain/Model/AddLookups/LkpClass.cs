@@ -20,7 +20,7 @@ namespace Domain.Model.AddLookups
         public int SectionId { get; set; }
         public LkpSection LkpSection { get; set; }
         public int YearId { get; set; }
-        public LkpLookup YearsLookup { get; set; }
+        public LkpYear YearsLookup { get; set; }
 
         [IgnoreDataMember] public ICollection<RegStud> ClassRegStuds { get; set; }
         [IgnoreDataMember] public ICollection<AdmStud> ClassAdm { get; set; }

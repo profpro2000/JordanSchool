@@ -40,6 +40,7 @@ namespace Domain.Config.Adm
                 .OnDelete(DeleteBehavior.Restrict);
 
             //Lookups
+            //builder.Ignore("Nationality");
             builder.HasOne(p => p.Religion)
                 .WithMany(p => p.ReligionAdm)
                 .HasForeignKey(key => key.ReligionId)

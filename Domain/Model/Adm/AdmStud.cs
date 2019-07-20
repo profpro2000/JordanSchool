@@ -11,7 +11,7 @@ namespace Domain.Model.Adm
         public int Id { get; set; }
         public string FirstName { get; set; }
         public int ParentId { get; set; }
-        [IgnoreDataMember] public RegParent Parent { get; set; }
+        public RegParent Parent { get; set; }
         public int? StudNo { get; set; }
         public int SchoolId { get; set; }
         public LkpSchool LkpSchool { get; set; }

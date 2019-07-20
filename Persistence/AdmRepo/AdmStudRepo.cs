@@ -58,5 +58,52 @@ namespace Persistence.AdmRepo
             return parent;
         }
 
+        public async Task<IEnumerable<object>> GetRegChildrens(int id)
+        {
+            var data = _db.AdmStuds.Where(p => p.ParentId == id).Select(x => new
+            {
+                x.Id,
+                x.FirstName,
+                x.BirthDate,
+                x.GenderId,
+                x.YearId,
+                GenderName = x.Gender != null ? x.Gender.AName : "",
+                ClassName = x.Class != null ? x.Class.Aname : "",
+                ClassPrice = x.Class != null ? x.Class.Amt : 0,
+                ClassYear = x.Class != null ? x.Class.YearsLookup != null ? x.Class.YearsLookup.Id :0 :0,
+                ClassActive = x.Class != null ? x.Class.YearsLookup != null ? x.Class.YearsLookup.Active:0 :0,
+                ClassSeqName = x.ClassSeq != null ? x.ClassSeq.AName:"",
+                TourName = x.Tour != null ? x.Tour.TourName : "",
+                TourTypeName= x.TourType != null ?  x.TourType.AName : "",          
+                TourPrice =x.TourType != null ? int.Parse(x.TourType.Value)==3 ?
+                x.Tour.TourFullPrice:x.Tour.TourHalfPrice : 0,
+            });//.Where(p=>p.ClassActive == 1) ;
+           
+            var result = data.Select(x => new
+            {
+                x.Id,
+                x.FirstName,
+                x.BirthDate,
+                x.GenderId,
+                x.GenderName,
+                x.YearId,
+                x.ClassName,
+                x.ClassPrice,
+                x.ClassYear,
+                x.ClassActive,
+                x.ClassSeqName,
+                x.TourName,
+                x.TourTypeName,
+                x.TourPrice,
+                TotalPrice = x.ClassPrice + x.TourPrice
+
+            }) ;
+            /*int? a = null;
+            int b = a ?? -1;
+            Console.WriteLine(b);  // output: -1
+            */
+            return result;
+
+        }
     }
 }

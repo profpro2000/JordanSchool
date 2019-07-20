@@ -5,9 +5,10 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Core.ILookupRepo;
 using Domain.Model.Lookups;
+using MiddlewareAndServices.Filters;
+using MiddlewareAndServices.Helper;
 using Model.Lookups;
-using ServicesAndMiddleware.Filters;
-using ServicesAndMiddleware.Helper;
+
 
 namespace School.ServiceLayer.Services.LookupsServices
 {
