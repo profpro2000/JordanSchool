@@ -1,7 +1,7 @@
 ﻿using System;
 using Domain.Model.AddLookups;
 using Domain.Model.Lookups;
-
+ 
 namespace Domain.Model.Adm
 {
     public class AdmStud:AuditModel
