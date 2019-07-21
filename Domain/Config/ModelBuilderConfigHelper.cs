@@ -54,6 +54,8 @@ namespace Domain.Config
             modelBuilder.ApplyConfiguration(new SchoolFeeConfig());
             modelBuilder.ApplyConfiguration(new ClassFeeConfig());
             modelBuilder.ApplyConfiguration(new StudentFeeConfig());
+            modelBuilder.ApplyConfiguration(new PaymentConfig());
+
 
 
 

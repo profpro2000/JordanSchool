@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Core.IFinancial;
 using Domain;
@@ -9,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Persistence.FinancialRepo
 {
-   public class FinItemRepo:DbOperation<FinItem>,IFinItemRepo
+    public class FinItemRepo:DbOperation<FinItem>,IFinItemRepo
     {
         private SchoolDbContext _db;
 

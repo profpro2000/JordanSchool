@@ -39,7 +39,11 @@ namespace Domain.Model.Lookups
         //financial
         [IgnoreDataMember] public ICollection<FinItem> CdTypes { get; set; }
         [IgnoreDataMember] public ICollection<FinItem> VpTypes { get; set; }
-        [IgnoreDataMember] public ICollection<SchoolFee> SchoolFees { get; set; }
+        [IgnoreDataMember] public ICollection<Payment> VoucherStatuses { get; set; }
+        [IgnoreDataMember] public ICollection<Payment> VoucherTypes { get; set; }
+
+        
+        //  [IgnoreDataMember] public ICollection<SchoolFee> SchoolFees { get; set; }
 
         // Adm
         [IgnoreDataMember] public ICollection<AdmStud> ReligionAdm { get; set; }

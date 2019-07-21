@@ -20,7 +20,7 @@ namespace Model.Financial
        
         //year Data
         public int YearId { set; get; }
-        public LkpLookup Year { set; get; }
+        public LkpYear Year { set; get; }
         public string YearDesc { get { return Year != null ? Year.AName : ""; } set { } }
 
 

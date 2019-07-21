@@ -217,6 +217,9 @@ namespace School.MiddlewareAndServices.Services
             services.AddScoped<IStudentFeeRepo, StudentFeeRepo>();
             services.AddScoped<StudentFeeService>();
 
+            services.AddScoped<IPaymentRepo, PaymentRepo>();
+            services.AddScoped<PaymentService>();
+
             // ==========  Users  ===========
             services.AddScoped<IUserRepo, UserRepo>();
             services.AddScoped<UsersService>();

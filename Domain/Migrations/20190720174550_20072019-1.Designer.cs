@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Domain.Migrations
 {
     [DbContext(typeof(SchoolDbContext))]
-    [Migration("20190718112008_ChangeClassesYearV1")]
-    partial class ChangeClassesYearV1
+    [Migration("20190720174550_20072019-1")]
+    partial class _200720191
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -383,8 +383,6 @@ namespace Domain.Migrations
 
                     b.Property<string>("ArDesc");
 
-                    b.Property<string>("CDType");
-
                     b.Property<DateTime?>("InsertDate");
 
                     b.Property<int?>("InsertUser");
@@ -395,9 +393,15 @@ namespace Domain.Migrations
 
                     b.Property<int?>("UpdateUser");
 
-                    b.Property<string>("VPType");
+                    b.Property<int>("cdTypeId");
+
+                    b.Property<int>("vpTypeId");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("cdTypeId");
+
+                    b.HasIndex("vpTypeId");
 
                     b.ToTable("Fin_items");
                 });
@@ -773,6 +777,36 @@ namespace Domain.Migrations
                     b.ToTable("Reg_Stud");
                 });
 
+            modelBuilder.Entity("Domain.Model.Users.Users", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("CurrentUrl");
+
+                    b.Property<string>("Email");
+
+                    b.Property<int?>("EmployeeId");
+
+                    b.Property<bool?>("IsSuperAdmin");
+
+                    b.Property<string>("Locale");
+
+                    b.Property<string>("Password")
+                        .IsRequired();
+
+                    b.Property<string>("Username")
+                        .IsRequired();
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Username")
+                        .IsUnique();
+
+                    b.ToTable("Sys_Users");
+                });
+
             modelBuilder.Entity("Domain.Model.library.Author", b =>
                 {
                     b.Property<int>("Id")
@@ -967,6 +1001,19 @@ namespace Domain.Migrations
                         .WithMany("ClassFees")
                         .HasForeignKey("YearId")
                         .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Domain.Model.Financial.FinItem", b =>
+                {
+                    b.HasOne("Domain.Model.Lookups.LkpLookup", "cdTypeLookup")
+                        .WithMany("CdTypes")
+                        .HasForeignKey("cdTypeId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("Domain.Model.Lookups.LkpLookup", "vpTypeLookup")
+                        .WithMany("VpTypes")
+                        .HasForeignKey("vpTypeId")
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("Domain.Model.Financial.SchoolFee", b =>

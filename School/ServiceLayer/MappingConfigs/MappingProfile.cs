@@ -44,6 +44,7 @@ namespace School.ServiceLayer.MappingConfigs
             CreateMap<SchoolFee, SchoolFeeVw>().ReverseMap();
             CreateMap<ClassFee, ClassFeeVw>().ReverseMap();
             CreateMap<StudentFee, StudentFeeVw>().ReverseMap();
+            CreateMap<Payment, PaymentVw>().ReverseMap();
 
 
 
