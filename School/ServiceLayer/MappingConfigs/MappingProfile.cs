@@ -20,7 +20,8 @@ namespace School.ServiceLayer.MappingConfigs
         public MappingProfile()
         {
             //=========== Users ===============
-            CreateMap<Users, UsersVw>().ReverseMap();
+            CreateMap<SysUsers, UsersVw>().ReverseMap();
+            CreateMap<UserSchool, UserSchoolVw>().ReverseMap();
             //=============Lookups ===============
             CreateMap<LkpItemCalendar, LkpItemCalendarVw>().ReverseMap();
             CreateMap<LkpCalendar, LkpCalendarVw>().ReverseMap();

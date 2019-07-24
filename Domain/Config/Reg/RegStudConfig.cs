@@ -54,6 +54,6 @@ namespace Domain.Config.Reg
 
             //throw new System.NotImplementedException();
         }
-        
+
     }
 }

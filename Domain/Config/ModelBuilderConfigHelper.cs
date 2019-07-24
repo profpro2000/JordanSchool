@@ -19,6 +19,7 @@ namespace Domain.Config
 
             //=========  Sys_Users ======================================
             modelBuilder.ApplyConfiguration(new UsersConfig());
+            modelBuilder.ApplyConfiguration(new UserSchoolsConfig());
 
 
             //========== System Table & lookups configuration================

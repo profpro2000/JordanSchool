@@ -4,14 +4,16 @@ using Domain;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Domain.Migrations
 {
     [DbContext(typeof(SchoolDbContext))]
-    partial class SchoolDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190722170257_UpdateAdm")]
+    partial class UpdateAdm
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -259,8 +261,6 @@ namespace Domain.Migrations
 
                     b.Property<int?>("ClassId");
 
-                    b.Property<int>("ClassPrice");
-
                     b.Property<int?>("ClassSeqId");
 
                     b.Property<string>("DiseaseName");
@@ -277,7 +277,7 @@ namespace Domain.Migrations
 
                     b.Property<int?>("GenderId");
 
-                    b.Property<int?>("IdNum");
+                    b.Property<int>("IdNum");
 
                     b.Property<string>("Image");
 

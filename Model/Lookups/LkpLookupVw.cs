@@ -15,7 +15,8 @@ namespace Model.Lookups
         public string Value { get; set; }
         public int ParentId { get; set; }
         public int TypeId { get; set; }
-     
+        public int DefaultValue { get; set; }
+
 
     }
 }

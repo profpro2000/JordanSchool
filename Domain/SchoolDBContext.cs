@@ -34,7 +34,8 @@ namespace Domain
 
 
         //=============Users =================
-        public DbSet<Users> Users { get; set; }
+        public DbSet<SysUsers> Users { get; set; }
+        public DbSet<UserSchool> UserSchools { get; set; }
 
         //========= Lookups Tables ====================================
         //public DbSet<LookupType> LookupTypes { get; set; }

@@ -7,6 +7,7 @@ using Domain.Model.Adm;
 using Domain.Model.Financial;
 using Domain.Model.Lookups;
 using Domain.Model.Reg;
+using Domain.Model.Users;
 
 namespace Domain.Model.AddLookups
 {
@@ -30,8 +31,9 @@ namespace Domain.Model.AddLookups
         [IgnoreDataMember] public ICollection<LkpClass> LkpClasses { get; set; }
 
         [IgnoreDataMember] public ICollection<RegStud> SchoolRegStuds { get; set; }
-        [IgnoreDataMember] public ICollection<AdmStud> SchoolAdm { get; set; }
+        [IgnoreDataMember] public ICollection<AdmStud> SchoolAdm { get; set; } 
         [IgnoreDataMember] public ICollection<SchoolFee> SchoolFees { get; set; }
+        [IgnoreDataMember] public ICollection<UserSchool> UsersSchools { get; set; }
 
 
 

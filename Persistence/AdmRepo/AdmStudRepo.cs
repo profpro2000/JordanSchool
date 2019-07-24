@@ -1,13 +1,10 @@
 ﻿using Core.IAdmStudRepo;
 using Domain;
 using Domain.Model.Adm;
-using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
-using System.Linq.Expressions;
 
 namespace Persistence.AdmRepo
 {
@@ -33,12 +30,16 @@ namespace Persistence.AdmRepo
         public object GetParentName(int id)
         {
             //return  _db.AdmStuds.Where(x => x.ParentId == id).Include(r => r.Parent).FirstOrDefault();
-            var parent= _db.RegParents.Where(x => x.Id == id).Select(p => new {
+            var _tourPrice = _db.AdmStuds.Where(x => x.ParentId == id).Sum(x => x.TourPrice);
+            var _classPrice = _db.AdmStuds.Where(x => x.ParentId == id).Sum(x => x.ClassPrice);
+            var _totalPrice = _tourPrice + _classPrice;
+
+            var parent = _db.RegParents.Where(x => x.Id == id).Select(p => new {
                 p.Id,
                 FatherFullName = p.FirstName + " " + p.SecondName + " " + p.FamilyName,
-                FatherFirstName=p.FirstName,
-                FatherSecondName=p.SecondName,
-                FatherFamilyName=p.FamilyName,
+                FatherFirstName = p.FirstName,
+                FatherSecondName = p.SecondName,
+                FatherFamilyName = p.FamilyName,
                 ReligionName = p.ReligionLookup.AName,
                 NationalityName = p.NationalityLookup.AName,
                 CityName = p.CityLookup.AName,
@@ -52,8 +53,10 @@ namespace Persistence.AdmRepo
                 p.MotherMobile,
                 p.SmsParent,
                 p.SmsMobile,
-                p.ParentEmail
-            }) ;
+                p.ParentEmail,
+                ParentTotalPrice= _totalPrice
+
+            });//.FirstOrDefault() ;
 
             return parent;
         }

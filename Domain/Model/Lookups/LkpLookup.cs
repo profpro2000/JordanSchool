@@ -50,5 +50,10 @@ namespace Domain.Model.Lookups
          [IgnoreDataMember] public ICollection<SchoolFee> SchoolFees { get; set; }
         [IgnoreDataMember] public ICollection<ClassFee> ClassFees { get; set; }
         [IgnoreDataMember] public ICollection<StudentFee> StudentFees { get; set; }
+
+        //
+        [IgnoreDataMember] public ICollection<AdmStud> JoinYearAdm { get; set; }
+        [IgnoreDataMember] public ICollection<AdmStud> JoinTermAdm { get; set; }
+        [IgnoreDataMember] public ICollection<AdmStud> HealthStudAdm { get; set; }
     }
 }

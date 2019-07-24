@@ -7,10 +7,10 @@ using System.Text;
 
 namespace Domain.Config.UsersConfigs
 {
-    public class UsersConfig : IEntityTypeConfiguration<Users>
+    public class UsersConfig : IEntityTypeConfiguration<SysUsers>
     {
 
-        public void Configure(EntityTypeBuilder<Users> builder)
+        public void Configure(EntityTypeBuilder<SysUsers> builder)
         {
 
             builder.ToTable("Sys_Users");
