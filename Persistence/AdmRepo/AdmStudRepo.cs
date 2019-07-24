@@ -51,7 +51,7 @@ namespace Persistence.AdmRepo
                 p.Tel,
                 p.FatherMobile,
                 p.MotherMobile,
-                p.SmsParent,
+                p.SmsParent, 
                 p.SmsMobile,
                 p.ParentEmail,
                 ParentTotalPrice= _totalPrice
