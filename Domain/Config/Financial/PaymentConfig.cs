@@ -22,8 +22,17 @@ namespace Domain.Config.Financial
 
             builder.HasOne(p => p.VoucherStatus)
                 .WithMany(p => p.VoucherStatuses)
-                .HasForeignKey(p => p.VoucherTypeId)
+                .HasForeignKey(p => p.VoucherStatusId)
                  .OnDelete(DeleteBehavior.Restrict);
+
+
+
+
+
+            builder.HasOne(p => p.RegParent)
+                .WithMany(p => p.Payments)
+                .HasForeignKey(p => p.RegParentId)
+                .OnDelete(DeleteBehavior.Restrict);
 
 
         }

@@ -4,14 +4,16 @@ using Domain;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Domain.Migrations
 {
     [DbContext(typeof(SchoolDbContext))]
-    partial class SchoolDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190723093049_3207")]
+    partial class _3207
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -420,8 +422,6 @@ namespace Domain.Migrations
 
                     b.Property<string>("Note");
 
-                    b.Property<int>("RegParentId");
-
                     b.Property<DateTime?>("UpdateDate");
 
                     b.Property<int?>("UpdateUser");
@@ -434,13 +434,13 @@ namespace Domain.Migrations
 
                     b.Property<int>("VoucherTypeId");
 
+                    b.Property<int?>("VoucherTypeId1");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("RegParentId");
-
-                    b.HasIndex("VoucherStatusId");
-
                     b.HasIndex("VoucherTypeId");
+
+                    b.HasIndex("VoucherTypeId1");
 
                     b.ToTable("Payments");
                 });
@@ -1061,20 +1061,14 @@ namespace Domain.Migrations
 
             modelBuilder.Entity("Domain.Model.Financial.Payment", b =>
                 {
-                    b.HasOne("Domain.Model.Reg.RegParent", "RegParent")
-                        .WithMany("Payments")
-                        .HasForeignKey("RegParentId")
-                        .OnDelete(DeleteBehavior.Restrict);
-
                     b.HasOne("Domain.Model.Lookups.LkpLookup", "VoucherStatus")
                         .WithMany("VoucherStatuses")
-                        .HasForeignKey("VoucherStatusId")
+                        .HasForeignKey("VoucherTypeId")
                         .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("Domain.Model.Lookups.LkpLookup", "VoucherType")
                         .WithMany("VoucherTypes")
-                        .HasForeignKey("VoucherTypeId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .HasForeignKey("VoucherTypeId1");
                 });
 
             modelBuilder.Entity("Domain.Model.Financial.SchoolFee", b =>
