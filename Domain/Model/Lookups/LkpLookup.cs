@@ -9,9 +9,9 @@ using Domain.Model.Reg;
 
 namespace Domain.Model.Lookups
 {
-   public class LkpLookup:AuditModel
+    public class LkpLookup : AuditModel
     {
-        public  int Id { get; set; }
+        public int Id { get; set; }
         public string AName { get; set; }
         public string LName { get; set; }
         public string Value { get; set; }
@@ -20,7 +20,7 @@ namespace Domain.Model.Lookups
         public int? DefaultValue { get; set; }
         public LkpLookupType LkpLookupType { get; set; }
 
-        [IgnoreDataMember] public  ICollection<LkpSchool> LkpSchool { get; set; }
+        [IgnoreDataMember] public ICollection<LkpSchool> LkpSchool { get; set; }
         [IgnoreDataMember] public ICollection<LkpClass> LkpClasses { get; set; }
 
         [IgnoreDataMember] public ICollection<RegParent> ReligionParents { get; set; }
@@ -36,6 +36,15 @@ namespace Domain.Model.Lookups
         [IgnoreDataMember] public ICollection<RegStud> JoinClassSeqStudMasters { get; set; }
         [IgnoreDataMember] public ICollection<RegStud> HealthStudMasters { get; set; }
 
+        //financial
+        [IgnoreDataMember] public ICollection<FinItem> CdTypes { get; set; }
+        [IgnoreDataMember] public ICollection<FinItem> VpTypes { get; set; }
+        [IgnoreDataMember] public ICollection<Payment> VoucherStatuses { get; set; }
+        [IgnoreDataMember] public ICollection<Payment> VoucherTypes { get; set; }
+
+        
+        //  [IgnoreDataMember] public ICollection<SchoolFee> SchoolFees { get; set; }
+
         // Adm
         [IgnoreDataMember] public ICollection<AdmStud> ReligionAdm { get; set; }
         [IgnoreDataMember] public ICollection<AdmStud> GenderAdm { get; set; }
@@ -47,7 +56,7 @@ namespace Domain.Model.Lookups
         [IgnoreDataMember] public ICollection<AdmStud> TourType { get; set; }
 
 
-         [IgnoreDataMember] public ICollection<SchoolFee> SchoolFees { get; set; }
+      //   [IgnoreDataMember] public ICollection<SchoolFee> SchoolFees { get; set; }
         [IgnoreDataMember] public ICollection<ClassFee> ClassFees { get; set; }
         [IgnoreDataMember] public ICollection<StudentFee> StudentFees { get; set; }
 

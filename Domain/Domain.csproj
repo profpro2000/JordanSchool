@@ -33,8 +33,22 @@
     <Compile Remove="Migrations\20190714150011_1407-1.Designer.cs" />
     <Compile Remove="Migrations\20190714151421_1407-1.cs" />
     <Compile Remove="Migrations\20190714151421_1407-1.Designer.cs" />
+    <Compile Remove="Migrations\20190715112756_1507-4.cs" />
+    <Compile Remove="Migrations\20190715112756_1507-4.Designer.cs" />
+    <Compile Remove="Migrations\20190715114422_1507-6.cs" />
+    <Compile Remove="Migrations\20190715114422_1507-6.Designer.cs" />
+    <Compile Remove="Migrations\20190715114556_1507-7.cs" />
+    <Compile Remove="Migrations\20190715114556_1507-7.Designer.cs" />
+    <Compile Remove="Migrations\20190715115108_1507-7.cs" />
+    <Compile Remove="Migrations\20190715115108_1507-7.Designer.cs" />
+    <Compile Remove="Migrations\20190715115227_1507-7.cs" />
+    <Compile Remove="Migrations\20190715115227_1507-7.Designer.cs" />
     <Compile Remove="Migrations\20190717122723_TableFromYaseenV1.cs" />
     <Compile Remove="Migrations\20190717122723_TableFromYaseenV1.Designer.cs" />
+    <Compile Remove="Migrations\20190720172235_20072019-v1.cs" />
+    <Compile Remove="Migrations\20190720172235_20072019-v1.Designer.cs" />
+    <Compile Remove="Migrations\20190723194903_test2.cs" />
+    <Compile Remove="Migrations\20190723194903_test2.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

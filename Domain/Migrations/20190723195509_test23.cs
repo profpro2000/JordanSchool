@@ -2,22 +2,17 @@
 
 namespace Domain.Migrations
 {
-    public partial class UsersV3 : Migration
+    public partial class test23 : Migration
     {
+
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AddColumn<string>(
-                name: "Password",
-                table: "Sys_Users",
-                nullable: false,
-                defaultValue: "");
         }
-
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(
-                name: "Password",
-                table: "Sys_Users");
+                name: "ThisIsId",
+                table: "Payments");
         }
     }
 }

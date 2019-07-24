@@ -15,7 +15,7 @@ namespace Domain.Model.Financial
         public LkpSchool school { set; get; }
 
         public int YearId { set; get; }
-       public LkpLookup Year { set; get; }
+       public LkpYear Year { set; get; }
 
         public int FinItemId { set; get; }
         public FinItem FinItem { set; get; }

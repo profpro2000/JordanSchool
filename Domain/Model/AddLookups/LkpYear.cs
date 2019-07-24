@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using System.Text;
+using Domain.Model.Financial;
 
 namespace Domain.Model.AddLookups
 {
@@ -13,5 +14,6 @@ namespace Domain.Model.AddLookups
         public int? Active { get; set; }
 
         [IgnoreDataMember] public ICollection<LkpClass> Classes { get; set; }
+       [IgnoreDataMember] public ICollection<SchoolFee> SchoolFees { set; get; }
     }
 }

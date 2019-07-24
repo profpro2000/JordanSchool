@@ -32,6 +32,8 @@ namespace Domain.Config
             modelBuilder.ApplyConfiguration(new LkpTourConfig());
             modelBuilder.ApplyConfiguration(new LkpBusConfig());
             modelBuilder.ApplyConfiguration(new LkpClassConfig());
+            modelBuilder.ApplyConfiguration(new AdmStudConfig());
+
             modelBuilder.ApplyConfiguration(new LkpYearConfig());
 
             //======= Student Tables ======================================
@@ -53,6 +55,8 @@ namespace Domain.Config
             modelBuilder.ApplyConfiguration(new SchoolFeeConfig());
             modelBuilder.ApplyConfiguration(new ClassFeeConfig());
             modelBuilder.ApplyConfiguration(new StudentFeeConfig());
+            modelBuilder.ApplyConfiguration(new PaymentConfig());
+
 
 
 

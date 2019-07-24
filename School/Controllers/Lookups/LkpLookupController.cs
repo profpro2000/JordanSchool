@@ -58,9 +58,6 @@ namespace School.Controllers.Lookups
         public async Task<IEnumerable<LkpLookupVw>> GetByListType(LookupTypes id)
         {
               var result = await _lookupService.GetByListType(id);
-
-           
-
             return await _lookupService.GetByListType(id);
         }
         
@@ -69,9 +66,6 @@ namespace School.Controllers.Lookups
         public async Task<IEnumerable<LkpLookupVw>> GetLookups([FromBody] FilterLookupsType filter)
         {
             var result = await _lookupService.GetByListType2(filter);
-
-
-
             return result;
         }
 

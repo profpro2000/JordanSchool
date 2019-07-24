@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using System.Text;
+using Domain.Model.Lookups;
 
 namespace Domain.Model.Financial
 {
@@ -10,8 +11,11 @@ namespace Domain.Model.Financial
         public int Id { set; get; }
         public string ArDesc { set; get; }
         public string LaDesc { set; get; }
-        public string CDType { set; get; }// debit or redit اضافة او خصم
-        public string VPType { set; get; }//  percentage or value
+        public int cdTypeId { set; get; }// debit or redit اضافة او خصم
+        public LkpLookup cdTypeLookup { set; get; }
+
+        public int vpTypeId { set; get; }//  percentage or value
+        public LkpLookup vpTypeLookup { set; get; }
 
         [IgnoreDataMember] public ICollection<SchoolFee> SchoolFees { get; set; }
         [IgnoreDataMember] public ICollection<ClassFee> ClassFees { get; set; }

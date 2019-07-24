@@ -6,46 +6,48 @@ using AutoMapper;
 using Core.IFinancial;
 using Domain.Model.Financial;
 using Model.Financial;
+using Persistence.FinancialRepo;
 
 namespace School.ServiceLayer.Services.FinancialServices
 {
-    public class FinItemService  
+    public class PaymentService
     {
         private IMapper _mapper;
-        private IFinItemRepo _interface;
+        private IPaymentRepo _interface;
 
-        public FinItemService(IMapper mapper, IFinItemRepo @interface)
+        public PaymentService(IMapper mapper, IPaymentRepo @interface)
         {
             _mapper = mapper;
             _interface = @interface;
         }
 
-        public async Task<List<FinItemVw>> GetAll()
+
+
+        public async Task<List<PaymentVw>> GetAll()
         {
-            var vw = await _interface.GetAll();
-           // var vw = await _interface.GetAllAsync();
-            var result = _mapper.Map<List<FinItemVw>>(vw);
+            var vw = await _interface.GetAllAsync();
+            var result = _mapper.Map<List<PaymentVw>>(vw);
             return result;
         }
 
 
-        public FinItemVw GetById(int Id)
+        public PaymentVw GetById(int Id)
         {
             var vw = _interface.Get(Id);
-            var result = _mapper.Map<FinItemVw>(vw);
+            var result = _mapper.Map<PaymentVw>(vw);
             return result;
         }
 
-        public void Add(FinItem obj)
+        public void Add(Payment obj)
         {
             var result = _interface.Add(obj);
             _interface.SaveChanges();
 
         }
 
-        public void Update(int id, FinItemVw obj)
+        public void Update(int id, PaymentVw obj)
         {
-            var tab = _mapper.Map<FinItem>(obj);
+            var tab = _mapper.Map<Payment>(obj);
             _interface.Update(id, tab);
             _interface.SaveChanges();
         }
@@ -56,6 +58,5 @@ namespace School.ServiceLayer.Services.FinancialServices
             var result = _interface.Delete(Id);
             _interface.SaveChanges();
         }
-
     }
 }

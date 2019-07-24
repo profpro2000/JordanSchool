@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Domain.Migrations
 {
     [DbContext(typeof(SchoolDbContext))]
-    [Migration("20190717155847_LKPYearV2")]
-    partial class LKPYearV2
+    [Migration("20190721104344_payment")]
+    partial class payment
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -85,6 +85,8 @@ namespace Domain.Migrations
 
                     b.Property<int?>("InsertUser");
 
+                    b.Property<int?>("LkpLookupId");
+
                     b.Property<string>("Lname")
                         .HasMaxLength(100);
 
@@ -99,6 +101,8 @@ namespace Domain.Migrations
                     b.Property<int>("YearId");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("LkpLookupId");
 
                     b.HasIndex("SchoolId");
 
@@ -379,8 +383,6 @@ namespace Domain.Migrations
 
                     b.Property<string>("ArDesc");
 
-                    b.Property<string>("CDType");
-
                     b.Property<DateTime?>("InsertDate");
 
                     b.Property<int?>("InsertUser");
@@ -391,11 +393,56 @@ namespace Domain.Migrations
 
                     b.Property<int?>("UpdateUser");
 
-                    b.Property<string>("VPType");
+                    b.Property<int>("cdTypeId");
+
+                    b.Property<int>("vpTypeId");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("cdTypeId");
+
+                    b.HasIndex("vpTypeId");
+
                     b.ToTable("Fin_items");
+                });
+
+            modelBuilder.Entity("Domain.Model.Financial.Payment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("Credit");
+
+                    b.Property<int>("Debit");
+
+                    b.Property<DateTime?>("InsertDate");
+
+                    b.Property<int?>("InsertUser");
+
+                    b.Property<string>("Note");
+
+                    b.Property<DateTime?>("UpdateDate");
+
+                    b.Property<int?>("UpdateUser");
+
+                    b.Property<DateTime>("VoucherDate");
+
+                    b.Property<string>("VoucherId");
+
+                    b.Property<string>("VoucherStatusId");
+
+                    b.Property<int>("VoucherTypeId");
+
+                    b.Property<int?>("VoucherTypeId1");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("VoucherTypeId");
+
+                    b.HasIndex("VoucherTypeId1");
+
+                    b.ToTable("Payments");
                 });
 
             modelBuilder.Entity("Domain.Model.Financial.SchoolFee", b =>
@@ -443,6 +490,8 @@ namespace Domain.Migrations
 
                     b.Property<int?>("InsertUser");
 
+                    b.Property<int>("PaymentId");
+
                     b.Property<int>("StudentId");
 
                     b.Property<DateTime?>("UpdateDate");
@@ -456,6 +505,8 @@ namespace Domain.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("FinItemId");
+
+                    b.HasIndex("PaymentId");
 
                     b.HasIndex("StudentId");
 
@@ -769,6 +820,36 @@ namespace Domain.Migrations
                     b.ToTable("Reg_Stud");
                 });
 
+            modelBuilder.Entity("Domain.Model.Users.Users", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("CurrentUrl");
+
+                    b.Property<string>("Email");
+
+                    b.Property<int?>("EmployeeId");
+
+                    b.Property<bool?>("IsSuperAdmin");
+
+                    b.Property<string>("Locale");
+
+                    b.Property<string>("Password")
+                        .IsRequired();
+
+                    b.Property<string>("Username")
+                        .IsRequired();
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Username")
+                        .IsUnique();
+
+                    b.ToTable("Sys_Users");
+                });
+
             modelBuilder.Entity("Domain.Model.library.Author", b =>
                 {
                     b.Property<int>("Id")
@@ -827,6 +908,10 @@ namespace Domain.Migrations
 
             modelBuilder.Entity("Domain.Model.AddLookups.LkpClass", b =>
                 {
+                    b.HasOne("Domain.Model.Lookups.LkpLookup")
+                        .WithMany("LkpClasses")
+                        .HasForeignKey("LkpLookupId");
+
                     b.HasOne("Domain.Model.AddLookups.LkpSchool", "LkpSchool")
                         .WithMany("LkpClasses")
                         .HasForeignKey("SchoolId")
@@ -837,8 +922,8 @@ namespace Domain.Migrations
                         .HasForeignKey("SectionId")
                         .OnDelete(DeleteBehavior.Restrict);
 
-                    b.HasOne("Domain.Model.Lookups.LkpLookup", "YearsLookup")
-                        .WithMany("LkpClasses")
+                    b.HasOne("Domain.Model.AddLookups.LkpYear", "YearsLookup")
+                        .WithMany("Classes")
                         .HasForeignKey("YearId")
                         .OnDelete(DeleteBehavior.Restrict);
                 });
@@ -961,6 +1046,31 @@ namespace Domain.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
+            modelBuilder.Entity("Domain.Model.Financial.FinItem", b =>
+                {
+                    b.HasOne("Domain.Model.Lookups.LkpLookup", "cdTypeLookup")
+                        .WithMany("CdTypes")
+                        .HasForeignKey("cdTypeId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("Domain.Model.Lookups.LkpLookup", "vpTypeLookup")
+                        .WithMany("VpTypes")
+                        .HasForeignKey("vpTypeId")
+                        .OnDelete(DeleteBehavior.Restrict);
+                });
+
+            modelBuilder.Entity("Domain.Model.Financial.Payment", b =>
+                {
+                    b.HasOne("Domain.Model.Lookups.LkpLookup", "VoucherStatus")
+                        .WithMany("VoucherStatuses")
+                        .HasForeignKey("VoucherTypeId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("Domain.Model.Lookups.LkpLookup", "VoucherType")
+                        .WithMany("VoucherTypes")
+                        .HasForeignKey("VoucherTypeId1");
+                });
+
             modelBuilder.Entity("Domain.Model.Financial.SchoolFee", b =>
                 {
                     b.HasOne("Domain.Model.Financial.FinItem", "FinItem")
@@ -973,7 +1083,7 @@ namespace Domain.Migrations
                         .HasForeignKey("SchoolId")
                         .OnDelete(DeleteBehavior.Restrict);
 
-                    b.HasOne("Domain.Model.Lookups.LkpLookup", "Year")
+                    b.HasOne("Domain.Model.AddLookups.LkpYear", "Year")
                         .WithMany("SchoolFees")
                         .HasForeignKey("YearId")
                         .OnDelete(DeleteBehavior.Restrict);
@@ -984,6 +1094,11 @@ namespace Domain.Migrations
                     b.HasOne("Domain.Model.Financial.FinItem", "FinItem")
                         .WithMany("StudentFees")
                         .HasForeignKey("FinItemId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("Domain.Model.Financial.Payment", "Payment")
+                        .WithMany("StudentFees")
+                        .HasForeignKey("PaymentId")
                         .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("Domain.Model.Reg.RegStud", "Student")
