@@ -54,6 +54,7 @@ namespace Model.Adm
         public int? BrotherDescountType { get; set; }
         public string BusNote { get; set; }
         public string Note { get; set; }
+        public double DescountValue { get; set; } //New 25/07/2019
 
 
         //// We merge AdmStud with RegStud

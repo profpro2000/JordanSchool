@@ -2,13 +2,13 @@
 
 namespace Domain.Migrations
 {
-    public partial class UpdateAdmV2 : Migration
+    public partial class updateLKPClassV2 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AlterColumn<int>(
-                name: "IdNum",
-                table: "Adm_Stud",
+                name: "ClassSeq",
+                table: "Lkp_Class",
                 nullable: true,
                 oldClrType: typeof(int));
         }
@@ -16,8 +16,8 @@ namespace Domain.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AlterColumn<int>(
-                name: "IdNum",
-                table: "Adm_Stud",
+                name: "ClassSeq",
+                table: "Lkp_Class",
                 nullable: false,
                 oldClrType: typeof(int),
                 oldNullable: true);

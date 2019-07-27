@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Runtime.Serialization;
 using Domain.Model.AddLookups;
 using Domain.Model.Lookups;
@@ -44,6 +46,7 @@ namespace Domain.Model.Adm
         public DateTime? ApprovedDate { get; set; }
         public int? StudentBrotherSeq { get; set; }
         public int? BrotherDescountType { get; set; }
+        public double DescountValue { get; set; } //New 25/07/2019
         public string BusNote { get; set; }
         public string Note { get; set; }
     
@@ -65,5 +68,6 @@ namespace Domain.Model.Adm
         public LkpLookup StudHealthLookup { get; set; }
         public string DiseaseName { get; set; }
         public string MedicamentName { get; set; }
+       [NotMapped] [IgnoreDataMember] public ICollection<YearlyStudReg> AdmStudYearlyStudRegs { get; set; }
     }
 }

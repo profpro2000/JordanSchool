@@ -47,8 +47,24 @@
     <Compile Remove="Migrations\20190717122723_TableFromYaseenV1.Designer.cs" />
     <Compile Remove="Migrations\20190720172235_20072019-v1.cs" />
     <Compile Remove="Migrations\20190720172235_20072019-v1.Designer.cs" />
+    <Compile Remove="Migrations\20190723190015_new.cs" />
+    <Compile Remove="Migrations\20190723190015_new.Designer.cs" />
+    <Compile Remove="Migrations\20190723193346_test.cs" />
+    <Compile Remove="Migrations\20190723193346_test.Designer.cs" />
     <Compile Remove="Migrations\20190723194903_test2.cs" />
     <Compile Remove="Migrations\20190723194903_test2.Designer.cs" />
+    <Compile Remove="Migrations\20190723195249_test21.cs" />
+    <Compile Remove="Migrations\20190723195249_test21.Designer.cs" />
+    <Compile Remove="Migrations\20190723195509_test23.cs" />
+    <Compile Remove="Migrations\20190723195509_test23.Designer.cs" />
+    <Compile Remove="Migrations\20190723195821_test4.cs" />
+    <Compile Remove="Migrations\20190723195821_test4.Designer.cs" />
+    <Compile Remove="Migrations\20190724174437_financeYaseenV2.cs" />
+    <Compile Remove="Migrations\20190724174437_financeYaseenV2.Designer.cs" />
+    <Compile Remove="Migrations\20190725151935_YearlRegStudV3.cs" />
+    <Compile Remove="Migrations\20190725151935_YearlRegStudV3.Designer.cs" />
+    <Compile Remove="Migrations\20190725152234_YearlRegStudV3.cs" />
+    <Compile Remove="Migrations\20190725152234_YearlRegStudV3.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

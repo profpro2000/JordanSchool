@@ -2,13 +2,13 @@
 
 namespace Domain.Migrations
 {
-    public partial class UpdateAdmV3 : Migration
+    public partial class updateLKPClassV1 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AddColumn<int>(
-                name: "ClassPrice",
-                table: "Adm_Stud",
+                name: "ClassSeq",
+                table: "Lkp_Class",
                 nullable: false,
                 defaultValue: 0);
         }
@@ -16,8 +16,8 @@ namespace Domain.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(
-                name: "ClassPrice",
-                table: "Adm_Stud");
+                name: "ClassSeq",
+                table: "Lkp_Class");
         }
     }
 }

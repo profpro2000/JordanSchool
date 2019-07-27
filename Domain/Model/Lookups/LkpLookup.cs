@@ -64,5 +64,17 @@ namespace Domain.Model.Lookups
         [IgnoreDataMember] public ICollection<AdmStud> JoinYearAdm { get; set; }
         [IgnoreDataMember] public ICollection<AdmStud> JoinTermAdm { get; set; }
         [IgnoreDataMember] public ICollection<AdmStud> HealthStudAdm { get; set; }
+
+        // YearlyStudReg
+
+        [IgnoreDataMember] public ICollection<YearlyStudReg> ApprovedYearlyStudReg { get; set; }
+        [IgnoreDataMember] public ICollection<YearlyStudReg> ClassSeqYearlyStudReg { get; set; }      
+        [IgnoreDataMember] public ICollection<YearlyStudReg> BrotherDescountTypeYearlyStudReg { get; set; }
+        [IgnoreDataMember] public ICollection<YearlyStudReg> YearsYearlyStudReg { get; set; }
+        [IgnoreDataMember] public ICollection<YearlyStudReg> TourTypeYearlyStudReg { get; set; }
+        [IgnoreDataMember] public ICollection<YearlyStudReg> JoinYearYearlyStudReg { get; set; }
+        [IgnoreDataMember] public ICollection<YearlyStudReg> JoinTermYearlyStudReg { get; set; }
+        [IgnoreDataMember] public ICollection<YearlyStudReg> StudStatusYearlyStudReg { get; set; }
+
     }
 }

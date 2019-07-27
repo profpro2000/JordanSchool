@@ -34,6 +34,7 @@ namespace Domain.Model.AddLookups
         [IgnoreDataMember] public ICollection<AdmStud> SchoolAdm { get; set; } 
         [IgnoreDataMember] public ICollection<SchoolFee> SchoolFees { get; set; }
         [IgnoreDataMember] public ICollection<UserSchool> UsersSchools { get; set; }
+        [IgnoreDataMember] public ICollection<YearlyStudReg> YearlyStudRegs { get; set; }
 
 
 

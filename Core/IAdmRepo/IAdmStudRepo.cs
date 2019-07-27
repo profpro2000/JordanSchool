@@ -14,5 +14,7 @@ namespace Core.IAdmStudRepo
         object GetParentName(int id);
 
         Task<IEnumerable<object>> GetRegChildrens(int id);
+        void UpdateStudSeq(int id);
+
     }
 }

@@ -21,10 +21,12 @@ namespace Domain.Model.AddLookups
         public LkpSection LkpSection { get; set; }
         public int YearId { get; set; }
         public LkpYear YearsLookup { get; set; }
+        public int? ClassSeq { get; set; }
 
         [IgnoreDataMember] public ICollection<RegStud> ClassRegStuds { get; set; }
         [IgnoreDataMember] public ICollection<AdmStud> ClassAdm { get; set; }
         [IgnoreDataMember] public ICollection<ClassFee> ClassFees { get; set; }
+        [IgnoreDataMember] public ICollection<YearlyStudReg> YearlyStudRegs { get; set; }
 
 
     }

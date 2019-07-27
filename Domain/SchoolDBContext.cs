@@ -55,6 +55,7 @@ namespace Domain
         //================Stud Module =========================
         public DbSet<RegParent> RegParents { get; set; }
         public DbSet<RegStud> RegStuds { get; set; }
+        public DbSet<YearlyStudReg> YearlyStudRegs { get; set; }
 
         //=========== Admission Module===================
         public DbSet<AdmStud> AdmStuds { get; set; }

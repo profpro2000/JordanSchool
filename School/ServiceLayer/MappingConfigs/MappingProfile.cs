@@ -36,6 +36,7 @@ namespace School.ServiceLayer.MappingConfigs
             //============Stud Mapping================
             CreateMap<RegParent, RegParentVw>().ReverseMap();
             CreateMap<RegStud, RegStudVw>().ReverseMap();
+            CreateMap<YearlyStudReg, YearlyStudRegVw>();
             //=========== Stud Admission
             CreateMap<AdmStud, AdmStudVw>().ReverseMap();
 
