@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Runtime.Serialization;
 using Domain.Model.AddLookups;
+using Domain.Model.Financial;
 using Domain.Model.Lookups;
 using Domain.Model.Reg;
 
@@ -69,5 +70,6 @@ namespace Domain.Model.Adm
         public string DiseaseName { get; set; }
         public string MedicamentName { get; set; }
        [NotMapped] [IgnoreDataMember] public ICollection<YearlyStudReg> AdmStudYearlyStudRegs { get; set; }
+        [IgnoreDataMember] public ICollection<StudentFee> StudentFees { get; set; }
     }
 }
