@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Domain.Migrations
 {
     [DbContext(typeof(SchoolDbContext))]
-    [Migration("20190723195509_test23")]
-    partial class test23
+    [Migration("20190727224607_newsqlinstallation")]
+    partial class newsqlinstallation
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -423,8 +423,6 @@ namespace Domain.Migrations
                     b.Property<string>("Note");
 
                     b.Property<int>("RegParentId");
-
-                    b.Property<int>("ThisIsId");
 
                     b.Property<DateTime?>("UpdateDate");
 
