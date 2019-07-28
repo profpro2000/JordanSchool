@@ -7,6 +7,7 @@ using Domain.Config.LookupConfig;
 using Domain.Config.Reg;
 using Domain.Config.UsersConfigs;
 using Domain.Model.library;
+using Domain.Model.Reg;
 using Microsoft.EntityFrameworkCore;
 
 namespace Domain.Config
@@ -57,6 +58,9 @@ namespace Domain.Config
             modelBuilder.ApplyConfiguration(new ClassFeeConfig());
             modelBuilder.ApplyConfiguration(new StudentFeeConfig());
             modelBuilder.ApplyConfiguration(new PaymentConfig());
+
+            //==============Views======================
+            modelBuilder.Query<RegStudYearlyVw>().ToView("RegStudYearlyVw");
 
 
 

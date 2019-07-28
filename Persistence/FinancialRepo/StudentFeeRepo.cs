@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Core.IFinancial;
 using Domain;
 using Domain.Model.Financial;
+using Model.Financial;
 
 namespace Persistence.FinancialRepo
 {
@@ -21,10 +22,10 @@ namespace Persistence.FinancialRepo
         public async Task<IEnumerable<object>> GetStudFeesListByParent(int ParentId)
         {
            // IList<ToDoItem> items = new List<ToDoItem>();
-            IList<ToDoItem> xList= new List<ToDoItem>();
+            IList<StudFeeDtlVw> xList= new List<StudFeeDtlVw>();
             try
             {
-                 xList =  _db.AdmStuds.Where(p => p.ParentId == ParentId).Select(x => new ToDoItem()
+                 xList =  _db.AdmStuds.Where(p => p.ParentId == ParentId).Select(x => new StudFeeDtlVw()
                  {
                     StudentId = x.Id,
                     StudentName = _db.AdmStuds.Where(c => c.Id == x.Id).Select(cc => cc.FirstName).FirstOrDefault(),
@@ -39,16 +40,25 @@ namespace Persistence.FinancialRepo
             catch(Exception e) { }
             return xList;
         }
-
-
-        class ToDoItem
+        public async Task<IEnumerable<object>> GetStudFeesDtl(int yearId,int StudId)
         {
-            public int StudentId { get; set; }
-            public string StudentName { get; set; }
-            public int? YearId { get; set; }
-            public int? Db { get; set; }
-            public int? Cr { get; set; }
-            public int? Total { get; set; }
+            IList<StudFeeDtlVw> xList = new List<StudFeeDtlVw>();
+            try
+            {
+                xList = _db.StudentFees.Where(p => p.YearId==yearId && p.StudentId == StudId).Select(x => new StudFeeDtlVw()
+                {
+                    StudentId=x.StudentId,
+                    FinItemId = x.FinItemId,
+                    FinItemName = _db.FinItems.Where(c => c.Id == x.FinItemId).Select(cc => cc.ArDesc).FirstOrDefault(),
+                    YearId = x.YearId,
+                    Db = x.Db,
+                    Cr = x.Cr                 
+                }).ToList();
+            }
+            catch (Exception e) { }
+            return xList;
         }
+
+
     }
 }

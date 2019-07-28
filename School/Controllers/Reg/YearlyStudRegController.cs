@@ -59,6 +59,13 @@ namespace School.Controllers.Reg
 
             return Ok(result);
         }
+
+        [HttpGet("GetParentChildrensVw/{parentId}")]
+        public async Task<IEnumerable<object>> GetParentChildrensVw(int ParentId)
+        {
+            var result = await _service.GetParentChildrensVw(ParentId);
+            return result;
+        }
         // POST: api/YearlyStudReg
         [HttpPost]
         public void Post([FromBody] string value)
@@ -77,10 +84,10 @@ namespace School.Controllers.Reg
         {
         }
 
-        [HttpGet("ConfirmStudReg/{id}/{PYearId}/{oldClass}/{newClass}")]
-        public int ConfirmStudReg(int id, int PYearId, int oldClass, int newClass)
+        [HttpGet("ConfirmStudReg/{studId}/{yearId}/{nextClassId}")]
+        public int ConfirmStudReg(int studId, int yearId, int nextClassId)
         {
-          return _service.ConfirmStudReg(id, PYearId, oldClass, newClass);
+          return _service.ConfirmStudReg(studId, yearId, nextClassId);
            
         }
     }

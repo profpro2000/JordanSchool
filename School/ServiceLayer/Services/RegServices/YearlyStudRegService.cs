@@ -39,11 +39,17 @@ namespace School.ServiceLayer.Services.RegServices
             var result = _mapper.Map<List<object>>(vw);
             return result;
         }
-        public int ConfirmStudReg(int id, int PYearId, int oldClassId, int newClassId)
-        {
 
-          
-             int msg=  _interface.ConfirmStudReg(id,  PYearId, oldClassId, newClassId);
+        public async Task<IEnumerable<object>> GetParentChildrensVw(int ParentId)
+        {
+            var vw = await _interface.GetParentChildrensVw(ParentId);
+          //  var result = _mapper.Map<List<object>>(vw);
+            return vw;
+        }
+
+        public int ConfirmStudReg(int studId, int yearId, int nextClassId)
+        {
+             int msg=  _interface.ConfirmStudReg(studId, yearId, nextClassId);
                _interface.SaveChanges();
             return msg;
         }

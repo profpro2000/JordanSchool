@@ -60,6 +60,13 @@ namespace School.Controllers.Financial
             return result;
         }
 
+        [HttpGet("GetStudFeesDtl/{yearId}/{studId}")]
+        public Task<IEnumerable<object>> GetStudFeesDtl(int YearId,int StudId)
+        {
+            var result = _service.GetStudFeesDtl(YearId,StudId);
+            return result;
+        }
+
 
         [HttpPost]
         public void add(StudentFee obj)

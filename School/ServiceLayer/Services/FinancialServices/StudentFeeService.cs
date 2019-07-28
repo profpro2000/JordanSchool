@@ -43,6 +43,13 @@ namespace School.ServiceLayer.Services.FinancialServices
             return vw;
         }
 
+        public Task<IEnumerable<object>> GetStudFeesDtl(int YearId,int StudId)
+        {
+            var vw = _interface.GetStudFeesDtl(YearId,StudId);
+            // var result = _mapper.Map<StudentFeeVw>(vw);
+            return vw;
+        }
+
         public void Add(StudentFee obj)
     {
         var result = _interface.Add(obj);
