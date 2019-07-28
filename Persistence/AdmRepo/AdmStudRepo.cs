@@ -1,22 +1,21 @@
 ﻿using Core.IAdmStudRepo;
 using Domain;
 using Domain.Model.Adm;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
 using System.Linq;
-using System.Linq.Expressions;
+using System.Threading.Tasks;
 
 namespace Persistence.AdmRepo
 {
- public   class AdmStudRepo: DbOperation<AdmStud>, IAdmStudRepo
+    public class AdmStudRepo : DbOperation<AdmStud>, IAdmStudRepo
     {
 
         private readonly SchoolDbContext _db;
 
-        public AdmStudRepo(SchoolDbContext db):base(db)
+
+        public AdmStudRepo(SchoolDbContext db) : base(db)
         {
             _db = db;
         }
@@ -25,20 +24,23 @@ namespace Persistence.AdmRepo
         {
             return await _db.AdmStuds.Include(r => r.Parent).ToListAsync();
         }
-        public async Task<List<AdmStud>> GetStudByParent(int id)
-        {
-            return await _db.AdmStuds.Where(x=>x.ParentId==id).Include(r => r.Parent).ToListAsync();
-        }
 
         public object GetParentName(int id)
         {
             //return  _db.AdmStuds.Where(x => x.ParentId == id).Include(r => r.Parent).FirstOrDefault();
-            var parent= _db.RegParents.Where(x => x.Id == id).Select(p => new {
+            var _tourPrice = _db.AdmStuds.Where(x => x.ParentId == id).Sum(x => x.TourPrice);
+            var _classPrice = _db.AdmStuds.Where(x => x.ParentId == id).Sum(x => x.ClassPrice);
+            var _descount = _db.AdmStuds.Where(x => x.ParentId == id).Sum(x => x.DescountValue);
+            var _totalPrice = _tourPrice + _classPrice;
+            var _netTotal = _tourPrice + _classPrice - _descount;
+
+            var parent = _db.RegParents.Where(x => x.Id == id).Select(p => new
+            {
                 p.Id,
                 FatherFullName = p.FirstName + " " + p.SecondName + " " + p.FamilyName,
-                FatherFirstName=p.FirstName,
-                FatherSecondName=p.SecondName,
-                FatherFamilyName=p.FamilyName,
+                FatherFirstName = p.FirstName,
+                FatherSecondName = p.SecondName,
+                FatherFamilyName = p.FamilyName,
                 ReligionName = p.ReligionLookup.AName,
                 NationalityName = p.NationalityLookup.AName,
                 CityName = p.CityLookup.AName,
@@ -52,8 +54,12 @@ namespace Persistence.AdmRepo
                 p.MotherMobile,
                 p.SmsParent,
                 p.SmsMobile,
-                p.ParentEmail
-            }) ;
+                p.ParentEmail,
+                ParentTotalDescount = _descount,
+                ParentTotalPrice = _totalPrice,
+                ParentNetTotalAmt = _netTotal
+
+            });//.FirstOrDefault() ;
 
             return parent;
         }
@@ -67,18 +73,20 @@ namespace Persistence.AdmRepo
                 x.BirthDate,
                 x.GenderId,
                 x.YearId,
-                GenderName = x.Gender != null ? x.Gender.AName : "",
-                ClassName = x.Class != null ? x.Class.Aname : "",
+                GenderName = x.Gender != null ? x.Gender.AName : string.Empty,
+                ClassName = x.Class != null ? x.Class.Aname : string.Empty,
                 ClassPrice = x.Class != null ? x.Class.Amt : 0,
-                ClassYear = x.Class != null ? x.Class.YearsLookup != null ? x.Class.YearsLookup.Id :0 :0,
-                ClassActive = x.Class != null ? x.Class.YearsLookup != null ? x.Class.YearsLookup.Active:0 :0,
-                ClassSeqName = x.ClassSeq != null ? x.ClassSeq.AName:"",
-                TourName = x.Tour != null ? x.Tour.TourName : "",
-                TourTypeName= x.TourType != null ?  x.TourType.AName : "",          
-                TourPrice =x.TourType != null ? int.Parse(x.TourType.Value)==3 ?
-                x.Tour.TourFullPrice:x.Tour.TourHalfPrice : 0,
+                ClassYear = x.Class != null ? x.Class.YearsLookup != null ? x.Class.YearsLookup.Id : 0 : 0,
+                ClassActive = x.Class != null ? x.Class.YearsLookup != null ? x.Class.YearsLookup.Active : 0 : 0,
+                ClassSeqName = x.ClassSeq != null ? x.ClassSeq.AName : string.Empty,
+                TourName = x.Tour != null ? x.Tour.TourName : string.Empty,
+                TourTypeName = x.TourType != null ? x.TourType.AName : string.Empty,
+                TourPrice = x.TourType != null ? int.Parse(x.TourType.Value) == 3 ?
+                x.Tour.TourFullPrice : x.Tour.TourHalfPrice : 0,
+                x.StudentBrotherSeq,
+                x.DescountValue
             });//.Where(p=>p.ClassActive == 1) ;
-           
+
             var result = data.Select(x => new
             {
                 x.Id,
@@ -95,14 +103,53 @@ namespace Persistence.AdmRepo
                 x.TourName,
                 x.TourTypeName,
                 x.TourPrice,
-                TotalPrice = x.ClassPrice + x.TourPrice
+                x.StudentBrotherSeq,
+                x.DescountValue,
+                TotalPrice = x.ClassPrice + x.TourPrice - x.DescountValue
 
-            }) ;
-            /*int? a = null;
-            int b = a ?? -1;
-            Console.WriteLine(b);  // output: -1
-            */
+            }).OrderBy(p => p.StudentBrotherSeq);
+
+
             return result;
+
+        }
+        public async Task<List<AdmStud>> GetStudByParent(int id)
+        {
+            return await _db.AdmStuds.Where(x => x.ParentId == id).Include(r => r.Parent).ToListAsync();
+        }
+
+        public void UpdateStudSeq(int id)
+        {
+            var data = _db.AdmStuds.Where(p => p.ParentId == id)
+                .OrderByDescending(x => x.BirthDate)
+                .ToList();
+            var CountData = data.Count();
+            System.Diagnostics.Debug.WriteLine("CountData=" + CountData);
+
+            //----------------------------------------------------------------------------
+            //youngest brother get 50%  (classPrice=1500=>Discount=750)
+            //younger brother get 25% (classPrice=4000 => Discount=1000)
+            //old brother get 10%    (classPrice=5000 => Discount=500)
+            //-----------------------------------------------------------------------
+            System.Diagnostics.Debug.WriteLine("begin");
+            var i = 0;
+            if (CountData > 1)
+                data.ForEach(x =>
+                {
+                    i = i + 1;
+                    var studId = x.Id;
+                    var price = x.ClassPrice + (x.TourPrice ?? 0);
+                    double descount = 0;
+                    if (i == 1) descount = price * 0.50;
+                    if (i == 2) descount = price * 0.25;
+                    if (i >= 3) descount = price * 0.10;
+
+                    x.StudentBrotherSeq = i;
+                    x.DescountValue = descount;
+                    DbSet.Update(x);
+                    System.Diagnostics.Debug.WriteLine("counter=" + i + "  studId=" + studId + "  price=" + price + "  descount=" + descount);
+                });
+            // _db.SaveChanges();
 
         }
     }

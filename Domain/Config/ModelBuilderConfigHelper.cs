@@ -19,6 +19,7 @@ namespace Domain.Config
 
             //=========  Sys_Users ======================================
             modelBuilder.ApplyConfiguration(new UsersConfig());
+            modelBuilder.ApplyConfiguration(new UserSchoolsConfig());
 
 
             //========== System Table & lookups configuration================
@@ -38,6 +39,7 @@ namespace Domain.Config
             //======= Student Tables ======================================
             modelBuilder.ApplyConfiguration(new RegParentConfig());
             modelBuilder.ApplyConfiguration(new RegStudConfig());
+            modelBuilder.ApplyConfiguration(new YearlyStudRegConfig());
 
             //=======Addmission Tables ======================================
             modelBuilder.ApplyConfiguration(new AdmStudConfig());

@@ -85,6 +85,12 @@ namespace School.Controllers.AdmStuds
             _service.Update(id, obj);
         }
 
+        [HttpGet("UpdateStudSeq/{id}")]
+        public void UpdateStudSeq(int id)
+        {
+            _service.UpdateStudSeq(id);
+        }
+
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
         public void Delete(int id)

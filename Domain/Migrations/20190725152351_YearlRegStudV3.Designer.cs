@@ -4,14 +4,16 @@ using Domain;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Domain.Migrations
 {
     [DbContext(typeof(SchoolDbContext))]
-    partial class SchoolDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190725152351_YearlRegStudV3")]
+    partial class YearlRegStudV3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -78,8 +80,6 @@ namespace Domain.Migrations
                         .ValueGeneratedOnAdd()
                         .HasMaxLength(3)
                         .HasDefaultValue(0);
-
-                    b.Property<int?>("ClassSeq");
 
                     b.Property<DateTime?>("InsertDate");
 
@@ -522,19 +522,13 @@ namespace Domain.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("Cr");
-
-                    b.Property<int?>("Db");
-
-                    b.Property<int?>("FinItemId");
+                    b.Property<int>("FinItemId");
 
                     b.Property<DateTime?>("InsertDate");
 
                     b.Property<int?>("InsertUser");
 
-                    b.Property<int?>("PaymentId");
-
-                    b.Property<int?>("RegStudId");
+                    b.Property<int>("PaymentId");
 
                     b.Property<int>("StudentId");
 
@@ -542,15 +536,15 @@ namespace Domain.Migrations
 
                     b.Property<int?>("UpdateUser");
 
-                    b.Property<int?>("YearId");
+                    b.Property<int>("Value");
+
+                    b.Property<int>("YearId");
 
                     b.HasKey("Id");
 
                     b.HasIndex("FinItemId");
 
                     b.HasIndex("PaymentId");
-
-                    b.HasIndex("RegStudId");
 
                     b.HasIndex("StudentId");
 
@@ -870,8 +864,6 @@ namespace Domain.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("AdmId");
-
                     b.Property<DateTime?>("ApprovedDate");
 
                     b.Property<int?>("ApprovedId");
@@ -908,6 +900,8 @@ namespace Domain.Migrations
 
                     b.Property<int>("SectionId");
 
+                    b.Property<int?>("StudId");
+
                     b.Property<int?>("StudStatusId");
 
                     b.Property<int?>("StudentBrotherSeq");
@@ -941,6 +935,8 @@ namespace Domain.Migrations
                     b.HasIndex("SchoolId");
 
                     b.HasIndex("SectionId");
+
+                    b.HasIndex("StudId");
 
                     b.HasIndex("StudStatusId");
 
@@ -1274,11 +1270,7 @@ namespace Domain.Migrations
                         .HasForeignKey("PaymentId")
                         .OnDelete(DeleteBehavior.Restrict);
 
-                    b.HasOne("Domain.Model.Reg.RegStud")
-                        .WithMany("StudentFees")
-                        .HasForeignKey("RegStudId");
-
-                    b.HasOne("Domain.Model.Adm.AdmStud", "Student")
+                    b.HasOne("Domain.Model.Reg.RegStud", "Student")
                         .WithMany("StudentFees")
                         .HasForeignKey("StudentId")
                         .OnDelete(DeleteBehavior.Restrict);
@@ -1435,6 +1427,10 @@ namespace Domain.Migrations
                         .WithMany("YearlyStudRegs")
                         .HasForeignKey("SectionId")
                         .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("Domain.Model.Adm.AdmStud", "AdmStuds")
+                        .WithMany("AdmStudYearlyStudRegs")
+                        .HasForeignKey("StudId");
 
                     b.HasOne("Domain.Model.Lookups.LkpLookup", "StudStatus")
                         .WithMany("StudStatusYearlyStudReg")

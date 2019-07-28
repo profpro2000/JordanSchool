@@ -30,13 +30,20 @@ namespace School.ServiceLayer.Services.FinancialServices
 
 
     public StudentFeeVw GetById(int Id)
-    {
+        {
         var vw = _interface.Get(Id);
         var result = _mapper.Map<StudentFeeVw>(vw);
         return result;
     }
 
-    public void Add(StudentFee obj)
+        public Task<IEnumerable<object>> GetStudFeesListByParent(int Id)
+        {
+            var vw = _interface.GetStudFeesListByParent(Id);
+           // var result = _mapper.Map<StudentFeeVw>(vw);
+            return vw;
+        }
+
+        public void Add(StudentFee obj)
     {
         var result = _interface.Add(obj);
         _interface.SaveChanges();

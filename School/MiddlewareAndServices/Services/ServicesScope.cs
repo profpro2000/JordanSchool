@@ -197,6 +197,8 @@ namespace School.MiddlewareAndServices.Services
             services.AddScoped<RegParentService>();
             services.AddScoped<IRegStudRepo, RegStudRepo>();
             services.AddScoped<RegStudService>();
+            services.AddScoped<IYearlyStudRegRepo, YearlyStudRegRepo>();
+            services.AddScoped<YearlyStudRegService>();
             //===========Users Scope
             services.AddScoped<UserService>();
             //=======Admisiion Module

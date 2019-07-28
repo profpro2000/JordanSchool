@@ -22,5 +22,6 @@ namespace Domain.Model.AddLookups
         [IgnoreDataMember] public ICollection<RegStud> SectionRegStuds { get; set; }
         [IgnoreDataMember] public ICollection<AdmStud> SectionAdm { get; set; }
         [IgnoreDataMember] public ICollection<ClassFee> ClassFees { get; set; }
+        [IgnoreDataMember] public ICollection<YearlyStudReg> YearlyStudRegs { get; set; }
     }
 }

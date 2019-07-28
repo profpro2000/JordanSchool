@@ -1,5 +1,8 @@
-﻿using System;
+﻿using Domain.Model.Users;
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 
 namespace Model.Users
@@ -16,6 +19,7 @@ namespace Model.Users
         public string Locale { get; set; }
         public string CurrentUrl { get; set; }
         public bool? IsSuperAdmin { get; set; }
+        public ICollection<UserSchool> UsersSchool { get; set; }
 
     }
 }

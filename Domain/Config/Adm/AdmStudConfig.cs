@@ -69,7 +69,20 @@ namespace Domain.Config.Adm
                 .WithMany(p => p.ApprovedAdm)
                 .HasForeignKey(key => key.ApprovedId)
                 .OnDelete(DeleteBehavior.Restrict);
-           
+            //
+            builder.HasOne(p => p.JoinYearLookup)
+               .WithMany(p => p.JoinYearAdm)
+               .HasForeignKey(k => k.JoinYearId)
+               .OnDelete(DeleteBehavior.Restrict);
+            builder.HasOne(p => p.JoinTermLookup)
+              .WithMany(p => p.JoinTermAdm)
+              .HasForeignKey(k => k.JoinTermId)
+              .OnDelete(DeleteBehavior.Restrict);
+            builder.HasOne(p => p.StudHealthLookup)
+               .WithMany(p => p.HealthStudAdm)
+               .HasForeignKey(k => k.StudHealthId)
+               .OnDelete(DeleteBehavior.Restrict);
+
 
 
         }

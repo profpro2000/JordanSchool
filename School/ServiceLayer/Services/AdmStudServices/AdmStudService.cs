@@ -87,5 +87,12 @@ namespace School.ServiceLayer.Services.AdmStudServices
             _interface.SaveChanges();
         }
 
+        public void UpdateStudSeq(int id)
+        {
+            _interface.UpdateStudSeq(id);
+            _interface.SaveChanges();
+        }
+
+       
     }
 }

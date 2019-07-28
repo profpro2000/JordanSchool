@@ -57,7 +57,7 @@ namespace School.Controllers.Reg
                     return BadRequest(new Res(false, "State Not Valid", obj));
                 }
                 _service.Insert(obj);
-                return Ok(new Res(true, "Completed", await _service.GetAll()));
+                return Ok(new Res(true, "Completed", await _service.GetAll())) ;
             }
             catch (Exception e)
             {
