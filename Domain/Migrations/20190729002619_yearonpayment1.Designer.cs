@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Domain.Migrations
 {
     [DbContext(typeof(SchoolDbContext))]
-    [Migration("20190726130207_updateLKPClassV2")]
-    partial class updateLKPClassV2
+    [Migration("20190729002619_yearonpayment1")]
+    partial class yearonpayment1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -450,9 +450,9 @@ namespace Domain.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("Credit");
+                    b.Property<int?>("Credit");
 
-                    b.Property<int>("Debit");
+                    b.Property<int?>("Debit");
 
                     b.Property<DateTime?>("InsertDate");
 
@@ -474,6 +474,8 @@ namespace Domain.Migrations
 
                     b.Property<int>("VoucherTypeId");
 
+                    b.Property<int>("YearId");
+
                     b.HasKey("Id");
 
                     b.HasIndex("RegParentId");
@@ -481,6 +483,8 @@ namespace Domain.Migrations
                     b.HasIndex("VoucherStatusId");
 
                     b.HasIndex("VoucherTypeId");
+
+                    b.HasIndex("YearId");
 
                     b.ToTable("Payments");
                 });
@@ -524,13 +528,19 @@ namespace Domain.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("FinItemId");
+                    b.Property<int?>("Cr");
+
+                    b.Property<int?>("Db");
+
+                    b.Property<int?>("FinItemId");
 
                     b.Property<DateTime?>("InsertDate");
 
                     b.Property<int?>("InsertUser");
 
-                    b.Property<int>("PaymentId");
+                    b.Property<int?>("PaymentId");
+
+                    b.Property<int?>("RegStudId");
 
                     b.Property<int>("StudentId");
 
@@ -538,15 +548,15 @@ namespace Domain.Migrations
 
                     b.Property<int?>("UpdateUser");
 
-                    b.Property<int>("Value");
-
-                    b.Property<int>("YearId");
+                    b.Property<int?>("YearId");
 
                     b.HasKey("Id");
 
                     b.HasIndex("FinItemId");
 
                     b.HasIndex("PaymentId");
+
+                    b.HasIndex("RegStudId");
 
                     b.HasIndex("StudentId");
 
@@ -998,54 +1008,6 @@ namespace Domain.Migrations
                     b.ToTable("Sys_UserSchool");
                 });
 
-            modelBuilder.Entity("Domain.Model.library.Author", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("ArName");
-
-                    b.Property<DateTime?>("InsertDate");
-
-                    b.Property<int?>("InsertUser");
-
-                    b.Property<string>("LaName");
-
-                    b.Property<DateTime?>("UpdateDate");
-
-                    b.Property<int?>("UpdateUser");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Author");
-                });
-
-            modelBuilder.Entity("Domain.Model.library.Book", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("AuthorId");
-
-                    b.Property<DateTime?>("InsertDate");
-
-                    b.Property<int?>("InsertUser");
-
-                    b.Property<string>("Title");
-
-                    b.Property<DateTime?>("UpdateDate");
-
-                    b.Property<int?>("UpdateUser");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AuthorId");
-
-                    b.ToTable("Book");
-                });
-
             modelBuilder.Entity("Domain.Model.AddLookups.LkpBus", b =>
                 {
                     b.HasOne("Domain.Model.AddLookups.LkpSchool", "LkpSchool")
@@ -1238,6 +1200,11 @@ namespace Domain.Migrations
                         .WithMany("VoucherTypes")
                         .HasForeignKey("VoucherTypeId")
                         .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("Domain.Model.AddLookups.LkpYear", "Year")
+                        .WithMany("Payments")
+                        .HasForeignKey("YearId")
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("Domain.Model.Financial.SchoolFee", b =>
@@ -1270,7 +1237,11 @@ namespace Domain.Migrations
                         .HasForeignKey("PaymentId")
                         .OnDelete(DeleteBehavior.Restrict);
 
-                    b.HasOne("Domain.Model.Reg.RegStud", "Student")
+                    b.HasOne("Domain.Model.Reg.RegStud")
+                        .WithMany("StudentFees")
+                        .HasForeignKey("RegStudId");
+
+                    b.HasOne("Domain.Model.Adm.AdmStud", "Student")
                         .WithMany("StudentFees")
                         .HasForeignKey("StudentId")
                         .OnDelete(DeleteBehavior.Restrict);
@@ -1460,14 +1431,6 @@ namespace Domain.Migrations
                         .WithMany("UsersSchool")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Restrict);
-                });
-
-            modelBuilder.Entity("Domain.Model.library.Book", b =>
-                {
-                    b.HasOne("Domain.Model.library.Author", "BookAuthor")
-                        .WithMany("AuthorBooks")
-                        .HasForeignKey("AuthorId")
-                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }

@@ -53,6 +53,22 @@
     <Compile Remove="Migrations\20190723193346_test.Designer.cs" />
     <Compile Remove="Migrations\20190723194903_test2.cs" />
     <Compile Remove="Migrations\20190723194903_test2.Designer.cs" />
+    <Compile Remove="Migrations\20190727224607_newsqlinstallation.cs" />
+    <Compile Remove="Migrations\20190727224607_newsqlinstallation.Designer.cs" />
+    <Compile Remove="Migrations\20190728114405_evening 2807.cs" />
+    <Compile Remove="Migrations\20190728114405_evening 2807.Designer.cs" />
+    <Compile Remove="Migrations\20190728120914_evening 2807.cs" />
+    <Compile Remove="Migrations\20190728120914_evening 2807.Designer.cs" />
+    <Compile Remove="Migrations\20190729000108_yearonpayment.cs" />
+    <Compile Remove="Migrations\20190729000108_yearonpayment.Designer.cs" />
+    <Compile Remove="Migrations\20190729000417_yearonpayment.cs" />
+    <Compile Remove="Migrations\20190729000417_yearonpayment.Designer.cs" />
+    <Compile Remove="Migrations\20190729000718_yearonpayment.cs" />
+    <Compile Remove="Migrations\20190729000718_yearonpayment.Designer.cs" />
+    <Compile Remove="Migrations\20190729001405_yearonpayment.cs" />
+    <Compile Remove="Migrations\20190729001405_yearonpayment.Designer.cs" />
+    <Compile Remove="Migrations\20190729001826_yearonpayment1.cs" />
+    <Compile Remove="Migrations\20190729001826_yearonpayment1.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

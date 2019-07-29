@@ -35,6 +35,13 @@ namespace Domain.Config.Financial
                 .OnDelete(DeleteBehavior.Restrict);
 
 
+
+            builder.HasOne(p => p.Year)
+                .WithMany(p => p.Payments)
+                .HasForeignKey(p => p.YearId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+
         }
     }
 }

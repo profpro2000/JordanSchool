@@ -15,5 +15,8 @@ namespace Domain.Model.AddLookups
 
         [IgnoreDataMember] public ICollection<LkpClass> Classes { get; set; }
        [IgnoreDataMember] public ICollection<SchoolFee> SchoolFees { set; get; }
+       [IgnoreDataMember] public ICollection<Payment> Payments { set; get; }
+
+
     }
 }
