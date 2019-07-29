@@ -53,6 +53,9 @@ namespace Domain.Config
             modelBuilder.ApplyConfiguration(new StudentFeeConfig());
             modelBuilder.ApplyConfiguration(new PaymentConfig());
 
+            //==============Views======================
+            modelBuilder.Query<RegStudYearlyVw>().ToView("RegStudYearlyVw");
+
 
 
 

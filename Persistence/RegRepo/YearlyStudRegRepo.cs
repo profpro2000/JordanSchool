@@ -13,13 +13,22 @@ namespace Persistence.RegRepo
  public   class YearlyStudRegRepo : DbOperation<YearlyStudReg>, IYearlyStudRegRepo
     {
         private SchoolDbContext _db;
-        private double descount = 0;
+        private decimal descount = 0;
        
 
         public YearlyStudRegRepo(SchoolDbContext db) : base(db)
         {
             _db = db;
            
+        }
+
+        // ======== View
+        public async Task<IEnumerable<object>> GetParentChildrensVw(int ParentId)
+        {
+
+            var Vw = _db.RegStudYearlyVw.Where(p => p.ParentId == ParentId).ToList();
+            return Vw;
+
         }
 
         // public List<String> Strings { get; set; }
@@ -121,97 +130,112 @@ namespace Persistence.RegRepo
             return result;
         }
 
-       
 
-        public  int ConfirmStudReg(int id, int PYearId,int oldClassId, int newClassId)
+
+        public int ConfirmStudReg(int studId, int yearId, int nextClassId)
         {
 
-            System.Diagnostics.Debug.WriteLine("-----****************-----==-------   id=" + id+ "   PYearId="+ PYearId+ "   oldClassId="+ oldClassId+ "   newClassId="+ newClassId);
-            
-            var StudExist = _db.YearlyStudRegs.Where(p => p.AdmId == _db.YearlyStudRegs.FirstOrDefault(x=>x.Id==id).AdmId && p.YearId== PYearId).Count();
-            var ClassNotConfirm=_db.YearlyStudRegs.Where(p => p.AdmId == _db.YearlyStudRegs.FirstOrDefault(x => x.Id == id).AdmId && p.ClassId == oldClassId && p.YearId==PYearId).Count();
+            System.Diagnostics.Debug.WriteLine("-----****************-----==-------   studId=" + studId + "   yearId=" + yearId + "   nextClassId=" + nextClassId);
 
-            if (ClassNotConfirm > 0) { ConfirmExistClass(id); return 1; }
 
-            if (StudExist>1) return 0;
-            if (newClassId == 0) return 0;
-            
-            
-                
-            var data = _db.YearlyStudRegs.Where(p => p.Id == id).Select(x =>
-          new //YearlyStudReg()
-          {
-              Id = x.Id,
-              AdmId = x.AdmId,
-              SchoolId = x.SchoolId,
-              SectionId = x.SectionId,
-              ClassId = newClassId,
-              ClassPrice =
-              _db.LkpClasses.Where(k1 => k1.Id == newClassId)
-                         .Select(k11 => k11.Amt).FirstOrDefault(),
-              ParentId = x.ParentId,
-              StudStatusId = _db.LkpLookups.Where(k => k.TypeId == 42).Select(k => k.Id).FirstOrDefault(), // Student Status = Register = 1
-              BirthDate = x.BirthDate,
-              YearId = PYearId,
-              JoinTermId = x.JoinTermId,
-              ClassSeqId = x.ClassSeqId,
-              TourId = x.TourId,
-              TourTypeId = x.TourTypeId,
-              BusId = x.BusId,
-              TourPrice = x.TourPrice,
-              ApprovedId = 1, //1=Approved  0 or null not approved
-              ApprovedDate = DateTime.Now,
-              StudentBrotherSeq = x.StudentBrotherSeq != null ? x.StudentBrotherSeq : 0,
-              BrotherDescountType = x.BrotherDescountType,
-              DescountValue = x.DescountValue
+            var _classIsFound = _db.RegStudYearlyVw
+               .Where(p => p.StudentId == studId && p.NextClassId == nextClassId && p.YearId == yearId)
+               .FirstOrDefault();
+            var _approvedId = _db.RegStudYearlyVw
+                .Where(p => p.StudentId == studId && p.NextClassId == nextClassId && p.YearId== yearId && p.ApprovedId==1)
+                .FirstOrDefault();
 
-          }) ;//.FirstOrDefault();
+            System.Diagnostics.Debug.WriteLine("1)-----****************-----==-------_classIsFound=" + _classIsFound + "   _approvedId =" + _approvedId);
 
-            int xStudentBrotherSeq = (int)data.Select(x=>x.StudentBrotherSeq).FirstOrDefault();
-            int xClassPrice = (int)data.Select(x => x.ClassPrice).FirstOrDefault();
-            System.Diagnostics.Debug.WriteLine("---------------xStudentBrotherSeq="+ xStudentBrotherSeq+ "  xClassPrice="+ xClassPrice);
-            CalcStudDescount(id, xStudentBrotherSeq, xClassPrice);
-            
+            //Register the  Student in the Class (if not found)
+            if (_classIsFound == null)
+            {
+                System.Diagnostics.Debug.WriteLine("2)-----****************-----==-------_classIsFound=" + _classIsFound + "   _approvedId =" + _approvedId);
+                InsertStudClass(studId, yearId);
+            }
+            if (_approvedId == null)
+            {
+                System.Diagnostics.Debug.WriteLine("3)-----****************-----==-------_classIsFound=" + _classIsFound + "   _approvedId =" + _approvedId);
+               // var ParentId = _db.AdmStuds.Where(p => p.Id == studId).Select(p => p.ParentId).FirstOrDefault();
+                ConfirmExistClass(studId);
+            }
+            return 1;
+        }
+
+        public void InsertStudClass(int studId, int yearId)
+        {
+            descount = 0;
+            var data = _db.RegStudYearlyVw.Where(p => p.StudentId == studId).Select(x =>
+             new //YearlyStudReg()
+              {
+                 x.Id,
+                 x.StudentId,
+                 x.SchoolId,
+                 x.SectionId,
+                 x.NextClassId,
+                 NextClassPrice= x.NextClassPrice ?? 0,
+                 x.ParentId,
+                 StudStatusId = _db.LkpLookups.Where(k => k.TypeId == 42).Select(k => k.Id).FirstOrDefault(), // Student Status = Register = 1
+                 x.BirthDate,
+                 YearId=yearId,
+                 x.JoinTermId,
+                 x.ClassSeqId,
+                 x.TourId,
+                 x.TourTypeId,
+                 x.BusId,
+                 x.TourPrice,
+                 ApprovedId = 1, //1=Approved  0 or null not approved
+                 ApprovedDate = DateTime.Now,
+                 StudentBrotherSeq = x.StudentBrotherSeq != null ? x.StudentBrotherSeq : 0,
+                 x.BrotherDescountType,
+                 x.DescountValue
+
+             });//.FirstOrDefault();
+
+            var dms = data.Select(x => x.StudentBrotherSeq).FirstOrDefault();
+            int xStudentBrotherSeq=0;
+            if (dms != null)
+                xStudentBrotherSeq = (int)dms;
+            var clsPrice= data.Select(x => x.NextClassPrice).FirstOrDefault();
+            int xClassPrice = 0;
+                if (clsPrice != null)
+                xClassPrice = (int)clsPrice;
+
+            System.Diagnostics.Debug.WriteLine("---------------xStudentBrotherSeq=" + xStudentBrotherSeq + "  xClassPrice=" + xClassPrice);
+            //CalcStudDescount(studId, xStudentBrotherSeq, xClassPrice);
+
             var data2 = data.Select(x =>
              new YearlyStudReg()
              {
-                AdmId = x.AdmId,
-                SchoolId = x.SchoolId,
-                SectionId = x.SectionId,
-                ClassId = x.ClassId,
-                ClassPrice =x.ClassPrice,
-                ParentId = x.ParentId,
-                StudStatusId = x.StudStatusId,
-                BirthDate = x.BirthDate,
-                YearId = x.YearId,
-                JoinTermId = x.JoinTermId,
-                ClassSeqId = x.ClassSeqId,
-                TourId = x.TourId,
-                TourTypeId = x.TourTypeId,
-                BusId = x.BusId,
-                TourPrice = x.TourPrice,
-                ApprovedId = x.ApprovedId,
-                ApprovedDate = x.ApprovedDate,
-                StudentBrotherSeq = x.StudentBrotherSeq ,
-                BrotherDescountType = x.BrotherDescountType,
-                DescountValue = descount
+                 AdmId = studId,
+                 SchoolId = x.SchoolId,
+                 SectionId = x.SectionId,
+                 ClassId = x.NextClassId,
+                 ClassPrice =  x.NextClassPrice,
+                 ParentId = x.ParentId,
+                 StudStatusId = x.StudStatusId,
+                 BirthDate = x.BirthDate,
+                 YearId = x.YearId,
+                 JoinTermId = x.JoinTermId,
+                 ClassSeqId = x.ClassSeqId,
+                 TourId = x.TourId,
+                 TourTypeId = x.TourTypeId,
+                 BusId = x.BusId,
+                 TourPrice = x.TourPrice,
+                 ApprovedId = x.ApprovedId,
+                 ApprovedDate = x.ApprovedDate,
+                 StudentBrotherSeq = x.StudentBrotherSeq,
+                 BrotherDescountType = x.BrotherDescountType,
+                 DescountValue = x.DescountValue??0
 
              }).FirstOrDefault();
 
             DbSet.Add(data2);
-
-            // Calc student descounts
-            var ParentId = _db.YearlyStudRegs.Where(p => p.Id == id).Select(p => p.ParentId).FirstOrDefault();
-            UpdateStudSeq(ParentId);
-
-            return 1;
-
- 
         }
 
         public void ConfirmExistClass(int id)
         {
-            var data = _db.YearlyStudRegs.Where(p => p.Id == id).ToList();
+            var data = _db.YearlyStudRegs.Where(p => p.AdmId == id).ToList();
             System.Diagnostics.Debug.WriteLine("----------==-------   id=" + id);           
                 data.ForEach(x =>
                 {
@@ -221,14 +245,14 @@ namespace Persistence.RegRepo
                 });
         }
 
-        public void CalcStudDescount(int studId, int? i, int price)
-        {
-            descount = 0;
-            if (i == 1) descount = price * 0.50;
-            if (i == 2) descount = price * 0.25;
-            if (i >= 3) descount = price * 0.10;
-            //return descount;
-        }
+        //public void CalcStudDescount(int studId, int? i, decimal price)
+        //{
+        //    descount = 0;
+        //    if (i == 1) descount = price * 0.50;
+        //    if (i == 2) descount = price * 0.25;
+        //    if (i >= 3) descount = price * 0.10;
+        //    //return descount;
+        //}
 
         public void UpdateStudSeq(int id)
         {
@@ -245,7 +269,7 @@ namespace Persistence.RegRepo
             //-----------------------------------------------------------------------
             System.Diagnostics.Debug.WriteLine("begin");
             var i = 0;
-            if (CountData > 1)
+            if (CountData > 1) {
                 data.ForEach(x =>
                 {
                     i = i + 1;
@@ -257,10 +281,12 @@ namespace Persistence.RegRepo
                     if (i >= 3) descount = price * 0.10;
 
                     x.StudentBrotherSeq = i;
-                    x.DescountValue = descount;
+                    //x.DescountValue = descount;
                     DbSet.Update(x);
                     System.Diagnostics.Debug.WriteLine("counter=" + i + "  studId=" + studId + "  price=" + price + "  descount=" + descount);
                 });
+            }
+           
             // _db.SaveChanges();
 
         }
@@ -285,7 +311,7 @@ namespace Persistence.RegRepo
        public string TourTypeName { get; set; }
        public int TourPrice { get; set; }
         public int? StudentBrotherSeq { get; set; }
-       public double DescountValue { get; set; }
+       public decimal? DescountValue { get; set; }
        public int SchoolId { get; set; }
        public int? ClassSeq { get; set; }
        public int? ClassId { get; set; }

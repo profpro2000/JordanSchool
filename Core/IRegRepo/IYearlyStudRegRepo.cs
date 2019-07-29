@@ -11,7 +11,9 @@ namespace Core.IRegRepo
 
         Task<IEnumerable<object>> GetParentChildrens(int id);
        // Task<IEnumerable<YearlyStudReg>> ConfirmStudReg2(int id, int PYearId);
-        int ConfirmStudReg(int id, int PYearId, int oldClassId, int newClassId);
+        int ConfirmStudReg(int studId, int yearId, int nextClassId);
+
+        Task<IEnumerable<object>> GetParentChildrensVw(int ParentId);
 
     }
 

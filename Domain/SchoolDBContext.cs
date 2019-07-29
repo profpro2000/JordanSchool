@@ -68,6 +68,10 @@ namespace Domain
         public DbSet<StudentFee> StudentFees { set; get; }
         public DbSet<Payment> Payments { set; get; }
 
+        //==============Views
+        public DbQuery<RegStudYearlyVw> RegStudYearlyVw { get; set; }
+       
+
 
 
     }
