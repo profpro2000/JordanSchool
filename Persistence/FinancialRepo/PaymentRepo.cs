@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Core.IFinancial;
@@ -28,5 +29,26 @@ namespace Persistence.FinancialRepo
                 .ToListAsync();
         }
 
+
+      
+        public async Task<IEnumerable<object>> GetByParenetIdYearId(int parentId, int yearId)
+        {
+
+
+            var payment = _db.Payments.Where(x => (x.RegParentId == parentId || parentId == 0) && (x.YearId == yearId || yearId == 0)).Select(p => new
+            {
+                p.Id,
+                p.RegParent.FirstLName,
+                FatherFullName = p.RegParent.FirstLName + " " + p.RegParent.SecondName + " " + p.RegParent.FamilyName,
+                p.VoucherDate
+
+            });//.FirstOrDefault() ;
+
+            return payment;
+
+
+        }
+
+        
     }
 }

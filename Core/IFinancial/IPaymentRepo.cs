@@ -10,5 +10,8 @@ namespace Core.IFinancial
     {
 
         Task<List<Payment>> GetAll();
+        Task<IEnumerable<object>> GetByParenetIdYearId(int parentId,int yearId);
+
+
     }
 }

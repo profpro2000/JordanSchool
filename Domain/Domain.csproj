@@ -69,6 +69,14 @@
     <Compile Remove="Migrations\20190729001405_yearonpayment.Designer.cs" />
     <Compile Remove="Migrations\20190729001826_yearonpayment1.cs" />
     <Compile Remove="Migrations\20190729001826_yearonpayment1.Designer.cs" />
+    <Compile Remove="Migrations\20190729095315_movetoserver2907.cs" />
+    <Compile Remove="Migrations\20190729095315_movetoserver2907.Designer.cs" />
+    <Compile Remove="Migrations\20190729095856_movetoserver2907.cs" />
+    <Compile Remove="Migrations\20190729095856_movetoserver2907.Designer.cs" />
+    <Compile Remove="Migrations\20190729100129_movetoserver2907.cs" />
+    <Compile Remove="Migrations\20190729100129_movetoserver2907.Designer.cs" />
+    <Compile Remove="Migrations\20190729100448_movetoserver2907.cs" />
+    <Compile Remove="Migrations\20190729100448_movetoserver2907.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

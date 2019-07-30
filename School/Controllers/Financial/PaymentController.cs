@@ -56,6 +56,24 @@ namespace School.Controllers.Financial
         }
 
 
+
+
+        [HttpGet("GetByParenetIdYearId/{parentId}/{yearId}")]
+        public IActionResult GetByParenetIdYearId(int parentId, int yearId)
+        {
+            try
+            {
+                var result = _service.GetByParenetIdYearId(  parentId,   yearId);
+                if (result == null)
+                    return NotFound("No Data Found");
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         [HttpPost]
         public void add(Payment obj)
         {

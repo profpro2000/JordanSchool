@@ -5,6 +5,7 @@ using Domain.Config.Financial;
 using Domain.Config.LookupConfig;
 using Domain.Config.Reg;
 using Domain.Config.UsersConfigs;
+using Domain.Model.Reg;
 using Microsoft.EntityFrameworkCore;
 
 namespace Domain.Config
