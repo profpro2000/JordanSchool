@@ -2,13 +2,13 @@
 
 namespace Domain.Migrations
 {
-    public partial class updateLKPClassV1 : Migration
+    public partial class yearonpayment : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AddColumn<int>(
-                name: "ClassSeq",
-                table: "Lkp_Class",
+                name: "YearId",
+                table: "Payments",
                 nullable: false,
                 defaultValue: 0);
         }
@@ -16,8 +16,8 @@ namespace Domain.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(
-                name: "ClassSeq",
-                table: "Lkp_Class");
+                name: "YearId",
+                table: "Payments");
         }
     }
 }

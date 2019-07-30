@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Domain.Migrations
 {
     [DbContext(typeof(SchoolDbContext))]
-    [Migration("20190725143402_YearlRegStudV1")]
-    partial class YearlRegStudV1
+    [Migration("20190728121204_evening 2807")]
+    partial class evening2807
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -80,6 +80,8 @@ namespace Domain.Migrations
                         .ValueGeneratedOnAdd()
                         .HasMaxLength(3)
                         .HasDefaultValue(0);
+
+                    b.Property<int?>("ClassSeq");
 
                     b.Property<DateTime?>("InsertDate");
 
@@ -448,9 +450,9 @@ namespace Domain.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("Credit");
+                    b.Property<int?>("Credit");
 
-                    b.Property<int>("Debit");
+                    b.Property<int?>("Debit");
 
                     b.Property<DateTime?>("InsertDate");
 
@@ -522,13 +524,19 @@ namespace Domain.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("FinItemId");
+                    b.Property<int?>("Cr");
+
+                    b.Property<int?>("Db");
+
+                    b.Property<int?>("FinItemId");
 
                     b.Property<DateTime?>("InsertDate");
 
                     b.Property<int?>("InsertUser");
 
-                    b.Property<int>("PaymentId");
+                    b.Property<int?>("PaymentId");
+
+                    b.Property<int?>("RegStudId");
 
                     b.Property<int>("StudentId");
 
@@ -536,15 +544,15 @@ namespace Domain.Migrations
 
                     b.Property<int?>("UpdateUser");
 
-                    b.Property<int>("Value");
-
-                    b.Property<int>("YearId");
+                    b.Property<int?>("YearId");
 
                     b.HasKey("Id");
 
                     b.HasIndex("FinItemId");
 
                     b.HasIndex("PaymentId");
+
+                    b.HasIndex("RegStudId");
 
                     b.HasIndex("StudentId");
 
@@ -864,6 +872,8 @@ namespace Domain.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int?>("AdmId");
+
                     b.Property<DateTime?>("ApprovedDate");
 
                     b.Property<int?>("ApprovedId");
@@ -900,7 +910,7 @@ namespace Domain.Migrations
 
                     b.Property<int>("SectionId");
 
-                    b.Property<int?>("StudNo");
+                    b.Property<int?>("StudStatusId");
 
                     b.Property<int?>("StudentBrotherSeq");
 
@@ -933,6 +943,8 @@ namespace Domain.Migrations
                     b.HasIndex("SchoolId");
 
                     b.HasIndex("SectionId");
+
+                    b.HasIndex("StudStatusId");
 
                     b.HasIndex("TourId");
 
@@ -990,54 +1002,6 @@ namespace Domain.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Sys_UserSchool");
-                });
-
-            modelBuilder.Entity("Domain.Model.library.Author", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("ArName");
-
-                    b.Property<DateTime?>("InsertDate");
-
-                    b.Property<int?>("InsertUser");
-
-                    b.Property<string>("LaName");
-
-                    b.Property<DateTime?>("UpdateDate");
-
-                    b.Property<int?>("UpdateUser");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Author");
-                });
-
-            modelBuilder.Entity("Domain.Model.library.Book", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("AuthorId");
-
-                    b.Property<DateTime?>("InsertDate");
-
-                    b.Property<int?>("InsertUser");
-
-                    b.Property<string>("Title");
-
-                    b.Property<DateTime?>("UpdateDate");
-
-                    b.Property<int?>("UpdateUser");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AuthorId");
-
-                    b.ToTable("Book");
                 });
 
             modelBuilder.Entity("Domain.Model.AddLookups.LkpBus", b =>
@@ -1264,7 +1228,11 @@ namespace Domain.Migrations
                         .HasForeignKey("PaymentId")
                         .OnDelete(DeleteBehavior.Restrict);
 
-                    b.HasOne("Domain.Model.Reg.RegStud", "Student")
+                    b.HasOne("Domain.Model.Reg.RegStud")
+                        .WithMany("StudentFees")
+                        .HasForeignKey("RegStudId");
+
+                    b.HasOne("Domain.Model.Adm.AdmStud", "Student")
                         .WithMany("StudentFees")
                         .HasForeignKey("StudentId")
                         .OnDelete(DeleteBehavior.Restrict);
@@ -1422,6 +1390,11 @@ namespace Domain.Migrations
                         .HasForeignKey("SectionId")
                         .OnDelete(DeleteBehavior.Restrict);
 
+                    b.HasOne("Domain.Model.Lookups.LkpLookup", "StudStatus")
+                        .WithMany("StudStatusYearlyStudReg")
+                        .HasForeignKey("StudStatusId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
                     b.HasOne("Domain.Model.AddLookups.LkpTour", "Tour")
                         .WithMany("YearlyStudRegs")
                         .HasForeignKey("TourId")
@@ -1449,14 +1422,6 @@ namespace Domain.Migrations
                         .WithMany("UsersSchool")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Restrict);
-                });
-
-            modelBuilder.Entity("Domain.Model.library.Book", b =>
-                {
-                    b.HasOne("Domain.Model.library.Author", "BookAuthor")
-                        .WithMany("AuthorBooks")
-                        .HasForeignKey("AuthorId")
-                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }

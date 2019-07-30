@@ -448,9 +448,9 @@ namespace Domain.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("Credit");
+                    b.Property<int?>("Credit");
 
-                    b.Property<int>("Debit");
+                    b.Property<int?>("Debit");
 
                     b.Property<DateTime?>("InsertDate");
 
@@ -472,6 +472,8 @@ namespace Domain.Migrations
 
                     b.Property<int>("VoucherTypeId");
 
+                    b.Property<int>("YearId");
+
                     b.HasKey("Id");
 
                     b.HasIndex("RegParentId");
@@ -479,6 +481,8 @@ namespace Domain.Migrations
                     b.HasIndex("VoucherStatusId");
 
                     b.HasIndex("VoucherTypeId");
+
+                    b.HasIndex("YearId");
 
                     b.ToTable("Payments");
                 });
@@ -1002,54 +1006,6 @@ namespace Domain.Migrations
                     b.ToTable("Sys_UserSchool");
                 });
 
-            modelBuilder.Entity("Domain.Model.library.Author", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("ArName");
-
-                    b.Property<DateTime?>("InsertDate");
-
-                    b.Property<int?>("InsertUser");
-
-                    b.Property<string>("LaName");
-
-                    b.Property<DateTime?>("UpdateDate");
-
-                    b.Property<int?>("UpdateUser");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Author");
-                });
-
-            modelBuilder.Entity("Domain.Model.library.Book", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("AuthorId");
-
-                    b.Property<DateTime?>("InsertDate");
-
-                    b.Property<int?>("InsertUser");
-
-                    b.Property<string>("Title");
-
-                    b.Property<DateTime?>("UpdateDate");
-
-                    b.Property<int?>("UpdateUser");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AuthorId");
-
-                    b.ToTable("Book");
-                });
-
             modelBuilder.Entity("Domain.Model.AddLookups.LkpBus", b =>
                 {
                     b.HasOne("Domain.Model.AddLookups.LkpSchool", "LkpSchool")
@@ -1241,6 +1197,11 @@ namespace Domain.Migrations
                     b.HasOne("Domain.Model.Lookups.LkpLookup", "VoucherType")
                         .WithMany("VoucherTypes")
                         .HasForeignKey("VoucherTypeId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("Domain.Model.AddLookups.LkpYear", "Year")
+                        .WithMany("Payments")
+                        .HasForeignKey("YearId")
                         .OnDelete(DeleteBehavior.Restrict);
                 });
 
@@ -1468,14 +1429,6 @@ namespace Domain.Migrations
                         .WithMany("UsersSchool")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Restrict);
-                });
-
-            modelBuilder.Entity("Domain.Model.library.Book", b =>
-                {
-                    b.HasOne("Domain.Model.library.Author", "BookAuthor")
-                        .WithMany("AuthorBooks")
-                        .HasForeignKey("AuthorId")
-                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }

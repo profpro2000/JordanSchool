@@ -25,7 +25,15 @@ namespace School.ServiceLayer.Services.FinancialServices
 
         public async Task<List<PaymentVw>> GetAll()
         {
-            var vw = await _interface.GetAllAsync();
+            var vw = await _interface.GetAll();
+            var result = _mapper.Map<List<PaymentVw>>(vw);
+            return result;
+        }
+
+        Task<IEnumerable<object>>
+        public async Task<List<PaymentVw>> GetByParenetIdYearId(int parentId,int yearId)
+        {
+            var vw = await _interface.GetByParenetIdYearId(parentId, yearId);
             var result = _mapper.Map<List<PaymentVw>>(vw);
             return result;
         }

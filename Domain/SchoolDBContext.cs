@@ -7,7 +7,6 @@ using Domain.Config;
 using Domain.Model.Adm;
 using Domain.Model.Lookups;
 using Domain.Model.Financial;
-using Domain.Model.library;
 using Domain.Model.Lookups;
  using Domain.Model.Reg;
  using Microsoft.EntityFrameworkCore;
@@ -61,9 +60,6 @@ namespace Domain
         public DbSet<AdmStud> AdmStuds { get; set; }
 
 
-        //===================Library=====================
-        public DbSet<Book> Books { set; get; }
-        public DbSet<Author> Authors { set; get; }
 
         //==================financial=============
         public DbSet<FinItem> FinItems { set; get; }

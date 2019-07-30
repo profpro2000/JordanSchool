@@ -2,11 +2,9 @@
 using Domain.Config.AddLookupsConfig;
 using Domain.Config.Adm;
 using Domain.Config.Financial;
-using Domain.Config.Library;
 using Domain.Config.LookupConfig;
 using Domain.Config.Reg;
 using Domain.Config.UsersConfigs;
-using Domain.Model.library;
 using Domain.Model.Reg;
 using Microsoft.EntityFrameworkCore;
 
@@ -46,9 +44,6 @@ namespace Domain.Config
             modelBuilder.ApplyConfiguration(new AdmStudConfig());
             
 
-            //==================================
-            modelBuilder.ApplyConfiguration(new BookConfig());
-            modelBuilder.ApplyConfiguration(new AuthorConfig());
 
 
 
