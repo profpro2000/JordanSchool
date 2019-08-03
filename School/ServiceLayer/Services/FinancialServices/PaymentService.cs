@@ -30,7 +30,7 @@ namespace School.ServiceLayer.Services.FinancialServices
             return result;
         }
 
-        Task<IEnumerable<object>>
+       
         public async Task<List<PaymentVw>> GetByParenetIdYearId(int parentId,int yearId)
         {
             var vw = await _interface.GetByParenetIdYearId(parentId, yearId);
