@@ -19,7 +19,7 @@ namespace Persistence.FinancialRepo
             _db = db;
         }
 
-        public async Task<IEnumerable<object>> GetStudFeesListByParent(int ParentId)
+        public async Task<IEnumerable<object>> GetStudFeesListByParent(int YearId, int ParentId)
         {
            // IList<ToDoItem> items = new List<ToDoItem>();
             IList<StudFeeDtlVw> xList= new List<StudFeeDtlVw>();
@@ -30,10 +30,10 @@ namespace Persistence.FinancialRepo
                     StudentId = x.Id,
                     StudentName = _db.AdmStuds.Where(c => c.Id == x.Id).Select(cc => cc.FirstName).FirstOrDefault(),
                     YearId = x.YearId,
-                    Db = _db.StudentFees.Where(p => p.StudentId == x.Id).Sum(xx => xx.Db),
-                    Cr = _db.StudentFees.Where(p => p.StudentId == x.Id).Sum(xx => xx.Cr),
-                    Total = _db.StudentFees.Where(p => p.StudentId == x.Id).Sum(xx => xx.Db) -
-                     _db.StudentFees.Where(p => p.StudentId == x.Id).Sum(xx => xx.Cr),
+                    Db = _db.StudentFees.Where(p => p.StudentId == x.Id && p.YearId == YearId).Sum(xx => xx.Db),
+                    Cr = _db.StudentFees.Where(p => p.StudentId == x.Id && p.YearId == YearId).Sum(xx => xx.Cr),
+                    Total = _db.StudentFees.Where(p => p.StudentId == x.Id && p.YearId == YearId).Sum(xx => xx.Db) -
+                     _db.StudentFees.Where(p => p.StudentId == x.Id && p.YearId == YearId).Sum(xx => xx.Cr),
 
                  }).ToList() ;
             }

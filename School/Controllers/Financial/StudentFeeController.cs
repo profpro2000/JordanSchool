@@ -53,10 +53,10 @@ namespace School.Controllers.Financial
             }
         }
 
-        [HttpGet("GetStudFeesListByParent/{id}")]
-        public Task<IEnumerable<object>> GetStudFeesListByParent(int Id)
+        [HttpGet("GetStudFeesListByParent/{YearId}/{id}")]
+        public Task<IEnumerable<object>> GetStudFeesListByParent(int YearId, int Id)
         {
-                var result = _service.GetStudFeesListByParent(Id);
+                var result = _service.GetStudFeesListByParent(YearId,Id);
             return result;
         }
 

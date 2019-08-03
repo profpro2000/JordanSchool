@@ -9,7 +9,7 @@ namespace Core.IFinancial
     public interface IStudentFeeRepo:IRepo<StudentFee>
     {
 
-        Task<IEnumerable<object>> GetStudFeesListByParent(int ParentId);
+        Task<IEnumerable<object>> GetStudFeesListByParent(int YearId, int ParentId);
         Task<IEnumerable<object>> GetStudFeesDtl(int yearId, int StudId);
 
     }

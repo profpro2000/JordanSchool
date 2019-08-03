@@ -36,9 +36,9 @@ namespace School.ServiceLayer.Services.FinancialServices
         return result;
     }
 
-        public Task<IEnumerable<object>> GetStudFeesListByParent(int Id)
+        public Task<IEnumerable<object>> GetStudFeesListByParent(int YearId ,int Id)
         {
-            var vw = _interface.GetStudFeesListByParent(Id);
+            var vw = _interface.GetStudFeesListByParent(YearId,Id);
            // var result = _mapper.Map<StudentFeeVw>(vw);
             return vw;
         }
