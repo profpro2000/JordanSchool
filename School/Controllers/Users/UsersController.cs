@@ -35,6 +35,15 @@ namespace School.Controllers.Users
         {
 
 
+            var option = new CookieOptions();
+
+            option.Expires = DateTime.Now.AddMinutes(10);
+
+            Response.Cookies.Append("new", "Hello From New", option);
+
+            var test = Request.Cookies["new"];
+
+
             return _service.CheckLogin(userName, password);
         }
 

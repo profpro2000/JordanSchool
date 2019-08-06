@@ -66,7 +66,8 @@ namespace Persistence.AdmRepo
 
         public async Task<IEnumerable<object>> GetRegChildrens(int id)
         {
-            var data = _db.AdmStuds.Where(p => p.ParentId == id).Select(x => new
+            var CurrentYear = _db.LkpYears.Where(p => p.Active == 1).Select(x => x.Id).FirstOrDefault();
+            var data = _db.AdmStuds.Where(p => p.ParentId == id && p.YearId==CurrentYear).Select(x => new
             {
                 x.Id,
                 x.FirstName,
@@ -115,7 +116,8 @@ namespace Persistence.AdmRepo
         }
         public async Task<List<AdmStud>> GetStudByParent(int id)
         {
-            return await _db.AdmStuds.Where(x => x.ParentId == id).Include(r => r.Parent).ToListAsync();
+           
+            return await _db.AdmStuds.Where(x => x.ParentId == id ).Include(r => r.Parent).ToListAsync();
         }
 
         public void UpdateStudSeq(int id)

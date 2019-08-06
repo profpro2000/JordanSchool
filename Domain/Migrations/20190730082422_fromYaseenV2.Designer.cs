@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Domain.Migrations
 {
     [DbContext(typeof(SchoolDbContext))]
-    [Migration("20190729100911_movetoserver2907")]
-    partial class movetoserver2907
+    [Migration("20190730082422_fromYaseenV2")]
+    partial class fromYaseenV2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -459,6 +459,8 @@ namespace Domain.Migrations
                     b.Property<int?>("InsertUser");
 
                     b.Property<string>("Note");
+
+                    b.Property<string>("Note2");
 
                     b.Property<int>("RegParentId");
 

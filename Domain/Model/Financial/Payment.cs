@@ -30,6 +30,7 @@ namespace Domain.Model.Financial
       
   
         public string Note { set; get; }
+        public string Note2 { get; set; }
 
         [IgnoreDataMember] public ICollection<StudentFee> StudentFees { set; get; }
 

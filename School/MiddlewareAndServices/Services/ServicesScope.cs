@@ -7,12 +7,14 @@ using Core.UsersRepo;
 using Domain;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Persistence.AddLookupsRepo;
 using Persistence.AdmRepo;
@@ -20,6 +22,7 @@ using Persistence.FinancialRepo;
 using Persistence.LookupsRepo;
 using Persistence.RegRepo;
 using Persistence.UsersRepo;
+using School.ServiceLayer.Helper;
 using School.ServiceLayer.Services.AddLookupServices;
 using School.ServiceLayer.Services.AdmStudServices;
 using School.ServiceLayer.Services.FinancialServices;
@@ -30,61 +33,126 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Text;
+using School.MiddlewareAndServices.Services;
 
 namespace School.MiddlewareAndServices.Services
 {
+   
     public static class ServicesScope
     {
 
 
-        public static IServiceCollection InitAuthentication(this IServiceCollection services, /*IConfigurationSection jwtAppSettingOptions, SymmetricSecurityKey _signingKey,*/ ApiService apiService)
+
+        /*
+                public static IServiceCollection InitAuthentication(this IServiceCollection services, 
+                    IConfigurationSection jwtAppSettingOptions, SymmetricSecurityKey _signingKey,ApiService apiService)
+                {
+                    services.Configure<JwtIssuerOptions>(options =>
+                    {
+                        options.Issuer = jwtAppSettingOptions[nameof(JwtIssuerOptions.Issuer)];
+                        options.Audience = jwtAppSettingOptions[nameof(JwtIssuerOptions.Audience)];
+                        options.SigningCredentials = new SigningCredentials(_signingKey, SecurityAlgorithms.HmacSha256);
+                    });
+
+                    //For Authntication 
+                    TokenValidationParameters tokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuer = true,
+                        ValidIssuer = "http://localhost:58488",
+                        ValidateAudience = true,
+                        ValidAudience = "http://localhost:4200",
+                        ValidateIssuerSigningKey = true,
+                        IssuerSigningKey = _signingKey,
+                        RequireExpirationTime = false,
+                        ValidateLifetime = true,
+                        ClockSkew = TimeSpan.Zero
+                    };
+
+                    services.AddAuthentication(options =>
+                    {
+                        options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                        options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+
+                    }).AddJwtBearer(configureOptions =>
+                    {
+
+                         configureOptions.ClaimsIssuer = jwtAppSettingOptions[nameof(JwtIssuerOptions.Issuer)];
+                         configureOptions.TokenValidationParameters = tokenValidationParameters;
+                         configureOptions.SaveToken = true;
+                         configureOptions.SecurityTokenValidators.Clear();
+                         configureOptions.SecurityTokenValidators.Add(new TokenValidationHandler(apiService));
+
+                    });
+
+                    // api user claim policy
+                    services.AddAuthorization(options =>
+                    {
+                        options.AddPolicy("ApiUser", policy => policy.RequireClaim("role", "api_access"));
+                    });
+
+                    return services;
+                }
+        */
+
+        public static IServiceCollection InitAuthentication(this IServiceCollection services, IConfigurationSection jwtAppSettingOptions, SymmetricSecurityKey _signingKey, ApiService apiService)
         {
-         /*   services.Configure<JwtIssuerOptions>(options =>
+            services.Configure<JwtIssuerOptions>(options =>
             {
                 options.Issuer = jwtAppSettingOptions[nameof(JwtIssuerOptions.Issuer)];
                 options.Audience = jwtAppSettingOptions[nameof(JwtIssuerOptions.Audience)];
                 options.SigningCredentials = new SigningCredentials(_signingKey, SecurityAlgorithms.HmacSha256);
             });
-            */
+
+
+           
+        
+      
+            
             //For Authntication 
             TokenValidationParameters tokenValidationParameters = new TokenValidationParameters
             {
-                ValidateIssuer = true,
+               
+            ValidateIssuer = true,
                 ValidIssuer = "http://localhost:58488",
                 ValidateAudience = true,
                 ValidAudience = "http://localhost:4200",
                 ValidateIssuerSigningKey = true,
-              //  IssuerSigningKey = _signingKey,
+                IssuerSigningKey = _signingKey,
                 RequireExpirationTime = false,
                 ValidateLifetime = true,
                 ClockSkew = TimeSpan.Zero
             };
 
-            /*services.AddAuthentication(options =>
+            services.AddAuthentication(options =>
             {
                 options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                 options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
 
             }).AddJwtBearer(configureOptions =>
             {
-                
-                 configureOptions.ClaimsIssuer = jwtAppSettingOptions[nameof(JwtIssuerOptions.Issuer)];
-                 configureOptions.TokenValidationParameters = tokenValidationParameters;
-                 configureOptions.SaveToken = true;
-                 configureOptions.SecurityTokenValidators.Clear();
-                 configureOptions.SecurityTokenValidators.Add(new TokenValidationHandler(apiService));
-                 
-            });*/
+                configureOptions.ClaimsIssuer = jwtAppSettingOptions[nameof(JwtIssuerOptions.Issuer)];
+                configureOptions.TokenValidationParameters = tokenValidationParameters;
+                configureOptions.SaveToken = true;
+                configureOptions.RequireHttpsMetadata = false;
+                configureOptions.SecurityTokenValidators.Clear();
+               // configureOptions.SecurityTokenValidators.Add(new TokenValidationHandler(apiService));
+            });
 
             // api user claim policy
             services.AddAuthorization(options =>
             {
                 options.AddPolicy("ApiUser", policy => policy.RequireClaim("role", "api_access"));
+
             });
 
             return services;
         }
 
+        public static IServiceCollection InitSignalR(this IServiceCollection services)
+        {
+            services.AddSignalR();
+            return services;
+        }
 
         public static IServiceCollection InitLocalization(this IServiceCollection services)
         {
@@ -120,6 +188,7 @@ namespace School.MiddlewareAndServices.Services
             return services;
         }
 
+       
         public static IServiceCollection InitMvc(this IServiceCollection services)
         {
             //options =>
@@ -155,11 +224,56 @@ namespace School.MiddlewareAndServices.Services
             return services;
         }
 
+        public static IServiceCollection AddCache(this IServiceCollection services)
+        {
+            services.AddMemoryCache();
+            return services;
+        }
+
 
         public static IServiceCollection InitContext(this IServiceCollection services, string connectionString)
         {
             // Context
             services.AddDbContext<SchoolDbContext>(options => options.UseSqlServer(connectionString));
+            return services;
+        }
+        public static IApplicationBuilder InitStartup(this IApplicationBuilder app, bool isDevelopment = false)
+        {
+            if (isDevelopment)
+                app.UseDeveloperExceptionPage();
+
+            app
+              .UseDefaultFiles()
+              .UseStaticFiles()
+             // .UseRequestUserMiddleware()
+            //  .UseCultureMiddleware()
+             // .UseHttpMachineInfoMiddleware()
+              .UseRequestLocalization(app.ApplicationServices.GetService<IOptions<RequestLocalizationOptions>>().Value)
+              .UseCors("AnyOrigin")
+              .UseSignalR(opt =>
+              {
+                //  opt.MapHub<NotificationsHub>("/hub");
+              })
+              .UseMvc(routes =>
+              {
+                  routes.MapRoute("api", "api/{controller}/{action=Index}/{id?}");
+                  routes.MapRoute("default", "{controller=Home}/{action=Index}/{id?}");
+              });
+
+            return app;
+        }
+
+        public static IServiceCollection InitCookies(this IServiceCollection services)
+        {
+            services.ConfigureExternalCookie(config =>
+            {
+                config.Cookie.Name = "_t";
+                config.Cookie.IsEssential = false;
+                config.Cookie.HttpOnly = true;
+                config.Cookie.SecurePolicy = CookieSecurePolicy.None;
+                config.Cookie.SameSite = SameSiteMode.None;
+            });
+
             return services;
         }
 
@@ -225,6 +339,10 @@ namespace School.MiddlewareAndServices.Services
             // ==========  Users  ===========
             services.AddScoped<IUserRepo, UserRepo>();
             services.AddScoped<UsersService>();
+
+            // ===Others
+            services.AddSingleton<ApiService>();
+
 
             return services;
 

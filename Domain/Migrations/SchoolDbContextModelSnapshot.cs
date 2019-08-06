@@ -458,6 +458,8 @@ namespace Domain.Migrations
 
                     b.Property<string>("Note");
 
+                    b.Property<string>("Note2");
+
                     b.Property<int>("RegParentId");
 
                     b.Property<DateTime?>("UpdateDate");
