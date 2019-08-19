@@ -125,7 +125,11 @@ namespace Domain.Migrations
                         .IsRequired()
                         .HasMaxLength(100);
 
+                    b.Property<string>("ArDescription");
+
                     b.Property<int>("CityId");
+
+                    b.Property<string>("EngDescription");
 
                     b.Property<string>("FaceBook");
 
@@ -138,6 +142,8 @@ namespace Domain.Migrations
                     b.Property<string>("Lname");
 
                     b.Property<string>("Mobile");
+
+                    b.Property<string>("PoBox");
 
                     b.Property<string>("Tel");
 
@@ -207,9 +213,7 @@ namespace Domain.Migrations
                         .ValueGeneratedOnAdd()
                         .HasDefaultValue(0);
 
-                    b.Property<string>("TourName")
-                        .IsRequired()
-                        .HasMaxLength(200);
+                    b.Property<int?>("TourNameId");
 
                     b.Property<DateTime?>("UpdateDate");
 
@@ -218,6 +222,8 @@ namespace Domain.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("SchoolId");
+
+                    b.HasIndex("TourNameId");
 
                     b.ToTable("LkpTour");
                 });
@@ -1059,6 +1065,11 @@ namespace Domain.Migrations
                     b.HasOne("Domain.Model.AddLookups.LkpSchool", "LkpSchool")
                         .WithMany("LkpTours")
                         .HasForeignKey("SchoolId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("Domain.Model.Lookups.LkpLookup", "Tour")
+                        .WithMany("LkpTour")
+                        .HasForeignKey("TourNameId")
                         .OnDelete(DeleteBehavior.Restrict);
                 });
 

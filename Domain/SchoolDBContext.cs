@@ -70,7 +70,8 @@ namespace Domain
 
         //==============Views
         public DbQuery<RegStudYearlyVw> RegStudYearlyVw { get; set; }
-       
+        public DbQuery<RegStudCardReportVw> RegStudCardReportVw { get; set; }
+
 
 
 

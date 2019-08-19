@@ -23,5 +23,15 @@ namespace Persistence.RegRepo
         {
             return await _db.RegStuds.Include(r => r.RegParent).ToListAsync();
         }
+
+        public object GetStudCardData(int yearId,int id)
+        {
+            var Vw = _db.RegStudCardReportVw.Where(p => p.YearId==yearId && p.StudId == id).FirstOrDefault();
+            return Vw;
+
+
+        }
+
+
     }
 }

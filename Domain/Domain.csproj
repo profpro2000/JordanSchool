@@ -85,6 +85,8 @@
     <Compile Remove="Migrations\20190729100911_movetoserver2907.Designer.cs" />
     <Compile Remove="Migrations\20190730081718_fromYaseenV1.cs" />
     <Compile Remove="Migrations\20190730081718_fromYaseenV1.Designer.cs" />
+    <Compile Remove="Migrations\20190811191143_updateLookupV1.cs" />
+    <Compile Remove="Migrations\20190811191143_updateLookupV1.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

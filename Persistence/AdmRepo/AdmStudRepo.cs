@@ -80,7 +80,7 @@ namespace Persistence.AdmRepo
                 ClassYear = x.Class != null ? x.Class.YearsLookup != null ? x.Class.YearsLookup.Id : 0 : 0,
                 ClassActive = x.Class != null ? x.Class.YearsLookup != null ? x.Class.YearsLookup.Active : 0 : 0,
                 ClassSeqName = x.ClassSeq != null ? x.ClassSeq.AName : string.Empty,
-                TourName = x.Tour != null ? x.Tour.TourName : string.Empty,
+                TourName = x.Tour != null ? x.Tour.Tour.AName : string.Empty,
                 TourTypeName = x.TourType != null ? x.TourType.AName : string.Empty,
                 TourPrice = x.TourType != null ? int.Parse(x.TourType.Value) == 3 ?
                 x.Tour.TourFullPrice : x.Tour.TourHalfPrice : 0,

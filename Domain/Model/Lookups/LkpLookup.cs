@@ -20,6 +20,8 @@ namespace Domain.Model.Lookups
         public int? DefaultValue { get; set; }
         public LkpLookupType LkpLookupType { get; set; }
 
+
+        [IgnoreDataMember] public ICollection<LkpTour> LkpTour { get; set; }
         [IgnoreDataMember] public ICollection<LkpSchool> LkpSchool { get; set; }
         [IgnoreDataMember] public ICollection<LkpClass> LkpClasses { get; set; }
 

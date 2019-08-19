@@ -43,7 +43,8 @@ namespace Persistence.UsersRepo
                 p.Email,
                 SchoolId=p.UsersSchool.Select(x=> x.SchoolId).FirstOrDefault(),
                 SchoolName = p.UsersSchool.Select(x => x.Schools.Aname).FirstOrDefault(),
-                YearId= yearId,
+                SchoolLName = p.UsersSchool.Select(x => x.Schools.Lname).FirstOrDefault(),
+                YearId = yearId,
                 YearName = yearName
             }).FirstOrDefaultAsync();
 

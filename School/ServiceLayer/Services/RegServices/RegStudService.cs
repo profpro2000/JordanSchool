@@ -62,5 +62,12 @@ namespace School.ServiceLayer.Services.RegServices
             _interface.Delete(id);
             _interface.SaveChanges();
         }
+
+        //-----Stud Reports
+        public object GetStudCardDataVw(int yearId, int studId)
+        {
+            var vw =  _interface.GetStudCardData(yearId,studId);
+            return vw;
+        }
     }
 }
