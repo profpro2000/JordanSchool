@@ -1,4 +1,5 @@
 ﻿using Domain.Model.Adm;
+using Domain.Model.Lookups;
 using Domain.Model.Reg;
 using System;
 using System.Collections.Generic;
@@ -10,13 +11,16 @@ namespace Domain.Model.AddLookups
   public  class LkpTour:AuditModel
     {
         public int Id { get; set; }
-        public string TourName { get; set; }
+       // public string TourName { get; set; }
         public int TourFullPrice { get; set; }
         public  int TourHalfPrice { get; set; }
         public  int SchoolId { get; set; }
         public LkpSchool LkpSchool { get; set; }
+        public int? TourNameId { get; set; }
+       [IgnoreDataMember] public LkpLookup Tour { get; set; }
 
         [IgnoreDataMember] public ICollection<AdmStud> TourAdm { get; set; }
         [IgnoreDataMember] public ICollection<YearlyStudReg> YearlyStudRegs { get; set; }
+        
     }
 }

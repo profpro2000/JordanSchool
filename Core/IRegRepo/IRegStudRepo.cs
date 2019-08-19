@@ -7,6 +7,7 @@ namespace Core.IRegRepo
     public interface IRegStudRepo:IRepo<RegStud>
     {
          Task<List<RegStud>> StudList();
+        object GetStudCardData(int yearId, int id);
     }
 }
 

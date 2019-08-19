@@ -29,6 +29,9 @@ namespace Model.AddLookups
         public string Fax { get; set; }
         public string WebPage { get; set; }
         public string FaceBook { get; set; }
+        public string ArDescription { get; set; }
+        public string EngDescription { get; set; }
+        public string PoBox { get; set; }
         [IgnoreDataMember] public ICollection<LkpSectionVw> LkpSections { get; set; }
       
 

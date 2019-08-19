@@ -39,12 +39,11 @@ namespace School.Controllers.AddLookups
 
         // GET: api/LkpTour/5
         [HttpGet("{id}")]
-        public async  Task<IActionResult> Get(int id)
+        public LkpTourVw Get(int id)
         {
-            var result = await _lkpTourService.GetById(id);
-            if (!result.Any())
-            { return NotFound("No Data Found");}
-            return Ok(result);
+            var result =  _lkpTourService.GetById(id);
+            
+            return result;
         }
         
         // POST: api/LkpTour

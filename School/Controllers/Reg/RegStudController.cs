@@ -92,5 +92,21 @@ namespace School.Controllers.Reg
             _service.Delete(id);
             return Accepted();
         }
+
+        //-------Stud Reports
+
+
+        // GET: api/StudParent/5
+        [HttpGet("StudCard/{yearId}/{studId}")]
+        public IActionResult GetStudCardDataVw(int yearId,int studId)
+        {
+            var result =  _service.GetStudCardDataVw(yearId, studId);
+            if (result == null)
+            {
+                return NotFound("No Data Found");
+            }
+
+            return Ok(result);
+        }
     }
 }

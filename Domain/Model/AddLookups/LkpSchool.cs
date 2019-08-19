@@ -24,6 +24,10 @@ namespace Domain.Model.AddLookups
         public string Fax { get; set; }
         public string WebPage { get; set; }
         public string FaceBook { get; set; }
+        //
+        public string  ArDescription { get; set; }
+        public string EngDescription { get; set; }
+        public string PoBox { get; set; }
         public ICollection<LkpSection> LkpSections { get; set; }
 
         [IgnoreDataMember] public ICollection<LkpTour> LkpTours { get; set; }

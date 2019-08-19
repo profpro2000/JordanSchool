@@ -66,7 +66,8 @@ namespace Persistence.AdmRepo
 
         public async Task<IEnumerable<object>> GetRegChildrens(int id)
         {
-            var data = _db.AdmStuds.Where(p => p.ParentId == id).Select(x => new
+            var CurrentYear = _db.LkpYears.Where(p => p.Active == 1).Select(x => x.Id).FirstOrDefault();
+            var data = _db.AdmStuds.Where(p => p.ParentId == id && p.YearId==CurrentYear).Select(x => new
             {
                 x.Id,
                 x.FirstName,
@@ -79,7 +80,7 @@ namespace Persistence.AdmRepo
                 ClassYear = x.Class != null ? x.Class.YearsLookup != null ? x.Class.YearsLookup.Id : 0 : 0,
                 ClassActive = x.Class != null ? x.Class.YearsLookup != null ? x.Class.YearsLookup.Active : 0 : 0,
                 ClassSeqName = x.ClassSeq != null ? x.ClassSeq.AName : string.Empty,
-                TourName = x.Tour != null ? x.Tour.TourName : string.Empty,
+                TourName = x.Tour != null ? x.Tour.Tour.AName : string.Empty,
                 TourTypeName = x.TourType != null ? x.TourType.AName : string.Empty,
                 TourPrice = x.TourType != null ? int.Parse(x.TourType.Value) == 3 ?
                 x.Tour.TourFullPrice : x.Tour.TourHalfPrice : 0,
@@ -115,7 +116,8 @@ namespace Persistence.AdmRepo
         }
         public async Task<List<AdmStud>> GetStudByParent(int id)
         {
-            return await _db.AdmStuds.Where(x => x.ParentId == id).Include(r => r.Parent).ToListAsync();
+           
+            return await _db.AdmStuds.Where(x => x.ParentId == id ).Include(r => r.Parent).ToListAsync();
         }
 
         public void UpdateStudSeq(int id)

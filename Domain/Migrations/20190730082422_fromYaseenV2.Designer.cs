@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Domain.Migrations
 {
     [DbContext(typeof(SchoolDbContext))]
-    [Migration("20190729001551_yearonpayment")]
-    partial class yearonpayment
+    [Migration("20190730082422_fromYaseenV2")]
+    partial class fromYaseenV2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -460,6 +460,8 @@ namespace Domain.Migrations
 
                     b.Property<string>("Note");
 
+                    b.Property<string>("Note2");
+
                     b.Property<int>("RegParentId");
 
                     b.Property<DateTime?>("UpdateDate");
@@ -483,6 +485,8 @@ namespace Domain.Migrations
                     b.HasIndex("VoucherStatusId");
 
                     b.HasIndex("VoucherTypeId");
+
+                    b.HasIndex("YearId");
 
                     b.ToTable("Payments");
                 });
@@ -894,7 +898,7 @@ namespace Domain.Migrations
 
                     b.Property<int?>("ClassSeqId");
 
-                    b.Property<double>("DescountValue");
+                    b.Property<decimal>("DescountValue");
 
                     b.Property<DateTime?>("EntryDate");
 
@@ -1197,6 +1201,11 @@ namespace Domain.Migrations
                     b.HasOne("Domain.Model.Lookups.LkpLookup", "VoucherType")
                         .WithMany("VoucherTypes")
                         .HasForeignKey("VoucherTypeId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("Domain.Model.AddLookups.LkpYear", "Year")
+                        .WithMany("Payments")
+                        .HasForeignKey("YearId")
                         .OnDelete(DeleteBehavior.Restrict);
                 });
 

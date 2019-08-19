@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Domain.Model.Lookups;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MiddlewareAndServices.Filters;
 using MiddlewareAndServices.Helper;
@@ -11,6 +13,7 @@ using School.ServiceLayer.Services.LookupsServices;
 
 namespace School.Controllers.Lookups
 {
+  //  [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class LkpLookupController : ControllerBase
@@ -22,8 +25,19 @@ namespace School.Controllers.Lookups
             _lookupService = lkpLookupService;
         }
 
+        [HttpGet]
         public Task<List<LkpLookupVw>> GetAll()
         {
+            var test = Request.Cookies["new"];
+
+            //var option = new CookieOptions();
+
+            //option.Expires = DateTime.Now.AddMinutes(10);
+
+            //Response.Cookies.Append("new", "Hello From New", option);
+
+            //var test = Request.Cookies["new"];
+
             var result = _lookupService.GetAll();
            
             return result;
@@ -32,6 +46,9 @@ namespace School.Controllers.Lookups
         [HttpGet("{id}")]
         public IActionResult GetById(int id)
         {
+
+            var test2 = Request.Cookies["new"];
+
             try
             {
                 var result = _lookupService.GetById(id);

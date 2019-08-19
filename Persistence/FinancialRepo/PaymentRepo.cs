@@ -35,7 +35,12 @@ namespace Persistence.FinancialRepo
         public async Task<IEnumerable<object>> GetByParenetIdYearId(int parentId, int yearId)
         {
 
-
+            //var _tourPrice = _db.AdmStuds.Where(x => x.ParentId == id).Sum(x => x.TourPrice);
+            //var _classPrice = _db.AdmStuds.Where(x => x.ParentId == id).Sum(x => x.ClassPrice);
+            //var _descount = _db.AdmStuds.Where(x => x.ParentId == id).Sum(x => x.DescountValue);
+            //var _totalPrice = _tourPrice + _classPrice;
+            //var _netTotal = _tourPrice + _classPrice - _descount;
+            
             var payment = _db.Payments.Where(x => (x.RegParentId == parentId || parentId == 0) && (x.YearId == yearId || yearId == 0)).Select(p => new
             {
                 p.Id,
