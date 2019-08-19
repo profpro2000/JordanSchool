@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Model.Financial
 {
-  public  class StudFeeDtlVw
+    public class StudFeeDtlVw
     {
         public int StudentId { get; set; }
         public string StudentName { get; set; }
@@ -14,5 +14,7 @@ namespace Model.Financial
         public int? Total { get; set; }
         public int? FinItemId { get; set; }
         public string FinItemName { get; set; }
+
+        public int? PaymentId{set;get;}
     }
 }

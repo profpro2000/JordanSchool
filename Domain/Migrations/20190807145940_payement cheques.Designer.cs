@@ -4,14 +4,16 @@ using Domain;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Domain.Migrations
 {
     [DbContext(typeof(SchoolDbContext))]
-    partial class SchoolDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190807145940_payement cheques")]
+    partial class payementcheques
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -529,7 +531,7 @@ namespace Domain.Migrations
 
                     b.HasIndex("PaymentId");
 
-                    b.ToTable("Payment_cheques");
+                    b.ToTable("PaymentCheques");
                 });
 
             modelBuilder.Entity("Domain.Model.Financial.SchoolFee", b =>
@@ -1258,13 +1260,12 @@ namespace Domain.Migrations
                 {
                     b.HasOne("Domain.Model.Lookups.LkpLookup", "Bank")
                         .WithMany("Banks")
-                        .HasForeignKey("BankId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .HasForeignKey("BankId");
 
                     b.HasOne("Domain.Model.Financial.Payment", "Payment")
                         .WithMany("Paymentcheques")
                         .HasForeignKey("PaymentId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Domain.Model.Financial.SchoolFee", b =>

@@ -77,6 +77,8 @@
     <Compile Remove="Migrations\20190729100129_movetoserver2907.Designer.cs" />
     <Compile Remove="Migrations\20190729100448_movetoserver2907.cs" />
     <Compile Remove="Migrations\20190729100448_movetoserver2907.Designer.cs" />
+    <Compile Remove="Migrations\20190807144505_payement cheques.cs" />
+    <Compile Remove="Migrations\20190807144505_payement cheques.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

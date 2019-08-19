@@ -74,6 +74,25 @@ namespace School.Controllers.Financial
             }
         }
 
+
+        [HttpGet("GetParentSummaryFeesByYear/{parentId}/{yearId}")]
+        public IActionResult GetParentSummaryFeesByYear(int parentId, int yearId)
+        {
+            try
+            {
+                var result = _service.GetParentSummaryFeesByYear(parentId, yearId);
+                if (result == null)
+                    return NotFound("No Data Found");
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+
+
         [HttpPost]
         public void add(Payment obj)
         {

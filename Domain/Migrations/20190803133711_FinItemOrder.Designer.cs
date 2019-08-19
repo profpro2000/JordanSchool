@@ -4,14 +4,16 @@ using Domain;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Domain.Migrations
 {
     [DbContext(typeof(SchoolDbContext))]
-    partial class SchoolDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190803133711_FinItemOrder")]
+    partial class FinItemOrder
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -460,19 +462,11 @@ namespace Domain.Migrations
 
                     b.Property<string>("Note");
 
-                    b.Property<int?>("PaymentMethodId");
-
                     b.Property<int>("RegParentId");
-
-                    b.Property<DateTime>("TransferDate");
-
-                    b.Property<string>("TransferNo");
 
                     b.Property<DateTime?>("UpdateDate");
 
                     b.Property<int?>("UpdateUser");
-
-                    b.Property<string>("VisaCardNo");
 
                     b.Property<DateTime>("VoucherDate");
 
@@ -486,8 +480,6 @@ namespace Domain.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("PaymentMethodId");
-
                     b.HasIndex("RegParentId");
 
                     b.HasIndex("VoucherStatusId");
@@ -497,39 +489,6 @@ namespace Domain.Migrations
                     b.HasIndex("YearId");
 
                     b.ToTable("Payments");
-                });
-
-            modelBuilder.Entity("Domain.Model.Financial.Paymentcheque", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int?>("BankId");
-
-                    b.Property<DateTime?>("InsertDate");
-
-                    b.Property<int?>("InsertUser");
-
-                    b.Property<int>("PaymentId");
-
-                    b.Property<DateTime?>("UpdateDate");
-
-                    b.Property<int?>("UpdateUser");
-
-                    b.Property<DateTime>("chequeDate");
-
-                    b.Property<string>("chequeNo");
-
-                    b.Property<int>("chequeValue");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("BankId");
-
-                    b.HasIndex("PaymentId");
-
-                    b.ToTable("Payment_cheques");
                 });
 
             modelBuilder.Entity("Domain.Model.Financial.SchoolFee", b =>
@@ -1229,10 +1188,6 @@ namespace Domain.Migrations
 
             modelBuilder.Entity("Domain.Model.Financial.Payment", b =>
                 {
-                    b.HasOne("Domain.Model.Lookups.LkpLookup", "PaymentMethod")
-                        .WithMany("PaymentMethods")
-                        .HasForeignKey("PaymentMethodId");
-
                     b.HasOne("Domain.Model.Reg.RegParent", "RegParent")
                         .WithMany("Payments")
                         .HasForeignKey("RegParentId")
@@ -1251,19 +1206,6 @@ namespace Domain.Migrations
                     b.HasOne("Domain.Model.AddLookups.LkpYear", "Year")
                         .WithMany("Payments")
                         .HasForeignKey("YearId")
-                        .OnDelete(DeleteBehavior.Restrict);
-                });
-
-            modelBuilder.Entity("Domain.Model.Financial.Paymentcheque", b =>
-                {
-                    b.HasOne("Domain.Model.Lookups.LkpLookup", "Bank")
-                        .WithMany("Banks")
-                        .HasForeignKey("BankId")
-                        .OnDelete(DeleteBehavior.Restrict);
-
-                    b.HasOne("Domain.Model.Financial.Payment", "Payment")
-                        .WithMany("Paymentcheques")
-                        .HasForeignKey("PaymentId")
                         .OnDelete(DeleteBehavior.Restrict);
                 });
 

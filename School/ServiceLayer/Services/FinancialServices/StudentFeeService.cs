@@ -43,6 +43,9 @@ namespace School.ServiceLayer.Services.FinancialServices
             return vw;
         }
 
+
+       
+
         public Task<IEnumerable<object>> GetStudFeesDtl(int YearId,int StudId)
         {
             var vw = _interface.GetStudFeesDtl(YearId,StudId);
