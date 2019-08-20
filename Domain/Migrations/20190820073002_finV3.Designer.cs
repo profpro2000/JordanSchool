@@ -4,14 +4,16 @@ using Domain;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Domain.Migrations
 {
     [DbContext(typeof(SchoolDbContext))]
-    partial class SchoolDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190820073002_finV3")]
+    partial class finV3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -425,8 +427,6 @@ namespace Domain.Migrations
 
                     b.Property<string>("ArDesc");
 
-                    b.Property<int?>("FinItemOrder");
-
                     b.Property<DateTime?>("InsertDate");
 
                     b.Property<int?>("InsertUser");
@@ -472,7 +472,7 @@ namespace Domain.Migrations
 
                     b.Property<int>("RegParentId");
 
-                    b.Property<DateTime?>("TransferDate");
+                    b.Property<DateTime>("TransferDate");
 
                     b.Property<string>("TransferNo");
 

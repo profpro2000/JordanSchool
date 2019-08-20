@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Domain.Migrations
 {
     [DbContext(typeof(SchoolDbContext))]
-    [Migration("20190819142152_1908")]
-    partial class _1908
+    [Migration("20190820081128_yaseenV1")]
+    partial class yaseenV1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -127,7 +127,11 @@ namespace Domain.Migrations
                         .IsRequired()
                         .HasMaxLength(100);
 
+                    b.Property<string>("ArDescription");
+
                     b.Property<int>("CityId");
+
+                    b.Property<string>("EngDescription");
 
                     b.Property<string>("FaceBook");
 
@@ -140,6 +144,8 @@ namespace Domain.Migrations
                     b.Property<string>("Lname");
 
                     b.Property<string>("Mobile");
+
+                    b.Property<string>("PoBox");
 
                     b.Property<string>("Tel");
 
@@ -209,9 +215,7 @@ namespace Domain.Migrations
                         .ValueGeneratedOnAdd()
                         .HasDefaultValue(0);
 
-                    b.Property<string>("TourName")
-                        .IsRequired()
-                        .HasMaxLength(200);
+                    b.Property<int?>("TourNameId");
 
                     b.Property<DateTime?>("UpdateDate");
 
@@ -220,6 +224,8 @@ namespace Domain.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("SchoolId");
+
+                    b.HasIndex("TourNameId");
 
                     b.ToTable("LkpTour");
                 });
@@ -421,7 +427,7 @@ namespace Domain.Migrations
 
                     b.Property<string>("ArDesc");
 
-                    b.Property<int>("FinItemOrder");
+                    b.Property<int?>("FinItemOrder");
 
                     b.Property<DateTime?>("InsertDate");
 
@@ -461,6 +467,8 @@ namespace Domain.Migrations
                     b.Property<int?>("InsertUser");
 
                     b.Property<string>("Note");
+
+                    b.Property<string>("Note2");
 
                     b.Property<int?>("PaymentMethodId");
 
@@ -1104,6 +1112,11 @@ namespace Domain.Migrations
                     b.HasOne("Domain.Model.AddLookups.LkpSchool", "LkpSchool")
                         .WithMany("LkpTours")
                         .HasForeignKey("SchoolId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("Domain.Model.Lookups.LkpLookup", "Tour")
+                        .WithMany("LkpTour")
+                        .HasForeignKey("TourNameId")
                         .OnDelete(DeleteBehavior.Restrict);
                 });
 

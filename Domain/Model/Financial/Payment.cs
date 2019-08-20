@@ -36,7 +36,7 @@ namespace Domain.Model.Financial
 
         public string TransferNo { set; get; }
 
-        public DateTime TransferDate { set; get; }
+        public DateTime? TransferDate { set; get; }
 
         public string VisaCardNo { set; get; }
 
