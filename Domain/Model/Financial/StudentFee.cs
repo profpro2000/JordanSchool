@@ -21,7 +21,7 @@ namespace Domain.Model.Financial
         public int? Cr { set; get; }
         public int? PaymentId { set; get; }
         public Payment Payment { set; get; }
-        public int? FinItemOrder { get; set; }
+       
 
     }
 }

@@ -19,7 +19,7 @@ namespace Model.Financial
         public LkpLookup vpTypeLookup { get; set; }
         public string vpTypeDesc { get { return vpTypeLookup != null ? vpTypeLookup.AName : ""; } set { } }
 
-
+        public int? FinItemOrder { get; set; }
 
     }
 }

@@ -16,6 +16,8 @@ namespace Domain.Model.Financial
 
         public int vpTypeId { set; get; }//  percentage or value
         public LkpLookup vpTypeLookup { set; get; }
+        public int? FinItemOrder { get; set; }
+        
 
         [IgnoreDataMember] public ICollection<SchoolFee> SchoolFees { get; set; }
         [IgnoreDataMember] public ICollection<ClassFee> ClassFees { get; set; }
