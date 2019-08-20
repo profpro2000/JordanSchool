@@ -15,7 +15,7 @@ namespace Model.Financial
         public int FinItemId { set; get; }
        // public FinItem FinItem { set; get; }
         public int Value { set; get; }
-        public int? FinItemOrder { get; set; }
+        
 
 
     }

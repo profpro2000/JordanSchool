@@ -5,6 +5,97 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20190603090250_LkpCalendar4.cs" />
+    <Compile Remove="Migrations\20190603090250_LkpCalendar4.Designer.cs" />
+    <Compile Remove="Migrations\20190709085845_09072016-2.cs" />
+    <Compile Remove="Migrations\20190709085845_09072016-2.Designer.cs" />
+    <Compile Remove="Migrations\20190709090030_09072016-3.cs" />
+    <Compile Remove="Migrations\20190709090030_09072016-3.Designer.cs" />
+    <Compile Remove="Migrations\20190709101835_09072016-4.cs" />
+    <Compile Remove="Migrations\20190709101835_09072016-4.Designer.cs" />
+    <Compile Remove="Migrations\20190709123200_09072016-5.cs" />
+    <Compile Remove="Migrations\20190709123200_09072016-5.Designer.cs" />
+    <Compile Remove="Migrations\20190709123252_09072016-5.cs" />
+    <Compile Remove="Migrations\20190709123252_09072016-5.Designer.cs" />
+    <Compile Remove="Migrations\20190709125002_d.cs" />
+    <Compile Remove="Migrations\20190709125002_d.Designer.cs" />
+    <Compile Remove="Migrations\20190709125250_09072016-v1.cs" />
+    <Compile Remove="Migrations\20190709125250_09072016-v1.Designer.cs" />
+    <Compile Remove="Migrations\20190709125950_now-v1.cs" />
+    <Compile Remove="Migrations\20190709125950_now-v1.Designer.cs" />
+    <Compile Remove="Migrations\20190709130315_now-v2.cs" />
+    <Compile Remove="Migrations\20190709130315_now-v2.Designer.cs" />
+    <Compile Remove="Migrations\20190709130709_now-v3.cs" />
+    <Compile Remove="Migrations\20190709130709_now-v3.Designer.cs" />
+    <Compile Remove="Migrations\20190709132900_fin-v1.cs" />
+    <Compile Remove="Migrations\20190709132900_fin-v1.Designer.cs" />
+    <Compile Remove="Migrations\20190714150011_1407-1.cs" />
+    <Compile Remove="Migrations\20190714150011_1407-1.Designer.cs" />
+    <Compile Remove="Migrations\20190714151421_1407-1.cs" />
+    <Compile Remove="Migrations\20190714151421_1407-1.Designer.cs" />
+    <Compile Remove="Migrations\20190715112756_1507-4.cs" />
+    <Compile Remove="Migrations\20190715112756_1507-4.Designer.cs" />
+    <Compile Remove="Migrations\20190715114422_1507-6.cs" />
+    <Compile Remove="Migrations\20190715114422_1507-6.Designer.cs" />
+    <Compile Remove="Migrations\20190715114556_1507-7.cs" />
+    <Compile Remove="Migrations\20190715114556_1507-7.Designer.cs" />
+    <Compile Remove="Migrations\20190715115108_1507-7.cs" />
+    <Compile Remove="Migrations\20190715115108_1507-7.Designer.cs" />
+    <Compile Remove="Migrations\20190715115227_1507-7.cs" />
+    <Compile Remove="Migrations\20190715115227_1507-7.Designer.cs" />
+    <Compile Remove="Migrations\20190717122723_TableFromYaseenV1.cs" />
+    <Compile Remove="Migrations\20190717122723_TableFromYaseenV1.Designer.cs" />
+    <Compile Remove="Migrations\20190720172235_20072019-v1.cs" />
+    <Compile Remove="Migrations\20190720172235_20072019-v1.Designer.cs" />
+    <Compile Remove="Migrations\20190723190015_new.cs" />
+    <Compile Remove="Migrations\20190723190015_new.Designer.cs" />
+    <Compile Remove="Migrations\20190723193346_test.cs" />
+    <Compile Remove="Migrations\20190723193346_test.Designer.cs" />
+    <Compile Remove="Migrations\20190723194903_test2.cs" />
+    <Compile Remove="Migrations\20190723194903_test2.Designer.cs" />
+    <Compile Remove="Migrations\20190727224607_newsqlinstallation.cs" />
+    <Compile Remove="Migrations\20190727224607_newsqlinstallation.Designer.cs" />
+    <Compile Remove="Migrations\20190728114405_evening 2807.cs" />
+    <Compile Remove="Migrations\20190728114405_evening 2807.Designer.cs" />
+    <Compile Remove="Migrations\20190728120914_evening 2807.cs" />
+    <Compile Remove="Migrations\20190728120914_evening 2807.Designer.cs" />
+    <Compile Remove="Migrations\20190729000108_yearonpayment.cs" />
+    <Compile Remove="Migrations\20190729000108_yearonpayment.Designer.cs" />
+    <Compile Remove="Migrations\20190729000417_yearonpayment.cs" />
+    <Compile Remove="Migrations\20190729000417_yearonpayment.Designer.cs" />
+    <Compile Remove="Migrations\20190729000718_yearonpayment.cs" />
+    <Compile Remove="Migrations\20190729000718_yearonpayment.Designer.cs" />
+    <Compile Remove="Migrations\20190729001405_yearonpayment.cs" />
+    <Compile Remove="Migrations\20190729001405_yearonpayment.Designer.cs" />
+    <Compile Remove="Migrations\20190729001551_yearonpayment.cs" />
+    <Compile Remove="Migrations\20190729001551_yearonpayment.Designer.cs" />
+    <Compile Remove="Migrations\20190729001826_yearonpayment1.cs" />
+    <Compile Remove="Migrations\20190729001826_yearonpayment1.Designer.cs" />
+    <Compile Remove="Migrations\20190729002619_yearonpayment1.cs" />
+    <Compile Remove="Migrations\20190729002619_yearonpayment1.Designer.cs" />
+    <Compile Remove="Migrations\20190729095315_movetoserver2907.cs" />
+    <Compile Remove="Migrations\20190729095315_movetoserver2907.Designer.cs" />
+    <Compile Remove="Migrations\20190729095856_movetoserver2907.cs" />
+    <Compile Remove="Migrations\20190729095856_movetoserver2907.Designer.cs" />
+    <Compile Remove="Migrations\20190729100129_movetoserver2907.cs" />
+    <Compile Remove="Migrations\20190729100129_movetoserver2907.Designer.cs" />
+    <Compile Remove="Migrations\20190729100448_movetoserver2907.cs" />
+    <Compile Remove="Migrations\20190729100448_movetoserver2907.Designer.cs" />
+    <Compile Remove="Migrations\20190807144505_payement cheques.cs" />
+    <Compile Remove="Migrations\20190807144505_payement cheques.Designer.cs" />
+    <Compile Remove="Migrations\20190819142152_1908.cs" />
+    <Compile Remove="Migrations\20190819142152_1908.Designer.cs" />
+    <Compile Remove="Migrations\20190820072044_finV3.cs" />
+    <Compile Remove="Migrations\20190820072044_finV3.Designer.cs" />
+    <Compile Remove="Migrations\20190820072303_finV3.cs" />
+    <Compile Remove="Migrations\20190820072303_finV3.Designer.cs" />
+    <Compile Remove="Migrations\20190820072519_finV3.cs" />
+    <Compile Remove="Migrations\20190820072519_finV3.Designer.cs" />
+    <Compile Remove="Migrations\20190820072821_finV3.cs" />
+    <Compile Remove="Migrations\20190820072821_finV3.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore" Version="2.2.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.2.4" />
   </ItemGroup>
