@@ -36,12 +36,12 @@ namespace Domain.Model.Financial
 
         public string TransferNo { set; get; }
 
-        public DateTime TransferDate { set; get; }
+        public DateTime? TransferDate { set; get; }
 
         public string VisaCardNo { set; get; }
 
         public string Note { set; get; }
-        public string Note2 { get; set; }
+      //  public string Note2 { get; set; }
 
         [IgnoreDataMember] public ICollection<StudentFee> StudentFees { set; get; }
         [IgnoreDataMember] public ICollection<Paymentcheque> Paymentcheques { set; get; }
