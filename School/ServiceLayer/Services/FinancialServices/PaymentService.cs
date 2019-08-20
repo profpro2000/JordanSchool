@@ -39,6 +39,15 @@ namespace School.ServiceLayer.Services.FinancialServices
         }
 
 
+        public async Task<List<PaymentVw>> GetParentSummaryFeesByYear(int parentId, int yearId)
+        {
+            var vw = await _interface.GetParentSummaryFeesByYear(parentId, yearId);
+            var result = _mapper.Map<List<PaymentVw>>(vw);
+            return result;
+        }
+
+
+
         public PaymentVw GetById(int Id)
         {
             var vw = _interface.Get(Id);

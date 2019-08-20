@@ -7,6 +7,7 @@ using Core.IFinancial;
 using Domain;
 using Domain.Model.Financial;
 using Microsoft.EntityFrameworkCore;
+using Model.Financial;
 
 namespace Persistence.FinancialRepo
 {
@@ -54,6 +55,30 @@ namespace Persistence.FinancialRepo
 
         }
 
+
+
+        public async Task<IEnumerable<object>> GetParentSummaryFeesByYear(int YearId, int ParentId)
+        {
+            IList<PaymentVw> xList = new List<PaymentVw>();
+            try
+            {
+                xList = _db.AdmStuds.Where(p => p.ParentId == ParentId).Select(x => new PaymentVw()
+                {
+                    YearId = YearId,
+                    Debit = _db.StudentFees.Where(p => p.YearId == YearId).Sum(xx => xx.Db),
+                    Credit = _db.StudentFees.Where(p => p.YearId == YearId).Sum(xx => xx.Cr),
+                 //   Total = _db.StudentFees.Where(p => p.YearId == YearId).Sum(xx => xx.Db) -
+                  // _db.StudentFees.Where(p => p.YearId == YearId).Sum(xx => xx.Cr),
+
+                }).ToList();
+            }
+            catch (Exception e) { }
+            return xList;
+        }
+
+
         
+
+
     }
 }

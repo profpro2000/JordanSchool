@@ -52,12 +52,16 @@ namespace Persistence.FinancialRepo
                     FinItemName = _db.FinItems.Where(c => c.Id == x.FinItemId).Select(cc => cc.ArDesc).FirstOrDefault(),
                     YearId = x.YearId,
                     Db = x.Db,
-                    Cr = x.Cr                 
+                    Cr = x.Cr  ,
+                    PaymentId=x.PaymentId
                 }).ToList();
             }
             catch (Exception e) { }
             return xList;
         }
+
+
+
 
 
     }
