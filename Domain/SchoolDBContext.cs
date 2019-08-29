@@ -1,16 +1,17 @@
-﻿ using System;
+﻿using System;
 using System.Collections.Generic;
- using System.Data;
- using System.Text;
+using System.Data;
+using System.Text;
 using Domain.Config;
- using Domain.Model.AddLookups;
+using Domain.Model.AddLookups;
 using Domain.Model.Adm;
 using Domain.Model.Lookups;
 using Domain.Model.Financial;
 using Domain.Model.Lookups;
- using Domain.Model.Reg;
- using Microsoft.EntityFrameworkCore;
+using Domain.Model.Reg;
+using Microsoft.EntityFrameworkCore;
 using Domain.Model.Users;
+using System.Threading.Tasks;
 
 namespace Domain
 {
@@ -66,9 +67,10 @@ namespace Domain
         public DbSet<SchoolFee> SchoolFees { set; get; }
         public DbSet<ClassFee> ClassFees { set; get; }
         public DbSet<StudentFee> StudentFees { set; get; }
-        public DbSet<Payment> Payments { set; get; }
-        public DbSet<Paymentcheque> PaymentCheques { set; get; }
+       // public DbSet<Payment> Payments { set; get; }
+        public DbSet<PaymentCheque> PaymentCheques { set; get; }
 
+        
         //==============Views
         public DbQuery<RegStudYearlyVw> RegStudYearlyVw { get; set; }
         public DbQuery<RegStudCardReportVw> RegStudCardReportVw { get; set; }

@@ -23,28 +23,28 @@ namespace School.ServiceLayer.Services.FinancialServices
 
 
 
-        public async Task<List<PaymentVw>> GetAll()
-        {
-            var vw = await _interface.GetAll();
-            var result = _mapper.Map<List<PaymentVw>>(vw);
-            return result;
-        }
-
-       
-        public async Task<List<PaymentVw>> GetByParenetIdYearId(int parentId,int yearId)
-        {
-            var vw = await _interface.GetByParenetIdYearId(parentId, yearId);
-            var result = _mapper.Map<List<PaymentVw>>(vw);
-            return result;
-        }
+        /*   public async Task<List<PaymentVw>> GetAll()
+           {
+               var vw = await _interface.GetAll();
+               var result = _mapper.Map<List<PaymentVw>>(vw);
+               return result;
+           }
 
 
-        public async Task<List<PaymentVw>> GetParentSummaryFeesByYear(int parentId, int yearId)
-        {
-            var vw = await _interface.GetParentSummaryFeesByYear(parentId, yearId);
-            var result = _mapper.Map<List<PaymentVw>>(vw);
-            return result;
-        }
+           public async Task<List<PaymentVw>> GetByParenetIdYearId(int parentId,int yearId)
+           {
+               var vw = await _interface.GetByParenetIdYearId(parentId, yearId);
+               var result = _mapper.Map<List<PaymentVw>>(vw);
+               return result;
+           }
+
+
+           public async Task<List<PaymentVw>> GetParentSummaryFeesByYear(int parentId, int yearId)
+           {
+               var vw = await _interface.GetParentSummaryFeesByYear(parentId, yearId);
+               var result = _mapper.Map<List<PaymentVw>>(vw);
+               return result;
+           }*/
 
 
 

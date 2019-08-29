@@ -11,6 +11,7 @@ namespace Core.IFinancial
 
         Task<IEnumerable<object>> GetStudFeesListByParent(int YearId, int ParentId);
         Task<IEnumerable<object>> GetStudFeesDtl(int yearId, int StudId);
+        Task<IEnumerable<object>> GetChequesListByFeeId(int StudentFeeId);
      
 
 

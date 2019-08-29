@@ -53,6 +53,15 @@ namespace School.Controllers.Financial
             }
         }
 
+
+        [HttpGet("GetChequesListByFeeId/{feeId}")]
+        public Task<IEnumerable<object>> GetChequesListByFeeId(int FeeId)
+        {
+            var v = _service.GetChequesListByFeeId(FeeId);
+            return v;
+        }
+
+
         [HttpGet("GetStudFeesListByParent/{YearId}/{id}")]
         public Task<IEnumerable<object>> GetStudFeesListByParent(int YearId, int Id)
         {

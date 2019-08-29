@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Persistence.FinancialRepo
 {
-    public class PaymentChequeRepo : DbOperation<Paymentcheque>, IPaymentChequeRepo
+    public class PaymentChequeRepo : DbOperation<PaymentCheque>, IPaymentChequeRepo
     {
         private SchoolDbContext _db;
 
@@ -21,16 +21,16 @@ namespace Persistence.FinancialRepo
         }
 
         
-        public async Task<List<Paymentcheque>> GetAll()
+        public async Task<List<PaymentCheque>> GetAll()
         {
             var v =await  _db.PaymentCheques.ToListAsync();
             return v;
         }
 
-        public async Task<IEnumerable<object>> GetByPaymentId(int PayemtnId)
+      /*  public async Task<List<PaymentCheque>> GetByStudentFeetId(int StudenFeeId)
         {
-            var pamentChequevar = _db.PaymentCheques.Where(x => x.PaymentId == PayemtnId);
+            var pamentChequevar = await _db.PaymentCheques.Where(x => x.StudentFeeId == StudenFeeId).ToListAsync();
             return pamentChequevar;
-        }
+        }*/
     }
 }
