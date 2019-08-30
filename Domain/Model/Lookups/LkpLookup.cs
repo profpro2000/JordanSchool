@@ -41,10 +41,11 @@ namespace Domain.Model.Lookups
         //financial
         [IgnoreDataMember] public ICollection<FinItem> CdTypes { get; set; }
         [IgnoreDataMember] public ICollection<FinItem> VpTypes { get; set; }
-        [IgnoreDataMember] public ICollection<Payment> VoucherStatuses { get; set; }
-        [IgnoreDataMember] public ICollection<Payment> VoucherTypes { get; set; }
-        [IgnoreDataMember] public ICollection<Payment> PaymentMethods { get; set; }
-        [IgnoreDataMember] public ICollection<Paymentcheque> Banks { get; set; }
+        [IgnoreDataMember] public ICollection<StudentFee> VoucherStatuses { get; set; }
+        [IgnoreDataMember] public ICollection<StudentFee> Years { get; set; }
+        [IgnoreDataMember] public ICollection<StudentFee> VoucherTypes { get; set; }
+        [IgnoreDataMember] public ICollection<StudentFee> PaymentMethods { get; set; }
+        [IgnoreDataMember] public ICollection<PaymentCheque> Banks { get; set; }
 
         
 
@@ -66,7 +67,7 @@ namespace Domain.Model.Lookups
 
       //   [IgnoreDataMember] public ICollection<SchoolFee> SchoolFees { get; set; }
         [IgnoreDataMember] public ICollection<ClassFee> ClassFees { get; set; }
-        [IgnoreDataMember] public ICollection<StudentFee> StudentFees { get; set; }
+       // [IgnoreDataMember] public ICollection<StudentFee> StudentFees { get; set; }
 
         //
         [IgnoreDataMember] public ICollection<AdmStud> JoinYearAdm { get; set; }

@@ -10,18 +10,19 @@ namespace Model.Financial
 
         public int Id { set; get; }
 
-        public string chequeNo { set; get; }
+        public string ChequeNo { set; get; }
 
-        public DateTime chequeDate { set; get; }
+        public DateTime ChequeDate { set; get; }
 
-        public int chequeValue { set; get; }
+        public int ChequeValue { set; get; }
 
         public int? BankId { set; get; }
         public LkpLookup Bank { set; get; }
 
         public string BankName { get { return Bank != null ? Bank.AName : ""; } set { } }
+        public int PaymentId { set; get; }
 
- 
+
 
     }
 }

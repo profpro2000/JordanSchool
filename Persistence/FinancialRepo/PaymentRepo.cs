@@ -20,19 +20,19 @@ namespace Persistence.FinancialRepo
             _db = db;
         }
 
-        public async Task<List<Payment>> GetAll()
-        {
-            return await _db.Payments
-                .Include(t => t.RegParent)
-                .Include(t => t.VoucherType)
-                .Include(t => t.VoucherStatus)
-                .Include(t => t.Year)
-                .ToListAsync();
-        }
+        /*   public async Task<List<Payment>> GetAll()
+          {
+             return await _db.Payments
+                  .Include(t => t.RegParent)
+                  .Include(t => t.VoucherType)
+                  .Include(t => t.VoucherStatus)
+                  .Include(t => t.Year)
+                  .ToListAsync();
+    }*/
 
 
-      
-        public async Task<IEnumerable<object>> GetByParenetIdYearId(int parentId, int yearId)
+
+      /*  public async Task<IEnumerable<object>> GetByParenetIdYearId(int parentId, int yearId)
         {
 
             //var _tourPrice = _db.AdmStuds.Where(x => x.ParentId == id).Sum(x => x.TourPrice);
@@ -53,7 +53,7 @@ namespace Persistence.FinancialRepo
             return payment;
 
 
-        }
+        }*/
 
 
 
@@ -65,8 +65,8 @@ namespace Persistence.FinancialRepo
                 xList = _db.AdmStuds.Where(p => p.ParentId == ParentId).Select(x => new PaymentVw()
                 {
                     YearId = YearId,
-                    Debit = _db.StudentFees.Where(p => p.YearId == YearId).Sum(xx => xx.Db),
-                    Credit = _db.StudentFees.Where(p => p.YearId == YearId).Sum(xx => xx.Cr),
+                    Debit = _db.StudentFees.Where(p => p.YearId == YearId).Sum(xx => xx.Debit),
+                    Credit = _db.StudentFees.Where(p => p.YearId == YearId).Sum(xx => xx.Credit),
                  //   Total = _db.StudentFees.Where(p => p.YearId == YearId).Sum(xx => xx.Db) -
                   // _db.StudentFees.Where(p => p.YearId == YearId).Sum(xx => xx.Cr),
 

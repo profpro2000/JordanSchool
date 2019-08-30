@@ -6,9 +6,9 @@ using System.Text;
 
 namespace Domain.Model.Financial
 {
-    class PaymentChequeConfig : IEntityTypeConfiguration<Paymentcheque>
+    class PaymentChequeConfig : IEntityTypeConfiguration<PaymentCheque>
     {
-        public void Configure(EntityTypeBuilder<Paymentcheque> builder)
+        public void Configure(EntityTypeBuilder<PaymentCheque> builder)
         {
             builder.ToTable("Payment_cheques");
             builder.HasKey(key => key.Id);
@@ -18,11 +18,11 @@ namespace Domain.Model.Financial
                .HasForeignKey(p => p.BankId)
                  .OnDelete(DeleteBehavior.Restrict);
 
-
-            builder.HasOne(p => p.Payment)
+          /*  builder.HasOne(p => p.StudentFee)
    .WithMany(p => p.Paymentcheques)
-   .HasForeignKey(p => p.PaymentId)
-     .OnDelete(DeleteBehavior.Restrict);
+   .HasForeignKey(p => p.StudentFeeId)
+     .OnDelete(DeleteBehavior.Restrict);*/
+
 
 
         }

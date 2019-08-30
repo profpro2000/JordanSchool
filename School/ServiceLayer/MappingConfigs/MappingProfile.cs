@@ -49,7 +49,7 @@ namespace School.ServiceLayer.MappingConfigs
             CreateMap<ClassFee, ClassFeeVw>().ReverseMap();
             CreateMap<StudentFee, StudentFeeVw>().ReverseMap();
             CreateMap<Payment, PaymentVw>().ReverseMap();
-            CreateMap<Paymentcheque, PaymentChequeVw>().ReverseMap();
+            CreateMap<PaymentCheque, PaymentChequeVw>().ReverseMap();
 
 
 

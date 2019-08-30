@@ -9,10 +9,10 @@ namespace Core.IFinancial
   public   interface IPaymentRepo:IRepo<Payment>
     {
 
-        Task<List<Payment>> GetAll();
-        Task<IEnumerable<object>> GetByParenetIdYearId(int parentId,int yearId);
+      //  Task<List<Payment>> GetAll();
+      //  Task<IEnumerable<object>> GetByParenetIdYearId(int parentId,int yearId);
 
-        Task<IEnumerable<object>> GetParentSummaryFeesByYear(int YearId, int ParentId);
+      //  Task<IEnumerable<object>> GetParentSummaryFeesByYear(int YearId, int ParentId);
 
     
 

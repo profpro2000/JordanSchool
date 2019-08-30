@@ -44,7 +44,14 @@ namespace School.ServiceLayer.Services.FinancialServices
         }
 
 
-       
+        public Task<IEnumerable<object>> GetChequesListByFeeId( int FeeId)
+        {
+            var v = _interface.GetChequesListByFeeId(FeeId);
+            return v;
+        }
+        
+
+
 
         public Task<IEnumerable<object>> GetStudFeesDtl(int YearId,int StudId)
         {

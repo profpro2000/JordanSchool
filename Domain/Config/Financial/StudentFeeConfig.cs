@@ -23,7 +23,7 @@ namespace Domain.Config.Financial
 
 
             builder.HasOne(p => p.Year)
-   .WithMany(p => p.StudentFees)
+   .WithMany(p => p.Years)
    .HasForeignKey(k => k.YearId)
    .OnDelete(DeleteBehavior.Restrict);
 
@@ -32,13 +32,21 @@ namespace Domain.Config.Financial
    .HasForeignKey(k => k.FinItemId)
    .OnDelete(DeleteBehavior.Restrict);
 
+            builder.HasOne(p => p.VoucherType)
+                            .WithMany(p => p.VoucherTypes)
+                            .HasForeignKey(k => k.VoucherTypeId)
+                            .OnDelete(DeleteBehavior.Restrict);
 
-            builder.HasOne(p => p.Payment)
-   .WithMany(p => p.StudentFees)
-   .HasForeignKey(k => k.PaymentId)
-   .OnDelete(DeleteBehavior.Restrict);
+            builder.HasOne(p => p.VoucherStatus)
+                .WithMany(p => p.VoucherStatuses)
+                .HasForeignKey(k => k.VoucherStatusId)
+                .OnDelete(DeleteBehavior.Restrict);
 
 
+            builder.HasOne(p => p.PaymentMethod)
+    .WithMany(p => p.PaymentMethods)
+    .HasForeignKey(k => k.PaymentMethodId)
+    .OnDelete(DeleteBehavior.Restrict);
 
 
 

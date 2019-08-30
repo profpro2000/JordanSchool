@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace Core.IFinancial
 {
-    public interface IPaymentChequeRepo:IRepo<Paymentcheque>
+    public interface IPaymentChequeRepo:IRepo<PaymentCheque>
     {
 
-        Task<List<Paymentcheque>> GetAll();
-        Task<IEnumerable<Object>> GetByPaymentId(int PayemtnId);
+        Task<List<PaymentCheque>> GetAll();
+     //   Task<List<PaymentCheque>> GetByStudentFeetId(int StudentFeeId);
 
        
     }
