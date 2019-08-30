@@ -35,6 +35,13 @@ namespace Domain
         //=============Users =================
         public DbSet<SysUsers> Users { get; set; }
         public DbSet<UserSchool> UserSchools { get; set; }
+        public DbSet<SysForms> SysForms { get; set; }
+        public DbSet<SysRoleForms> SysRoleForms { get; set; }
+        public DbSet<SysRoles> SysRoles { get; set; }
+        public DbSet<SysUsers> SysUsers { get; set; }
+        public DbSet<SysUsersRoles> SysUsersRoles { get; set; }
+
+
 
         //========= Lookups Tables ====================================
         //public DbSet<LookupType> LookupTypes { get; set; }
@@ -69,9 +76,11 @@ namespace Domain
         public DbSet<Payment> Payments { set; get; }
         public DbSet<Paymentcheque> PaymentCheques { set; get; }
 
-        //==============Views
+        //==============Views SysUserFormsVw
         public DbQuery<RegStudYearlyVw> RegStudYearlyVw { get; set; }
         public DbQuery<RegStudCardReportVw> RegStudCardReportVw { get; set; }
+        public DbQuery<SysUserMenuVw> SysUserMenuVw { get; set; }
+
 
 
 

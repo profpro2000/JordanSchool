@@ -22,6 +22,7 @@ namespace School.ServiceLayer.MappingConfigs
             //=========== Users ===============
             CreateMap<SysUsers, UsersVw>().ReverseMap();
             CreateMap<UserSchool, UserSchoolVw>().ReverseMap();
+            CreateMap<SysUsersRoles, SysUsersRolesVw>().ReverseMap();
             //=============Lookups ===============
             CreateMap<LkpItemCalendar, LkpItemCalendarVw>().ReverseMap();
             CreateMap<LkpCalendar, LkpCalendarVw>().ReverseMap();
@@ -33,6 +34,7 @@ namespace School.ServiceLayer.MappingConfigs
             CreateMap<LkpBus, LkpBusVw>().ReverseMap();
             CreateMap<LkpClass, LkpClassVw>().ReverseMap();
             CreateMap<LkpYear, LkpYearVw>().ReverseMap();
+            CreateMap<LkpClassFees, LkpClassFeesVw>().ReverseMap();
             //============Stud Mapping================
             CreateMap<RegParent, RegParentVw>().ReverseMap();
             CreateMap<RegStud, RegStudVw>().ReverseMap();

@@ -25,13 +25,19 @@ namespace School.Controllers.AddLookups
             return  _lkpSectionService.GetAll();
         }
 
-        // GET: api/LkpSection/5
+        // GET: api/LkpSection/5  
         [HttpGet("{id}")]
         public LkpSectionVw Get(int id)
         {
             return _lkpSectionService.GetById(id);
         }
-        
+
+        [HttpGet("GetSectionBySchool/{schoolId}")]
+        public List<LkpSectionVw> GetSectionBySchool(int schoolId)
+        {
+            return _lkpSectionService.GetSectionBySchool(schoolId);
+        }
+
         // POST: api/LkpSection
         [HttpPost]
         public async Task<IActionResult> Post(LkpSectionVw obj)

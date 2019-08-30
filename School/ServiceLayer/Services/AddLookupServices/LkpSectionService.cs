@@ -38,6 +38,13 @@ namespace School.ServiceLayer.Services.AddLookupServices
             return result;
         }
 
+        public List<LkpSectionVw> GetSectionBySchool(int schoolId)
+        {
+            var vw = _lkpSectionRepo.Find(x => x.SchoolId== schoolId).ToList();
+            var result = _mapper.Map<List<LkpSectionVw>>(vw);
+            return result;
+        }
+
         public void Insert(LkpSectionVw obj)
         {
           

@@ -67,7 +67,7 @@ namespace Persistence.AdmRepo
         public async Task<IEnumerable<object>> GetRegChildrens(int id)
         {
             var CurrentYear = _db.LkpYears.Where(p => p.Active == 1).Select(x => x.Id).FirstOrDefault();
-            var data = _db.AdmStuds.Where(p => p.ParentId == id && p.YearId==CurrentYear).Select(x => new
+            var data = _db.AdmStuds.Where(p => p.ParentId == id && p.YearId==CurrentYear ).Select(x => new
             {
                 x.Id,
                 x.FirstName,
@@ -114,11 +114,68 @@ namespace Persistence.AdmRepo
             return result;
 
         }
+        public async Task<IEnumerable<object>> GetRegChildrensBySchool(int id, int SchoolId)
+        {
+            var CurrentYear = _db.LkpYears.Where(p => p.Active == 1).Select(x => x.Id).FirstOrDefault();
+            var data = _db.AdmStuds.Where(p => p.ParentId == id && p.YearId == CurrentYear && p.SchoolId==SchoolId).Select(x => new
+            {
+                x.Id,
+                x.FirstName,
+                x.BirthDate,
+                x.GenderId,
+                x.YearId,
+                GenderName = x.Gender != null ? x.Gender.AName : string.Empty,
+                ClassName = x.Class != null ? x.Class.Aname : string.Empty,
+                ClassPrice = x.ClassPrice,
+                ClassYear = x.Class != null ? x.Class.YearsLookup != null ? x.Class.YearsLookup.Id : 0 : 0,
+                ClassActive = x.Class != null ? x.Class.YearsLookup != null ? x.Class.YearsLookup.Active : 0 : 0,
+                ClassSeqName = x.ClassSeq != null ? x.ClassSeq.AName : string.Empty,
+                TourName = x.Tour != null ? x.Tour.Tour.AName : string.Empty,
+                TourTypeName = x.TourType != null ? x.TourType.AName : string.Empty,
+                TourPrice = x.TourType != null ? int.Parse(x.TourType.Value) == 3 ?
+                x.Tour.TourFullPrice : x.Tour.TourHalfPrice : 0,
+                x.StudentBrotherSeq,
+                x.DescountValue
+            });//.Where(p=>p.ClassActive == 1) ;
+
+            var result = data.Select(x => new
+            {
+                x.Id,
+                x.FirstName,
+                x.BirthDate,
+                x.GenderId,
+                x.GenderName,
+                x.YearId,
+                x.ClassName,
+                x.ClassPrice,
+                x.ClassYear,
+                x.ClassActive,
+                x.ClassSeqName,
+                x.TourName,
+                x.TourTypeName,
+                x.TourPrice,
+                x.StudentBrotherSeq,
+                x.DescountValue,
+                TotalPrice = x.ClassPrice + x.TourPrice - x.DescountValue
+
+            }).OrderBy(p => p.StudentBrotherSeq);
+
+
+            return result;
+
+        }
         public async Task<List<AdmStud>> GetStudByParent(int id)
         {
            
             return await _db.AdmStuds.Where(x => x.ParentId == id ).Include(r => r.Parent).ToListAsync();
         }
+
+        public async Task<List<AdmStud>> GetStudByParentAndSchool(int id, int schoolId)
+        {
+
+            return await _db.AdmStuds.Where(x => x.ParentId == id && x.SchoolId==schoolId).Include(r => r.Parent).ToListAsync();
+        }
+        
 
         public void UpdateStudSeq(int id)
         {

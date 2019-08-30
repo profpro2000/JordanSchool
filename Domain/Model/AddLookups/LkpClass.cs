@@ -19,14 +19,17 @@ namespace Domain.Model.AddLookups
         public LkpSchool LkpSchool { get; set; }
         public int SectionId { get; set; }
         public LkpSection LkpSection { get; set; }
-        public int YearId { get; set; }
+       
+        public int? YearId { get; set; }
         public LkpYear YearsLookup { get; set; }
         public int? ClassSeq { get; set; }
+        public int? ClassGender { get; set; } //0=All, 1=Male, 2=Female
 
         [IgnoreDataMember] public ICollection<RegStud> ClassRegStuds { get; set; }
         [IgnoreDataMember] public ICollection<AdmStud> ClassAdm { get; set; }
         [IgnoreDataMember] public ICollection<ClassFee> ClassFees { get; set; }
         [IgnoreDataMember] public ICollection<YearlyStudReg> YearlyStudRegs { get; set; }
+        [IgnoreDataMember] public ICollection<LkpClassFees> LkpClassFees { get; set; }
 
 
     }

@@ -45,13 +45,27 @@ namespace School.ServiceLayer.Services.AdmStudServices
             return result;
         }
 
+        public async Task<List<AdmStudVw>> GetByParentAndSchool(int id, int schoolId)
+        {
+            var vw = await _interface.GetStudByParentAndSchool(id, schoolId);
+            var result = _mapper.Map<List<AdmStudVw>>(vw);
+            return result;
+        }
+        
+
         public async Task<List<object>>GetRegChildrens(int id)
         {
             var vw = await _interface.GetRegChildrens(id);
             var result = _mapper.Map<List<object>>(vw);
             return result;
         }
-       
+
+        public async Task<List<object>> GetRegChildrensBySchool(int id, int SchoolId)
+        {
+            var vw = await _interface.GetRegChildrensBySchool(id, SchoolId);
+            var result = _mapper.Map<List<object>>(vw);
+            return result;
+        }
 
         public object GetParentName(int id)
         {

@@ -79,6 +79,8 @@ namespace Domain.Migrations
                         .HasMaxLength(3)
                         .HasDefaultValue(0);
 
+                    b.Property<int?>("ClassGender");
+
                     b.Property<int?>("ClassSeq");
 
                     b.Property<DateTime?>("InsertDate");
@@ -98,7 +100,7 @@ namespace Domain.Migrations
 
                     b.Property<int?>("UpdateUser");
 
-                    b.Property<int>("YearId");
+                    b.Property<int?>("YearId");
 
                     b.HasKey("Id");
 
@@ -111,6 +113,27 @@ namespace Domain.Migrations
                     b.HasIndex("YearId");
 
                     b.ToTable("Lkp_Class");
+                });
+
+            modelBuilder.Entity("Domain.Model.AddLookups.LkpClassFees", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("ClassFees");
+
+                    b.Property<int>("ClassId");
+
+                    b.Property<int>("YearId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ClassId");
+
+                    b.HasIndex("YearId");
+
+                    b.ToTable("Lkp_class_fees");
                 });
 
             modelBuilder.Entity("Domain.Model.AddLookups.LkpSchool", b =>
@@ -134,6 +157,10 @@ namespace Domain.Migrations
                     b.Property<string>("FaceBook");
 
                     b.Property<string>("Fax");
+
+                    b.Property<byte[]>("ImageFile");
+
+                    b.Property<int?>("ImageId");
 
                     b.Property<DateTime?>("InsertDate");
 
@@ -167,6 +194,8 @@ namespace Domain.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Email");
+
+                    b.Property<int?>("Gender");
 
                     b.Property<DateTime?>("InsertDate");
 
@@ -1010,6 +1039,96 @@ namespace Domain.Migrations
                     b.ToTable("Reg_StudYearly");
                 });
 
+            modelBuilder.Entity("Domain.Model.Users.SysForms", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("Active");
+
+                    b.Property<string>("Icon");
+
+                    b.Property<DateTime?>("InsertDate");
+
+                    b.Property<int?>("InsertUser");
+
+                    b.Property<int?>("Order");
+
+                    b.Property<int?>("ParentId");
+
+                    b.Property<string>("Path");
+
+                    b.Property<int?>("PortalId");
+
+                    b.Property<string>("Title");
+
+                    b.Property<DateTime?>("UpdateDate");
+
+                    b.Property<int?>("UpdateUser");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Sys_Forms");
+                });
+
+            modelBuilder.Entity("Domain.Model.Users.SysRoleForms", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("FormId");
+
+                    b.Property<DateTime?>("InsertDate");
+
+                    b.Property<int?>("InsertUser");
+
+                    b.Property<int>("RoleId");
+
+                    b.Property<DateTime?>("UpdateDate");
+
+                    b.Property<int?>("UpdateUser");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("FormId");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("Sys_Role_Forms");
+                });
+
+            modelBuilder.Entity("Domain.Model.Users.SysRoles", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("Active");
+
+                    b.Property<string>("Description");
+
+                    b.Property<DateTime?>("InsertDate");
+
+                    b.Property<int?>("InsertUser");
+
+                    b.Property<int?>("SysUsersId");
+
+                    b.Property<DateTime?>("UpdateDate");
+
+                    b.Property<int?>("UpdateUser");
+
+                    b.Property<string>("name")
+                        .IsRequired();
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SysUsersId");
+
+                    b.ToTable("Sys_Roles");
+                });
+
             modelBuilder.Entity("Domain.Model.Users.SysUsers", b =>
                 {
                     b.Property<int>("Id")
@@ -1038,6 +1157,33 @@ namespace Domain.Migrations
                         .IsUnique();
 
                     b.ToTable("Sys_Users");
+                });
+
+            modelBuilder.Entity("Domain.Model.Users.SysUsersRoles", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime?>("InsertDate");
+
+                    b.Property<int?>("InsertUser");
+
+                    b.Property<int>("RoleId");
+
+                    b.Property<DateTime?>("UpdateDate");
+
+                    b.Property<int?>("UpdateUser");
+
+                    b.Property<int>("UserId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RoleId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Sys_Users_Roles");
                 });
 
             modelBuilder.Entity("Domain.Model.Users.UserSchool", b =>
@@ -1085,6 +1231,19 @@ namespace Domain.Migrations
 
                     b.HasOne("Domain.Model.AddLookups.LkpYear", "YearsLookup")
                         .WithMany("Classes")
+                        .HasForeignKey("YearId")
+                        .OnDelete(DeleteBehavior.Restrict);
+                });
+
+            modelBuilder.Entity("Domain.Model.AddLookups.LkpClassFees", b =>
+                {
+                    b.HasOne("Domain.Model.AddLookups.LkpClass", "Classes")
+                        .WithMany("LkpClassFees")
+                        .HasForeignKey("ClassId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("Domain.Model.AddLookups.LkpYear", "Years")
+                        .WithMany("LkpClassFees")
                         .HasForeignKey("YearId")
                         .OnDelete(DeleteBehavior.Restrict);
                 });
@@ -1490,6 +1649,39 @@ namespace Domain.Migrations
                     b.HasOne("Domain.Model.Lookups.LkpLookup", "Years")
                         .WithMany("YearsYearlyStudReg")
                         .HasForeignKey("YearId")
+                        .OnDelete(DeleteBehavior.Restrict);
+                });
+
+            modelBuilder.Entity("Domain.Model.Users.SysRoleForms", b =>
+                {
+                    b.HasOne("Domain.Model.Users.SysForms", "SysForms")
+                        .WithMany("SysRoleForms")
+                        .HasForeignKey("FormId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("Domain.Model.Users.SysRoles", "SysRoles")
+                        .WithMany("SysRoleForms")
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Restrict);
+                });
+
+            modelBuilder.Entity("Domain.Model.Users.SysRoles", b =>
+                {
+                    b.HasOne("Domain.Model.Users.SysUsers")
+                        .WithMany("SysRoles")
+                        .HasForeignKey("SysUsersId");
+                });
+
+            modelBuilder.Entity("Domain.Model.Users.SysUsersRoles", b =>
+                {
+                    b.HasOne("Domain.Model.Users.SysRoles", "SysRoles")
+                        .WithMany("SysUsersRoles")
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("Domain.Model.Users.SysUsers", "SysUsers")
+                        .WithMany("SysUsersRoles")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Restrict);
                 });
 

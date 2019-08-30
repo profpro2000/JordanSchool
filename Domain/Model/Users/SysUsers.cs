@@ -16,9 +16,10 @@ namespace Domain.Model.Users
         public string Email { get; set; }
         public string Locale { get; set; }
         public string CurrentUrl { get; set; }
-        public bool? IsSuperAdmin { get; set; }
-
+        public bool? IsSuperAdmin { get; set; } 
         [IgnoreDataMember] public ICollection<UserSchool> UsersSchool { get; set; }
-       
+        [IgnoreDataMember] public ICollection<SysRoles> SysRoles { get; set; }
+        [IgnoreDataMember] public ICollection<SysUsersRoles> SysUsersRoles { get; set; }
+
     }
 }

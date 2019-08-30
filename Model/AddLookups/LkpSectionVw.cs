@@ -13,6 +13,7 @@ namespace Model.AddLookups
         public string Email { get; set; }
         public string NationalId { get; set; }
         public int SchoolId { get; set; }
-       
+        public int? Gender { get; set; }
+
     }
 }

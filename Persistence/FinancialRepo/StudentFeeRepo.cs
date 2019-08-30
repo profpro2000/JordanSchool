@@ -42,10 +42,12 @@ namespace Persistence.FinancialRepo
         }
         public async Task<IEnumerable<object>> GetStudFeesDtl(int yearId,int StudId)
         {
+            
             IList<StudFeeDtlVw> xList = new List<StudFeeDtlVw>();
             try
             {
-                xList = _db.StudentFees.Where(p => p.YearId==yearId && p.StudentId == StudId).Select(x => new StudFeeDtlVw()
+                xList = _db.StudentFees.Where(p => p.YearId==yearId && p.StudentId == StudId /*&&
+                p.FinItemId != 9*/).Select(x => new StudFeeDtlVw()
                 {
                     StudentId=x.StudentId,
                     FinItemId = x.FinItemId,

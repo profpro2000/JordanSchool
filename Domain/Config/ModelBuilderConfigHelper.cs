@@ -20,6 +20,10 @@ namespace Domain.Config
             //=========  Sys_Users ======================================
             modelBuilder.ApplyConfiguration(new UsersConfig());
             modelBuilder.ApplyConfiguration(new UserSchoolsConfig());
+            modelBuilder.ApplyConfiguration(new SysFormsConfig());
+            modelBuilder.ApplyConfiguration(new SysRolesConfig());
+            modelBuilder.ApplyConfiguration(new SysUsersRolesConfig());
+            modelBuilder.ApplyConfiguration(new SysRoleFormsConfig());
 
 
             //========== System Table & lookups configuration================
@@ -33,6 +37,7 @@ namespace Domain.Config
             modelBuilder.ApplyConfiguration(new LkpBusConfig());
             modelBuilder.ApplyConfiguration(new LkpClassConfig());
             modelBuilder.ApplyConfiguration(new AdmStudConfig());
+            modelBuilder.ApplyConfiguration(new LkpClassFeesConfig());
 
             modelBuilder.ApplyConfiguration(new LkpYearConfig());
 

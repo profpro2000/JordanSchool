@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-
+using Model.Users;
 
 namespace Persistence.UsersRepo
 {
@@ -54,6 +54,48 @@ namespace Persistence.UsersRepo
 
             return await user;
         }
-    
+
+        public async Task<IEnumerable<object>> GetUserMenu(int UserId)
+        {
+            var xx = "";
+            xx = null;
+            var Vw = _db.SysUserMenuVw.Where(p => p.UserId == UserId).Select(m => new
+            {
+                Id = m.formId,
+                title = m.title,
+                routerLink = m.path,
+                href = xx ,
+                icon=m.icon,
+                target=xx,
+                hasSubMenu=m.parentId>0?false:true,
+                m.parentId,
+                m.OrderId
+            })
+                .ToList().OrderBy(x=>x.OrderId);
+            return Vw;
+        }
+        
+        public object GetSchoolById(int id)
+        {
+            var result = _db.UserSchools.Where(p => p.UserId == id).FirstOrDefault();
+            return result;
+        }
+        
+        public async Task<IEnumerable<object>> GetAll()
+        {
+           // var result = _db.SysUsers.Include(p => p.UsersSchool).ToList();
+            var result = _db.SysUsers.Select(p => new
+            {
+                Id = p.Id,
+                p.Username,
+                p.Password,
+                RoleName = p.SysUsersRoles != null ? p.SysUsersRoles.Where(x => x.UserId == p.Id).Select(xx => xx.SysRoles.name).FirstOrDefault() : "",
+                schoolId = p.UsersSchool != null ? p.UsersSchool.Where(x => x.UserId == p.Id).Select(xx => xx.SchoolId).FirstOrDefault() : 0,
+                schoolName = p.UsersSchool != null ? p.UsersSchool.Where(x => x.UserId == p.Id).Select(xx => xx.Schools.Aname).FirstOrDefault() : "",
+                p.Email
+            }).ToList();
+            return result;
+        }
+
     }
 }

@@ -10,5 +10,8 @@ namespace Core.UsersRepo
 {
 
         Task<object> CheckLogin(string userName, string password);
+        Task<IEnumerable<object>> GetUserMenu(int UserId);
+        object GetSchoolById(int id);
+        Task<IEnumerable<object>> GetAll();
 }
 }

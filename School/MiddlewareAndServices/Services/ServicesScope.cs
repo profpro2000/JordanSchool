@@ -305,6 +305,8 @@ namespace School.MiddlewareAndServices.Services
             services.AddScoped<LkpClassService>();
             services.AddScoped<ILkpYearRepo, LkpYearRepo>();
             services.AddScoped<LkpYearService>();
+            services.AddScoped<ILkpClassFeesRepo, LkpClassFeesRepo>();
+            services.AddScoped<LkpClassFeesService>();
 
             //======= Stud Module =============
             services.AddScoped<IRegParentRepo, RegParentRepo>();
@@ -342,6 +344,10 @@ namespace School.MiddlewareAndServices.Services
             // ==========  Users  ===========
             services.AddScoped<IUserRepo, UserRepo>();
             services.AddScoped<UsersService>();
+            services.AddScoped<IUserSchoolRepo, UserSchoolRepo>();
+            services.AddScoped<UserSchoolService>();
+            services.AddScoped<ISysUserRoleRepo, SysUserRoleRepo>();
+            services.AddScoped<UserRoleService>();
 
             // ===Others
             services.AddSingleton<ApiService>();

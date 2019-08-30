@@ -16,5 +16,8 @@ namespace Core.IAdmStudRepo
         Task<IEnumerable<object>> GetRegChildrens(int id);
         void UpdateStudSeq(int id);
 
+        Task<List<AdmStud>> GetStudByParentAndSchool(int id, int schoolId);
+        Task<IEnumerable<object>> GetRegChildrensBySchool(int id, int SchoolId);
+
     }
 }

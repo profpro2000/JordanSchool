@@ -32,6 +32,9 @@ namespace Model.AddLookups
         public string ArDescription { get; set; }
         public string EngDescription { get; set; }
         public string PoBox { get; set; }
+        public byte[] ImageFile { get; set; }
+        public int? ImageId { get; set; }
+        
         [IgnoreDataMember] public ICollection<LkpSectionVw> LkpSections { get; set; }
       
 

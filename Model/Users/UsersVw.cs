@@ -19,7 +19,7 @@ namespace Model.Users
         public string Locale { get; set; }
         public string CurrentUrl { get; set; }
         public bool? IsSuperAdmin { get; set; }
-        public ICollection<UserSchool> UsersSchool { get; set; }
+        [IgnoreDataMember] public ICollection<UserSchool> UsersSchool { get; set; }
 
     }
 }

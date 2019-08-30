@@ -51,10 +51,30 @@ namespace School.Controllers.AdmStuds
             return Ok(result);
         }
 
+        [HttpGet("ParentAndSchool/{id}/{schoolId}")]
+        public async Task<IActionResult> GetByParentAndSchool(int id, int schoolId)
+        {
+            //  return await _service.GetById(id);
+            var result = await _service.GetByParentAndSchool(id, schoolId);
+            if (result == null)
+            { return NotFound("No Data Found"); }
+            return Ok(result);
+        }
+
         [HttpGet("RegChildrens/{id}")]
         public async Task<IActionResult> RegChildrens(int id)
         {
             var result = await _service.GetRegChildrens(id);
+            if (result == null)
+            { return NotFound("No Data Found"); }
+            return Ok(result);
+        }
+
+
+        [HttpGet("RegChildrensBySchool/{id}/{schoolId}")]
+        public async Task<IActionResult> RegChildrens(int id, int schoolId)
+        {
+            var result = await _service.GetRegChildrensBySchool(id, schoolId);
             if (result == null)
             { return NotFound("No Data Found"); }
             return Ok(result);
