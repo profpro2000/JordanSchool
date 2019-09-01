@@ -2,12 +2,18 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Domain.Model.Lookups;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using MiddlewareAndServices.Filters;
+using MiddlewareAndServices.Helper;
 using Model.Lookups;
 using School.ServiceLayer.Services.LookupsServices;
 
+
 namespace School.Controllers.Lookups
 {
+  //  [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class LkpLookupController : ControllerBase
@@ -19,8 +25,19 @@ namespace School.Controllers.Lookups
             _lookupService = lkpLookupService;
         }
 
+        [HttpGet]
         public Task<List<LkpLookupVw>> GetAll()
         {
+            var test = Request.Cookies["new"];
+
+            //var option = new CookieOptions();
+
+            //option.Expires = DateTime.Now.AddMinutes(10);
+
+            //Response.Cookies.Append("new", "Hello From New", option);
+
+            //var test = Request.Cookies["new"];
+
             var result = _lookupService.GetAll();
            
             return result;
@@ -29,6 +46,9 @@ namespace School.Controllers.Lookups
         [HttpGet("{id}")]
         public IActionResult GetById(int id)
         {
+
+            var test2 = Request.Cookies["new"];
+
             try
             {
                 var result = _lookupService.GetById(id);
@@ -50,22 +70,55 @@ namespace School.Controllers.Lookups
             
             return result;
         }
+
+        [HttpPost("GetListByType")]
+        public async Task<IEnumerable<LkpLookupVw>> GetByListType(LookupTypes id)
+        {
+              var result = await _lookupService.GetByListType(id);
+            return await _lookupService.GetByListType(id);
+        }
+        
+
+        [HttpPost("GetLookups")]
+        public async Task<IEnumerable<LkpLookupVw>> GetLookups([FromBody] FilterLookupsType filter)
+        {
+            var result = await _lookupService.GetByListType2(filter);
+            return result;
+        }
+
         [HttpPost]
         public void Add(LkpLookup obj)
         {
             _lookupService.Add(obj);
         }
 
-        [HttpPost("Update/{id}")]
+        [HttpPut("{id}")]
         public void Update(int id, LkpLookup obj)
         {
             _lookupService.Update(id,obj);
         }
 
         [HttpDelete("{id}")]
-        public void Delete(int id)
+       /* public void Delete(int id)
         {
             _lookupService.Delete(id);
+        }
+        */
+        public async Task<IActionResult> Delete(int id)
+       {
+
+           try
+           {
+               _lookupService.Delete(id);
+            }
+           catch (Exception e)
+           {
+               
+               Console.WriteLine(e);
+               throw;
+           }
+          
+            return NoContent();
         }
     }
 }

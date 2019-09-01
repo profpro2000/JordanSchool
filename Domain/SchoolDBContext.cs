@@ -1,13 +1,17 @@
-﻿ using System;
+﻿using System;
 using System.Collections.Generic;
- using System.Data;
- using System.Text;
+using System.Data;
+using System.Text;
 using Domain.Config;
- using Domain.Model.AddLookups;
+using Domain.Model.AddLookups;
 using Domain.Model.Adm;
 using Domain.Model.Lookups;
- using Domain.Model.Reg;
- using Microsoft.EntityFrameworkCore;
+using Domain.Model.Financial;
+using Domain.Model.Lookups;
+using Domain.Model.Reg;
+using Microsoft.EntityFrameworkCore;
+using Domain.Model.Users;
+using System.Threading.Tasks;
 
 namespace Domain
 {
@@ -28,6 +32,18 @@ namespace Domain
             
         }
 
+
+        //=============Users =================
+        public DbSet<SysUsers> Users { get; set; }
+        public DbSet<UserSchool> UserSchools { get; set; }
+        public DbSet<SysForms> SysForms { get; set; }
+        public DbSet<SysRoleForms> SysRoleForms { get; set; }
+        public DbSet<SysRoles> SysRoles { get; set; }
+        public DbSet<SysUsers> SysUsers { get; set; }
+        public DbSet<SysUsersRoles> SysUsersRoles { get; set; }
+
+
+
         //========= Lookups Tables ====================================
         //public DbSet<LookupType> LookupTypes { get; set; }
 
@@ -35,23 +51,41 @@ namespace Domain
         public  DbSet<LkpCalendar> LkpCalendars { get; set; }
         public  DbSet<LkpLookupType> LkpLookupTypes { get; set; }
         public DbSet<LkpLookup> LkpLookups { get; set; }
-
-        public DbSet<LkpDocument> LkpDocuments { set; get; }
         //==================Additional Lookups =================
         public  DbSet<LkpSchool> LkpSchools { get; set; }
         public  DbSet<LkpSection> LkpSections { get; set; }
         public  DbSet<LkpTour> LkpTours { get; set; }
         public  DbSet<LkpBus> LkpBusses { get; set; }
         public DbSet<LkpClass> LkpClasses { get; set; }
-        
+        public DbSet<LkpYear> LkpYears { get; set; }
+
         //================Stud Module =========================
         public DbSet<RegParent> RegParents { get; set; }
         public DbSet<RegStud> RegStuds { get; set; }
+        public DbSet<YearlyStudReg> YearlyStudRegs { get; set; }
 
-
-        //=========================Adm Module========================
-
+        //=========== Admission Module===================
         public DbSet<AdmStud> AdmStuds { get; set; }
+
+
+
+        //==================financial=============
+        public DbSet<FinItem> FinItems { set; get; }
+        public DbSet<SchoolFee> SchoolFees { set; get; }
+        public DbSet<ClassFee> ClassFees { set; get; }
+        public DbSet<StudentFee> StudentFees { set; get; }
+       // public DbSet<Payment> Payments { set; get; }
+        public DbSet<PaymentCheque> PaymentCheques { set; get; }
+
+        
+        //==============Views
+        public DbQuery<RegStudYearlyVw> RegStudYearlyVw { get; set; }
+        public DbQuery<RegStudCardReportVw> RegStudCardReportVw { get; set; }
+        public DbQuery<SysUserMenuVw> SysUserMenuVw { get; set; }
+
+
+
+
 
     }
 }

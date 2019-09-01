@@ -33,12 +33,20 @@ namespace School.Controllers.AddLookups
 
         // GET: api/LkpClass/5
         [HttpGet("{id}")]
-        public async Task<IActionResult> Get(int id)
+        public IActionResult Get(int id)
         {
-            var result = await _service.GetById(id);
-            if (!result.Any())
+            var result =  _service.GetById(id);
+            if (result==null)
             { return NotFound("No Data Found"); }
             return Ok(result);
+        }
+        [HttpGet("GetClassBySchool/{schoolId}")]
+        public async Task<IEnumerable<object>> GetClassBySchool(int schoolId)
+        {
+            var result = await _service.GetClassBySchool(schoolId);
+            //if (!result.Any())
+           // { return NotFound("No Data Found"); }
+            return result;
         }
 
         // POST: api/LkpClass
@@ -57,15 +65,11 @@ namespace School.Controllers.AddLookups
 
         // PUT: api/LkpClass/5
         [HttpPut("{id}")]
-        public IActionResult Put(int id, LkpClassVw obj)
+        public void Put(int id, LkpClassVw obj)
         {
-            if (!ModelState.IsValid)
-            {
-                Response.StatusCode = 400;
-                return Ok(new Res(false, "State not valid", obj));
-            }
+           
             _service.Update(id, obj);
-            return Ok(new Res(true, "Complite", _service.GetAll()));
+          //  return Ok(new Res(true, "Complite", _service.GetAll()));
         }
 
         // DELETE: api/ApiWithActions/5

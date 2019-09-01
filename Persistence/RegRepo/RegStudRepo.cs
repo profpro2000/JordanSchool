@@ -3,6 +3,11 @@ using Domain;
 using Domain.Model.Reg;
 using Microsoft.EntityFrameworkCore;
 using  Microsoft.EntityFrameworkCore.Metadata.Builders;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using System.Linq;
+using System.Linq.Expressions;
+
 namespace Persistence.RegRepo
 {
     public class RegStudRepo:DbOperation<RegStud>, IRegStudRepo
@@ -13,5 +18,20 @@ namespace Persistence.RegRepo
         {
             _db = db;
         }
+
+        public async Task<List<RegStud>> StudList()
+        {
+            return await _db.RegStuds.Include(r => r.RegParent).ToListAsync();
+        }
+
+        public object GetStudCardData(int yearId,int id)
+        {
+            var Vw = _db.RegStudCardReportVw.Where(p => p.YearId==yearId && p.StudId == id).FirstOrDefault();
+            return Vw;
+
+
+        }
+
+
     }
 }

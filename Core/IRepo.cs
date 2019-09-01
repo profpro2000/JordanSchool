@@ -12,6 +12,7 @@ namespace Core
     {
         TEntity Get(int id);
         TEntity Get(Expression<Func<TEntity, bool>> predicate, bool withDeleted = false);
+        Task<TEntity> GetAsync(int id);
         Task<TEntity> GetAsyncById(int id, params string[] include);
         IEnumerable<TEntity> Find(
           Expression<Func<TEntity, bool>> filter = null,
@@ -66,7 +67,8 @@ namespace Core
         Task DeleteAll(IEnumerable<int> obj);
 
         void SaveChanges();
-       // void Delete(int id);
+        Task DeleteAsync(TEntity entity);
+        // void Delete(int id);
 
     }
 }

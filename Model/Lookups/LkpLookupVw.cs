@@ -10,11 +10,13 @@ namespace Model.Lookups
     {
 
         public int Id { get; set; }
-        public string LookupName { get; set; }
+        public string Aname { get; set; }
+        public  string Lname { get; set; }
         public string Value { get; set; }
         public int ParentId { get; set; }
         public int TypeId { get; set; }
-     
+        public int DefaultValue { get; set; }
+
 
     }
 }

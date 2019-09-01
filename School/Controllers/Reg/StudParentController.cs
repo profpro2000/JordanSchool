@@ -40,12 +40,17 @@ namespace School.Controllers.Reg
         public async Task<IActionResult> Get(int id)
         {
             var result = await _service.GetById(id);
-            if (!result.Any())
+            if (result== null)
             {
               return  NotFound("No Data Found");
             }
 
             return Ok(result);
+        }
+        [HttpGet("Detail/{id}")]
+        public async Task<IEnumerable<object>> GetParentDetail(int id)
+        {
+            return await _service.ParentDetail(id);
         }
 
         // POST: api/StudParent

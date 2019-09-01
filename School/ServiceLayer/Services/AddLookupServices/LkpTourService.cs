@@ -22,17 +22,17 @@ namespace School.ServiceLayer.Services.AddLookupServices
 
         public async Task<List<LkpTourVw>> GetAll()
         {
-            var vw = await _lkpTourRepo.GetAllAsync();
+            var vw = await _lkpTourRepo.GetAll();
             var result = _mapper.Map<List<LkpTourVw>>(vw);
             return result;
         }
 
-        public async  Task<List<LkpTourVw>> GetById(int id)
+        public LkpTourVw GetById(int id)
         {
             //var vw =   _lkpTourRepo.Find(p => p.Id == id).FirstOrDefault();
           //var vw = await _lkpTourRepo.GetAsyncById(id);
-           var vw = await _lkpTourRepo.GetAllWhereAsync(p => p.Id == id);
-            var result = _mapper.Map<List<LkpTourVw>>(vw);
+           var vw =  _lkpTourRepo.Find(p => p.Id == id).FirstOrDefault();
+            var result = _mapper.Map<LkpTourVw>(vw);
             return result;
 
         }

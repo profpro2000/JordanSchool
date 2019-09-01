@@ -1,41 +1,49 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
 using Core.IRegRepo;
 using Domain.Model.Reg;
 using Model.Reg;
+using School.MiddlewareAndServices.Services;
 
 namespace School.ServiceLayer.Services.RegServices
 {
-    public class RegStudService
+    public class RegStudService 
     {
         private IMapper _mapper;
         private IRegStudRepo _interface;
+        private UserService _userService;
 
-        public RegStudService(IMapper mapper, IRegStudRepo @interface)
+        public RegStudService(IMapper mapper, IRegStudRepo @interface, UserService userService)
         {
             _mapper = mapper;
             _interface = @interface;
+            _userService = userService;
+            _userService.Id=101;  //For Testing
         }
 
         public async Task<List<RegStudVw>> GetAll()
         {
-            var vw = await _interface.GetAllAsync();
+            var vw = await _interface.StudList();
             var result = _mapper.Map<List<RegStudVw>>(vw);
             return result;
         }
 
 
-        public async Task<List<RegStudVw>> GetById(int id)
+        public async Task<RegStudVw> GetById(int id)
         {
-            var vw = await _interface.GetAllWhereAsync(p => p.Id == id);
-            var result = _mapper.Map<List<RegStudVw>>(vw);
+            var vw = await _interface.GetAsync(p => p.Id == id);
+            var result = _mapper.Map<RegStudVw>(vw);
             return result;
         }
 
         public void Insert(RegStudVw obj)
         {
             var table = _mapper.Map<RegStud>(obj);
+            table.InsertDate = DateTime.Now;
+            table.InsertUser = _userService.Id;
+
             _interface.Add(table);
             _interface.SaveChanges();
         }
@@ -43,6 +51,9 @@ namespace School.ServiceLayer.Services.RegServices
         public void Update(int id, RegStudVw obj)
         {
             var table = _mapper.Map<RegStud>(obj);
+            table.UpdateDate=DateTime.Now;
+            table.UpdateUser = _userService.Id;
+
             _interface.Update(id, table);
             _interface.SaveChanges();
         }
@@ -50,6 +61,13 @@ namespace School.ServiceLayer.Services.RegServices
         {
             _interface.Delete(id);
             _interface.SaveChanges();
+        }
+
+        //-----Stud Reports
+        public object GetStudCardDataVw(int yearId, int studId)
+        {
+            var vw =  _interface.GetStudCardData(yearId,studId);
+            return vw;
         }
     }
 }

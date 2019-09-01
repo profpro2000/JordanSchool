@@ -13,7 +13,7 @@ namespace Domain.Config.LookupConfig
         {
             builder.ToTable("Lkp_Lookup");
             builder.HasKey(key => key.Id);
-            builder.Property(p => p.AName).IsRequired().HasMaxLength(200);
+           // builder.Property(p => p.AName).IsRequired().HasMaxLength(200);
             builder.HasOne(p => p.LkpLookupType)
                 .WithMany(p => p.LkpLookups)
                 .HasForeignKey(key => key.TypeId);

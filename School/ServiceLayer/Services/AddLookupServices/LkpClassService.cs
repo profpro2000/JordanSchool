@@ -28,15 +28,23 @@ namespace School.ServiceLayer.Services.AddLookupServices
             return result;
         }
 
-        public async Task<List<LkpClassVw>> GetById(int id)
+        public LkpClassVw GetById(int id)
         {
 
-            var vw = await _interface.GetAllWhereAsync(p => p.Id == id);
-            var result = _mapper.Map<List<LkpClassVw>>(vw);
+            var vw = _interface.Get(p => p.Id == id);
+            var result = _mapper.Map<LkpClassVw>(vw);
             return result;
 
         }
 
+        public async Task<IEnumerable<object>> GetClassBySchool(int schoolId)
+        {
+
+            var vw = await _interface.GetClassBySchool(schoolId);
+           // var result = _mapper.Map<List<LkpClassVw>>(vw);
+            return vw;
+
+        }
         public void Insert(LkpClassVw obj)
         {
             var tab = _mapper.Map<LkpClass>(obj);

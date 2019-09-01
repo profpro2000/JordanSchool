@@ -44,6 +44,8 @@ namespace Persistence
 
         public TEntity Get(int id) => DbSet.Find(id);
 
+        public async Task<TEntity> GetAsync(int id) => await DbSet.FindAsync(id);
+
         public TEntity Get(Expression<Func<TEntity, bool>> predicate, bool withDeleted = false) => DbSet.Where(predicate).FirstOrDefault();
 
         public async Task<TEntity> GetAsyncById(int id, params string[] include)
@@ -241,6 +243,12 @@ namespace Persistence
                 DbSet.Remove(obj);
             }
             return Task.CompletedTask;
+        }
+
+        public async Task DeleteAsync(TEntity entity)
+        {
+            _db.Set<TEntity>().Remove(entity);
+            //await _db.SaveChanges();
         }
 
         public void SaveChanges() => _db.SaveChanges();

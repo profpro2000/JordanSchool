@@ -1,6 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using Domain.Model.Adm;
+using Domain.Model.Reg;
+using System.Collections.Generic;
 using System.Runtime.Serialization;
-using Domain.Model.Adm;
 
 namespace Domain.Model.AddLookups
 {
@@ -15,9 +16,8 @@ namespace Domain.Model.AddLookups
         public int SchoolId { get; set; }
         public LkpSchool LkpSchool { get; set; }
 
-
-        [IgnoreDataMember] public ICollection<AdmStud> BusAdmStuds { get; set; }
-
+        [IgnoreDataMember] public ICollection<AdmStud> BusAdm { get; set; }
+        [IgnoreDataMember] public ICollection<YearlyStudReg> YearlyStudRegs { get; set; }
 
     }
 }

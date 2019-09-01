@@ -1,23 +1,16 @@
 ﻿using AutoMapper;
-using Core.IAddLookupsRepo;
-using Core.IAdmRepo;
-using Core.ILookupRepo;
-using Core.IRegRepo;
 using Domain;
-
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Persistence.AddLookupsRepo;
-using Persistence.AdmRepo;
-using Persistence.LookupsRepo;
-using Persistence.RegRepo;
-using School.ServiceLayer.Services.AddLookupServices;
-using School.ServiceLayer.Services.AdmServices;
-using School.ServiceLayer.Services.LookupsServices;
-using School.ServiceLayer.Services.RegServices;
+using Microsoft.IdentityModel.Tokens;
+using School.MiddlewareAndServices.Services;
+using School.ServiceLayer.Helper;
+using System;
+using System.Text;
 using IConfiguration = Microsoft.Extensions.Configuration.IConfiguration;
 
 
@@ -25,86 +18,124 @@ namespace School
 {
     public class Startup
     {
+
+        public IConfiguration Configuration { get; }
+        private readonly SymmetricSecurityKey _signingKey;
+        private readonly ApiService _apiService;
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+             _signingKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["SecurityKey"]));
+          
+            _apiService = new ApiService
+            {
+                IdentityServiceUrl = Configuration["IdentityServiceUrl"]
+            };
         }
 
-        public IConfiguration Configuration { get; }
+
 
         // This method gets called by the runtime. Use this method to add services to the container.
+
         public void ConfigureServices(IServiceCollection services)
         {
 
-           
+            var _securityKey = Configuration["SecurityKey"];
+            var _Issuer = Configuration.GetSection("JwtIssuerOptions:Issuer").Value;
+            var connection = Configuration.GetConnectionString("Connection");
 
-            // services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-            // services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-            services.AddDbContext<SchoolDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("Connection"))); //--------1: add Connection
-            services.AddCors(); //--------2: add CORS
-            services.AddAutoMapper();
-            services.AddMvc(); //--------3: add MVC
-                               // services.AddAutoMapper();
-                             
-          //  services.AddAutoMapper();
+             services
+                .InitDependenciesInjection()
+                .InitContext(Configuration.GetConnectionString("Connection"))
+                .AddAutoMapper()
+                .InitCookies()
+                .InitCors()
+                .AddCache()
+                .InitLocalization()
+                // .InitAuthentication(Configuration.GetSection(nameof(JwtIssuerOptions)), _signingKey, _apiService)
+                .InitSignalR()
+                .InitMvc();
+                
+            services.AddAuthentication(o =>
+             {
+                 o.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                 o.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                 o.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
 
-            services.AddScoped<ILkpItemCalendarRepo, LkpItemCalendarRepo>();
-            services.AddScoped<LkpItemCalendarService>();
-            services.AddScoped<ILkpCalendarRepo, LkpCalendarRepo>();
-            services.AddScoped<LkpCalendarService>();
-            services.AddScoped<ILkpLookupTypeRepo, LkpLookupTypeRepo>();
-            services.AddScoped<LkpLookupTypeService>();
-            services.AddScoped<ILkpLookupRepo, LkpLookupRepo>();
-            services.AddScoped<LkpLookupService>();
+             }).AddJwtBearer(p =>
+             {
+                 p.SaveToken = true;
+                 p.RequireHttpsMetadata = false;
+                 p.TokenValidationParameters = new TokenValidationParameters()
+                 {
+                     ValidateIssuer = true,
+                     ValidateAudience = true,
+                     ValidAudience = _Issuer,
+                     ValidIssuer = _Issuer,
+                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_securityKey))
 
-            //========Additional Lookups
-            services.AddScoped<ILkpSchoolRepo, LkpSchoolRepo>();
-            services.AddScoped<LkpSchoolService>();
-            services.AddScoped<ILkpSectionRepo, LkpSectionRepo>();
-            services.AddScoped<LkpSectionService>();
-            services.AddScoped<ILkpTourRepo, LkpTourRepo>();
-            services.AddScoped<LkpTourService>();
-            services.AddScoped<ILkpBusRepo, LkpBusRepo>();
-            services.AddScoped<LkpBusService>();
-            services.AddScoped<ILkpClassRepo, LkpClassRepo>();
-            services.AddScoped<LkpClassService>();
+                 };
+
+             });
+
+            services
+                .AddDbContext<SchoolDbContext>(options =>
+                  options.UseSqlServer(connection))
+                 .AddCors(options =>
+                 {
+                     options.AddPolicy("AnyOrigin",
+                         builder =>
+                             builder
+                                 .AllowAnyMethod()
+                                 .AllowAnyHeader()
+                                 .AllowAnyOrigin()
+                                 .AllowCredentials()
+                     );
+                 });
+            
+                //.InitLocalization()
+                // .InitAuthentication(/*Configuration.GetSection(nameof(JwtIssuerOptions)),*/ _signingKey, _apiService)
+                //.InitMvc()
+                // .AddAuthentication(JwtBearerDefaults.AuthenticationScheme);
+            services.AddMvc();
 
 
-            services.AddScoped<ILkpDocumentRepo, LkpDocumentRepo>();
-            services.AddScoped<LkpDocumentService>();
-
-            //======= Stud Module =============
-            services.AddScoped<IRegParentRepo, RegParentRepo>();
-            services.AddScoped<RegParentService>();
-            services.AddScoped<IRegStudRepo, RegStudRepo>();
-            services.AddScoped<RegStudService>();
-
-
-
-            //=========================Adm Module==============================//
-
-            services.AddScoped<IAdmStudRepo, AdmStudRepo>();
-            services.AddScoped<AdmStudService>();
 
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ApiService apiService)
         {
+            //app.InitStartup(env.IsDevelopment());
+
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
 
 
+
             app.UseCors(builder => builder //--------4: add UseCors
                 .AllowAnyOrigin()
                 .AllowAnyMethod()
-                .AllowAnyHeader()
+               .AllowAnyHeader()
                 .AllowCredentials());
-            //app.UseHttpsRedirection();
+            app.UseHttpsRedirection();
+            app.UseAuthentication();
+            
             app.UseMvc();
+           
+
+            //using (IServiceScope serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
+            //{
+            //    SchoolDbContext context = serviceScope.ServiceProvider.GetRequiredService<SchoolDbContext>();
+            //    context.Database.Migrate();
+            //    //initializer.Seed();
+            //}
+
+           // apiService.IdentityServiceUrl = Configuration["IdentityServiceUrl"];
 
 
         }

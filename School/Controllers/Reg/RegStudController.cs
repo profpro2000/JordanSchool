@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Core;
 using Microsoft.AspNetCore.Mvc;
@@ -37,7 +38,7 @@ namespace School.Controllers.Reg
         public async Task<IActionResult> Get(int id)
         {
             var result = await _service.GetById(id);
-            if (!result.Any())
+            if (result == null)
             {
                 return NotFound("No Data Found");
             }
@@ -49,13 +50,20 @@ namespace School.Controllers.Reg
         [HttpPost]
         public async Task<IActionResult> Post(RegStudVw obj)
         {
-            if (!ModelState.IsValid)
+            try
             {
-                Response.StatusCode = 400;
-                return Ok(new Res(false, "State Not Valid", obj));
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(new Res(false, "State Not Valid", obj));
+                }
+                _service.Insert(obj);
+                return Ok(new Res(true, "Completed", await _service.GetAll())) ;
             }
-            _service.Insert(obj);
-            return Ok(new Res(true, "Complite", await _service.GetAll()));
+            catch (Exception e)
+            {
+                return BadRequest(new Res(false, "Unexpected Error", obj));
+            }
+          
         }
 
         // PUT: api/StudParent/5
@@ -83,6 +91,22 @@ namespace School.Controllers.Reg
             }
             _service.Delete(id);
             return Accepted();
+        }
+
+        //-------Stud Reports
+
+
+        // GET: api/StudParent/5
+        [HttpGet("StudCard/{yearId}/{studId}")]
+        public IActionResult GetStudCardDataVw(int yearId,int studId)
+        {
+            var result =  _service.GetStudCardDataVw(yearId, studId);
+            if (result == null)
+            {
+                return NotFound("No Data Found");
+            }
+
+            return Ok(result);
         }
     }
 }

@@ -4,8 +4,10 @@ using System.Reflection;
 using System.Runtime.Serialization;
 using System.Text;
 using Domain.Model.Adm;
+using Domain.Model.Financial;
 using Domain.Model.Lookups;
 using Domain.Model.Reg;
+using Domain.Model.Users;
 
 namespace Domain.Model.AddLookups
 {
@@ -22,6 +24,12 @@ namespace Domain.Model.AddLookups
         public string Fax { get; set; }
         public string WebPage { get; set; }
         public string FaceBook { get; set; }
+        //
+        public string  ArDescription { get; set; }
+        public string EngDescription { get; set; }
+        public string PoBox { get; set; }
+        public byte[] ImageFile { get; set; }
+        public int? ImageId { get; set; }
         public ICollection<LkpSection> LkpSections { get; set; }
 
         [IgnoreDataMember] public ICollection<LkpTour> LkpTours { get; set; }
@@ -29,7 +37,13 @@ namespace Domain.Model.AddLookups
         [IgnoreDataMember] public ICollection<LkpClass> LkpClasses { get; set; }
 
         [IgnoreDataMember] public ICollection<RegStud> SchoolRegStuds { get; set; }
-        [IgnoreDataMember] public ICollection<AdmStud> SchoolAdmStuds { get; set; }
+        [IgnoreDataMember] public ICollection<AdmStud> SchoolAdm { get; set; } 
+        [IgnoreDataMember] public ICollection<SchoolFee> SchoolFees { get; set; }
+        [IgnoreDataMember] public ICollection<UserSchool> UsersSchools { get; set; }
+        [IgnoreDataMember] public ICollection<YearlyStudReg> YearlyStudRegs { get; set; }
+
+
+
 
     }
 }
