@@ -12,6 +12,8 @@ namespace Domain.Model.Financial
     public class StudentFee : AuditModel
     {
         public int Id { set; get; }
+        public int ParentId { get; set; }
+        public RegParent RegParent {get;set;}
         public int StudentId { set; get; }
         public AdmStud Student { set; get; }
         public int? YearId { set; get; }

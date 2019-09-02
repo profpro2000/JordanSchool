@@ -111,6 +111,10 @@
     <Compile Remove="Migrations\20190826083036_StudentFeesUpdate.Designer.cs" />
     <Compile Remove="Migrations\20190826084922_StudentFeesUpdate1.cs" />
     <Compile Remove="Migrations\20190826084922_StudentFeesUpdate1.Designer.cs" />
+    <Compile Remove="Migrations\20190830194102_izzV1.cs" />
+    <Compile Remove="Migrations\20190830194102_izzV1.Designer.cs" />
+    <Compile Remove="Migrations\20190830195907_izzV123.cs" />
+    <Compile Remove="Migrations\20190830195907_izzV123.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

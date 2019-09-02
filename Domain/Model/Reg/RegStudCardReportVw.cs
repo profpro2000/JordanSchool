@@ -43,7 +43,7 @@ namespace Domain.Model.Reg
         public string SmsParentName { get; set; }
         public string TourTypeIdName { get; set; }
         public string BusNote { get; set; }
-        public decimal? StudentBrotherValue { get; set; }
+        public int? StudentBrotherValue { get; set; }
         public string StudentBrotherDescountType { get; set; }
         public decimal? TotalValue { get; set; }
 

@@ -107,13 +107,19 @@ namespace School.Controllers.Financial
             }
         }
 
-
+        
         [HttpPut("{id}")]
         public void Update(int id, StudentFeeVw obj)
         {
             _service.Update(id, obj);
         }
 
+        [HttpGet("FinStudCard/{YearId}/{ParentId}")]
+        public Task<IEnumerable<object>> FinStudCard(int YearId, int ParentId)
+        {
+            var result = _service.FinStudCard(YearId, ParentId);
+            return result;
+        }
 
     }
 }

@@ -45,5 +45,6 @@ namespace Domain.Model.Reg
         public double? DescountValue { get; set; } //New 25/07/2019
         public string BusNote { get; set; }
         public string Note { get; set; }
+        public string BrotherDescountName { get; set; }
     }
 }

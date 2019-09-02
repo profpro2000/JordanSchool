@@ -8,6 +8,7 @@ using Domain;
 using Domain.Model.Financial;
 using Microsoft.EntityFrameworkCore;
 using Model.Financial;
+using FinStudCard = Model.Financial.FinStudCard;
 
 namespace Persistence.FinancialRepo
 {
@@ -68,5 +69,12 @@ namespace Persistence.FinancialRepo
 
 
         }
+
+        public async Task<IEnumerable<object>> FinStudCard(int YearId, int ParentId)
+        {
+            var Vw = await  _db.FinStudCard.Where(p => p.YearId == YearId && p.ParentId == ParentId).ToListAsync();
+            return Vw;
+        }
+
     }
     }

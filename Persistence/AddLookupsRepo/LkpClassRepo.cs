@@ -32,7 +32,8 @@ namespace Persistence.AddLookupsRepo
                 Lname = x.Lname,
                 Capacity = x.Capacity,
                 Age = x.Age,
-                ClassFees = x.LkpClassFees.Where(xx => xx.ClassId == x.Id && xx.YearId==currentYEar).LastOrDefault()
+                ClassFees = x.LkpClassFees.Where(xx => xx.ClassId == x.Id && xx.YearId == currentYEar).LastOrDefault(),
+                ClassGender= x.ClassGender != null ? x.ClassGender : 0
 
             }).ToList();
 
@@ -46,7 +47,8 @@ namespace Persistence.AddLookupsRepo
                 Lname = x.Lname,
                 Capacity = x.Capacity,
                 Age = x.Age,
-                ClassFees=x.ClassFees!=null? x.ClassFees.ClassFees+"":null
+                ClassFees=x.ClassFees!=null? x.ClassFees.ClassFees+"":null,
+                x.ClassGender
             }).ToList();
 
             return values;

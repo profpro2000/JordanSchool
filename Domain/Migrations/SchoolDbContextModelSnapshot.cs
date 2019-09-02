@@ -620,6 +620,8 @@ namespace Domain.Migrations
 
                     b.Property<int?>("InsertUser");
 
+                    b.Property<int>("ParentId");
+
                     b.Property<int?>("PaymentMethodId");
 
                     b.Property<int?>("RegStudId");
@@ -647,6 +649,8 @@ namespace Domain.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("FinItemId");
+
+                    b.HasIndex("ParentId");
 
                     b.HasIndex("PaymentMethodId");
 
@@ -1480,6 +1484,11 @@ namespace Domain.Migrations
                     b.HasOne("Domain.Model.Financial.FinItem", "FinItem")
                         .WithMany("StudentFees")
                         .HasForeignKey("FinItemId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("Domain.Model.Reg.RegParent", "RegParent")
+                        .WithMany("StudentFees")
+                        .HasForeignKey("ParentId")
                         .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("Domain.Model.Lookups.LkpLookup", "PaymentMethod")

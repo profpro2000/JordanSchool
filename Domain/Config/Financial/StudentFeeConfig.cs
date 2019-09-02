@@ -16,6 +16,11 @@ namespace Domain.Config.Financial
             builder.HasKey(Key => Key.Id);
 
 
+            builder.HasOne(p => p.RegParent)
+   .WithMany(p => p.StudentFees)
+   .HasForeignKey(k => k.ParentId)
+   .OnDelete(DeleteBehavior.Restrict);
+
             builder.HasOne(p => p.Student)
    .WithMany(p => p.StudentFees)
    .HasForeignKey(k => k.StudentId)

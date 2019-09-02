@@ -6,6 +6,7 @@ using AutoMapper;
 using Core.IFinancial;
 using Domain.Model.Financial;
 using Model.Financial;
+using FinStudCard = Domain.Model.Financial.FinStudCard;
 
 namespace School.ServiceLayer.Services.FinancialServices
 {
@@ -81,7 +82,13 @@ namespace School.ServiceLayer.Services.FinancialServices
         _interface.SaveChanges();
     }
 
+        public async Task<IEnumerable<object>> FinStudCard(int YearId, int ParentId)
+        {
+            var v = await _interface.FinStudCard(YearId, ParentId);
+            return v;
+        }
 
-}
+
+    }
 
 }

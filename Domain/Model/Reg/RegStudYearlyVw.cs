@@ -33,9 +33,11 @@ namespace Domain.Model.Reg
         public DateTime? ApprovedDate { get; set; }
         public int? StudentBrotherSeq { get; set; }
         public int? BrotherDescountType { get; set; }
-        public decimal? DescountValue { get; set; } //New 25/07/2019
+        public int? DescountValue { get; set; } //New 25/07/2019
         public string BusNote { get; set; }
         public string Note { get; set; }
+        public string BrotherDescountName { get; set; }
+
     }
 
 

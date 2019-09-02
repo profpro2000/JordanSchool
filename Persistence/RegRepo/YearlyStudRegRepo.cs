@@ -26,7 +26,7 @@ namespace Persistence.RegRepo
         public async Task<IEnumerable<object>> GetParentChildrensVw(int ParentId)
         {
 
-            var Vw = _db.RegStudYearlyVw.Where(p => p.ParentId == ParentId).ToList();
+            var Vw = _db.RegStudYearlyVw.Where(p => p.ParentId == ParentId).ToList().OrderBy(x=>x.StudentBrotherSeq);
             return Vw;
 
         }
@@ -188,9 +188,10 @@ namespace Persistence.RegRepo
                  ApprovedDate = DateTime.Now,
                  StudentBrotherSeq = x.StudentBrotherSeq != null ? x.StudentBrotherSeq : 0,
                  x.BrotherDescountType,
-                 x.DescountValue
+                 x.DescountValue//,
+                // x.BrotherDescountName
 
-             });//.FirstOrDefault();
+    });//.FirstOrDefault();
 
             var dms = data.Select(x => x.StudentBrotherSeq).FirstOrDefault();
             int xStudentBrotherSeq=0;
@@ -226,7 +227,8 @@ namespace Persistence.RegRepo
                  ApprovedDate = x.ApprovedDate,
                  StudentBrotherSeq = x.StudentBrotherSeq,
                  BrotherDescountType = x.BrotherDescountType,
-                 DescountValue = x.DescountValue??0
+                 DescountValue = x.DescountValue??0//,
+                 //BrotherDescountName = x.BrotherDescountName
 
              }).FirstOrDefault();
 
@@ -257,7 +259,7 @@ namespace Persistence.RegRepo
         public void UpdateStudSeq(int id)
         {
             var data = _db.YearlyStudRegs.Where(p => p.ParentId == id)
-                .OrderByDescending(x => x.BirthDate)
+                .OrderBy(x => x.BirthDate)
                 .ToList();
             var CountData = data.Count();
             System.Diagnostics.Debug.WriteLine("CountData=" + CountData);
@@ -276,9 +278,12 @@ namespace Persistence.RegRepo
                     var studId = x.Id;
                     var price = x.ClassPrice + (x.TourPrice ?? 0);
                     double descount = 0;
-                    if (i == 1) descount = price * 0.50;
-                    if (i == 2) descount = price * 0.25;
-                    if (i >= 3) descount = price * 0.10;
+                     if (i == 1) descount = price * 0.10;
+                    if (i == 2) descount = price * 0.15;
+                    if (i == 3) descount = price * 0.20;
+                    if (i == 4) descount = price * 0.25;
+                    if (i == 5) descount = price * 0.30;
+                    if (i >= 6) descount = price * 0.30;
 
                     x.StudentBrotherSeq = i;
                     //x.DescountValue = descount;
@@ -317,5 +322,6 @@ namespace Persistence.RegRepo
        public int? ClassId { get; set; }
        public int? NewClass { get; set; }
         public int? ApprovedId { get; set; }
+       // public string BrotherDescountName { get; set; }
     }
     }

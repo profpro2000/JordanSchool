@@ -55,6 +55,7 @@ namespace Domain.Model.Reg
         public ICollection<Payment> Payments { get; set; } 
         [IgnoreDataMember] public ICollection<AdmStud> ParentAdm { get; set; }
         [IgnoreDataMember] public ICollection<YearlyStudReg> ParentYearlyStudReg { get; set; }
+        [IgnoreDataMember] public ICollection<StudentFee> StudentFees { get; set; }
 
     }
 
