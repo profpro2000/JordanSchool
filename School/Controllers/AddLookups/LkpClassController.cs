@@ -40,6 +40,7 @@ namespace School.Controllers.AddLookups
             { return NotFound("No Data Found"); }
             return Ok(result);
         }
+
         [HttpGet("GetClassBySchool/{schoolId}")]
         public async Task<IEnumerable<object>> GetClassBySchool(int schoolId)
         {
@@ -48,6 +49,17 @@ namespace School.Controllers.AddLookups
            // { return NotFound("No Data Found"); }
             return result;
         }
+
+
+        [HttpGet("GetClassBySection/{sectionId}")]
+        public async Task<IEnumerable<object>> GetClassBySection(int sectionId)
+        {
+            var result = await _service.GetClassBySection(sectionId);
+            //if (!result.Any())
+            // { return NotFound("No Data Found"); }
+            return result;
+        }
+
 
         // POST: api/LkpClass
         [HttpPost]
