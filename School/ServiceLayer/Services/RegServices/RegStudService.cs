@@ -69,5 +69,12 @@ namespace School.ServiceLayer.Services.RegServices
             var vw =  _interface.GetStudCardData(yearId,studId);
             return vw;
         }
+
+        //-----Classes Reports
+        public Task<IEnumerable<object>> GetClassStudents(int YearId, int ClassId)
+        {
+            var vw = _interface.GetClassStudents(YearId, ClassId);
+            return vw;
+        }
     }
 }

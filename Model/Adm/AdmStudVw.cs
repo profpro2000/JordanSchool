@@ -31,6 +31,7 @@ namespace Model.Adm
         public int? ReligionId { get; set; }
         public LkpLookup Religion { get; set; }
         public DateTime? BirthDate { get; set; }
+        public string BirthPlace { get; set; }
         public int? GenderId { get; set; }
         public LkpLookup Gender { get; set; }
         public int? YearId { get; set; }

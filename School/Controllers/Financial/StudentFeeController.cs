@@ -54,18 +54,26 @@ namespace School.Controllers.Financial
         }
 
 
-        [HttpGet("GetChequesListByFeeId/{feeId}")]
-        public Task<IEnumerable<object>> GetChequesListByFeeId(int FeeId)
-        {
-            var v = _service.GetChequesListByFeeId(FeeId);
-            return v;
-        }
+        //[HttpGet("GetChequesListByFeeId/{feeId}")]
+        //public Task<IEnumerable<object>> GetChequesListByFeeId(int FeeId)
+        //{
+        //    var v = _service.GetChequesListByFeeId(FeeId);
+        //    return v;
+        //}
 
 
         [HttpGet("GetStudFeesListByParent/{YearId}/{id}")]
         public Task<IEnumerable<object>> GetStudFeesListByParent(int YearId, int Id)
         {
                 var result = _service.GetStudFeesListByParent(YearId,Id);
+            return result;
+        }
+
+
+        [HttpGet("GetPaymentList/{YearId}/{ParentId}")]
+        public async Task<IEnumerable<object>> GetPaymentList(int YearId, int ParentId)
+        {
+            var result = await _service.GetPaymentList(YearId, ParentId);
             return result;
         }
 
@@ -78,18 +86,12 @@ namespace School.Controllers.Financial
 
 
         [HttpPost]
-        public void add(StudentFee obj)
+        public object add(StudentFee obj)
         {
-            try
-            {
-                _service.Add(obj);
-
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
+            
+               return _service.Add(obj);
+               
+            
 
         }
 
@@ -107,13 +109,26 @@ namespace School.Controllers.Financial
             }
         }
 
-
+        
         [HttpPut("{id}")]
         public void Update(int id, StudentFeeVw obj)
         {
             _service.Update(id, obj);
         }
 
+        [HttpGet("FinStudCard/{YearId}/{ParentId}")]
+        public Task<IEnumerable<object>> FinStudCard(int YearId, int ParentId)
+        {
+            var result = _service.FinStudCard(YearId, ParentId);
+            return result;
+        }
+
+        [HttpGet("FinStudCardByStud/{YearId}/{StudId}")]
+        public Task<IEnumerable<object>> FinStudCardByStud(int YearId, int StudId)
+        {
+            var result = _service.FinStudCardByStud(YearId, StudId);
+            return result;
+        }
 
     }
 }

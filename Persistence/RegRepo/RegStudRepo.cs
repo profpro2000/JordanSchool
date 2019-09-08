@@ -32,6 +32,15 @@ namespace Persistence.RegRepo
 
         }
 
+        public async Task<IEnumerable<object>> GetClassStudents(int YearId, int ClassId)
+        {
+            var Vw = _db.RegStudCardReportVw.Where(p => p.YearId == YearId && p.ClassId == ClassId).ToList();
+            return Vw;
+
+
+        }
+
+
 
     }
 }

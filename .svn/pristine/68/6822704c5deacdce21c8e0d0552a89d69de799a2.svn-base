@@ -1,0 +1,29 @@
+{
+  "ConnectionStrings": {
+    "Connection": "server=LEEN\\SQLEXPRESS;database=JordanSchool3;user id=adham;password=Admin123#"
+  },
+  "IdentityServiceUrl": "https://localhost:58488",
+  "SecurityKey": "dd%88*377f6d&f�$$�$FdddFF33fssDG^!3",
+  "JwtIssuerOptions": {
+    "Issuer": "http://localhost:58488",
+    "Audience": "http://localhost:4200"
+  },
+  "Logging": {
+    "IncludeScopes": false,
+    "Debug": {
+      "LogLevel": {
+        "Default": "Warning"
+      }
+    },
+    "Console": {
+      "LogLevel": {
+        "Default": "Warning"
+      }
+    },
+    "Json": {
+      "LogLevel": {
+        "Default": "Warning"
+      }
+    }
+  }
+}

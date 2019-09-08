@@ -180,7 +180,7 @@ namespace Persistence.AdmRepo
         public void UpdateStudSeq(int id)
         {
             var data = _db.AdmStuds.Where(p => p.ParentId == id)
-                .OrderByDescending(x => x.BirthDate)
+                .OrderBy(x => x.BirthDate)
                 .ToList();
             var CountData = data.Count();
             System.Diagnostics.Debug.WriteLine("CountData=" + CountData);
@@ -197,11 +197,14 @@ namespace Persistence.AdmRepo
                 {
                     i = i + 1;
                     var studId = x.Id;
-                    var price = x.ClassPrice;// + (x.TourPrice ?? 0);
-                    double descount = 0;
-                    if (i == 1) descount = price * 0.50;
-                    if (i == 2) descount = price * 0.25;
-                    if (i >= 3) descount = price * 0.10;
+                    int? price = x.ClassPrice;// + (x.TourPrice ?? 0);
+                    double? descount = 0;
+                    if (i == 1) descount = price * 0.10;
+                    if (i == 2) descount = price * 0.15;
+                    if (i == 3) descount = price * 0.20;
+                    if (i == 4) descount = price * 0.25;
+                    if (i == 5) descount = price * 0.30;
+                    if (i >= 6) descount = price * 0.30;
 
                     x.StudentBrotherSeq = i;
                     x.DescountValue = descount;

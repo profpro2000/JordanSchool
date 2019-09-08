@@ -1,0 +1,37 @@
+{
+
+  "ConnectionStrings": {
+    // "Connection": "server=10.0.1.1;database=JordanSchool3;user id=adham;password=Admin123#"
+     "Connection": "server=LEEN\\SQLEXPRESS;database=JordanSchool3;user id=adham;password=Admin123#"
+    //"Connection": "server=YASEEN-PC;database=JordanSchool3;user id=yaseen;password=yaseen",
+   // "Connection": "server=DESKTOP-ERU9JP2\\SQLEXPRESS;database=JordanSchool3;user id=yaseen;password=yaseen"
+
+    // "Connection": "Data Source=newsoft.database.windows.net;Initial Catalog=School;User ID=NewSoft;Password=P@ssw0rd;Connect Timeout=60;Encrypt=True;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False"
+
+  },
+  //"IdentityServiceUrl": "http://10.0.1.5:2201",   
+  "IdentityServiceUrl": "https://localhost:58488",
+  "SecurityKey": "dd%88*377f6d&f£$$£$FdddFF33fssDG^!3",
+  "JwtIssuerOptions": {
+    "Issuer": "http://localhost:58488",
+    "Audience": "http://localhost:4200"
+  },
+  "Logging": {
+    "IncludeScopes": false,
+    "Debug": {
+      "LogLevel": {
+        "Default": "Warning"
+      }
+    },
+    "Console": {
+      "LogLevel": {
+        "Default": "Warning"
+      }
+    },
+    "Json": {
+      "LogLevel": {
+        "Default": "Warning"
+      }
+    }
+  }
+}

@@ -8,6 +8,8 @@ namespace Core.IRegRepo
     {
          Task<List<RegStud>> StudList();
         object GetStudCardData(int yearId, int id);
+        Task<IEnumerable<object>> GetClassStudents(int YearId, int ClassId);
+
     }
 }
 

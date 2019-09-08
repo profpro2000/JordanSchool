@@ -56,6 +56,8 @@ namespace School.Controllers.Financial
         }
 
 
+
+
         [HttpPost]
         public void add(SchoolFee obj)
         {

@@ -15,6 +15,9 @@ namespace Model.Financial
         public int? FinItemId { get; set; }
         public string FinItemName { get; set; }
 
-        public int? PaymentId{set;get;}
+        public int? PaymentId { set; get; }
+        public int? FinItemVoucherSequence { get; set; }
+        public DateTime? VoucherDate { get; set; }
+        public string Note {get;set;}
     }
 }

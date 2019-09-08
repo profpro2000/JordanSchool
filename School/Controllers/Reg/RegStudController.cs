@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Core;
@@ -107,6 +108,15 @@ namespace School.Controllers.Reg
             }
 
             return Ok(result);
+        }
+
+
+        // GET: api/StudParent/5
+        [HttpGet("GetClassStudents/{YearId}/{ClassId}")]
+        public async Task<IEnumerable<object>> GetClassStudents(int YearId, int ClassId)
+        {
+            var result = await _service.GetClassStudents(YearId, ClassId);
+            return result;
         }
     }
 }
