@@ -46,8 +46,9 @@ namespace Domain.Model.Financial
         public DateTime? TransferDate { set; get; }
 
         public string VisaCardNo { set; get; }
- 
-        [IgnoreDataMember] public ICollection<PaymentCheque> Paymentcheques { set; get; }
+        public string Note { get; set; }
+
+        public ICollection<PaymentCheque> Paymentcheques { set; get; }
 
 
     }

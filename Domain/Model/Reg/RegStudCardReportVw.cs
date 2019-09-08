@@ -46,6 +46,13 @@ namespace Domain.Model.Reg
         public int? StudentBrotherValue { get; set; }
         public string StudentBrotherDescountType { get; set; }
         public decimal? TotalValue { get; set; }
+        public int? RegFees { get; set; }
+        public string CityName { get; set; }
+        public string Address { get; set; }
+        public string StudMobile { get; set; }
+        public string BirthPlace { get; set; }
+        public string ParentWork { get; set; }
+        public int? JoinYearId { get; set; }
 
 
     }

@@ -26,13 +26,14 @@ namespace Domain.Model.Adm
         public int? ReligionId { get; set; }
         public LkpLookup Religion { get; set; }
         public DateTime? BirthDate { get; set; }
+        public string BirthPlace { get; set; }
         public int? GenderId { get; set; }
         public LkpLookup Gender {get;set;}
         public int? YearId { get; set; }
         public LkpLookup Years { get; set; }
         public int? ClassId { get; set; }
         public LkpClass Class { get; set; }
-        public int ClassPrice { get; set; }
+        public int? ClassPrice { get; set; }
         public int? ClassSeqId { get; set; }
         public LkpLookup ClassSeq { get; set; }
         public int? TourId { get; set; }
@@ -47,7 +48,7 @@ namespace Domain.Model.Adm
         public DateTime? ApprovedDate { get; set; }
         public int? StudentBrotherSeq { get; set; }
         public int? BrotherDescountType { get; set; }
-        public double DescountValue { get; set; } //New 25/07/2019
+        public double? DescountValue { get; set; } //New 25/07/2019
         public string BusNote { get; set; }
         public string Note { get; set; }
     

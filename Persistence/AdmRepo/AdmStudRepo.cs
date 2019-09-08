@@ -197,8 +197,8 @@ namespace Persistence.AdmRepo
                 {
                     i = i + 1;
                     var studId = x.Id;
-                    var price = x.ClassPrice;// + (x.TourPrice ?? 0);
-                    double descount = 0;
+                    int? price = x.ClassPrice;// + (x.TourPrice ?? 0);
+                    double? descount = 0;
                     if (i == 1) descount = price * 0.10;
                     if (i == 2) descount = price * 0.15;
                     if (i == 3) descount = price * 0.20;

@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Web.Mvc;
 using AutoMapper;
+using Core;
 using Core.IFinancial;
 using Domain.Model.Financial;
+using Microsoft.AspNetCore.Mvc;
 using Model.Financial;
 using FinStudCard = Domain.Model.Financial.FinStudCard;
 
@@ -29,8 +32,15 @@ namespace School.ServiceLayer.Services.FinancialServices
         return result;
     }
 
+        public async Task<IEnumerable<object>> GetPaymentList(int YearId, int StudId)
+        {
+            var vw = await _interface.GetPaymentList(YearId, StudId);
+           
+            return vw;
+        }
 
-    public StudentFeeVw GetById(int Id)
+
+        public StudentFeeVw GetById(int Id)
         {
         var vw = _interface.Get(Id);
         var result = _mapper.Map<StudentFeeVw>(vw);
@@ -45,11 +55,11 @@ namespace School.ServiceLayer.Services.FinancialServices
         }
 
 
-        public Task<IEnumerable<object>> GetChequesListByFeeId( int FeeId)
-        {
-            var v = _interface.GetChequesListByFeeId(FeeId);
-            return v;
-        }
+        //public Task<IEnumerable<object>> GetChequesListByFeeId( int FeeId)
+        //{
+        //    var v = _interface.GetChequesListByFeeId(FeeId);
+        //    return v;
+        //}
         
 
 
@@ -61,14 +71,35 @@ namespace School.ServiceLayer.Services.FinancialServices
             return vw;
         }
 
-        public void Add(StudentFee obj)
+        public StudentFeeVw Add(StudentFee obj)
     {
-        var result = _interface.Add(obj);
-        _interface.SaveChanges();
 
-    }
+            //if (!ModelState.IsValid)
+            //{
+            //   // Response.StatusCode = 400;
+            //    //return Ok(new Res(false, "State not valid", obj));
+            //}
 
-    public void Update(int id, StudentFeeVw obj)
+            var result = _interface.Add(obj);
+            _interface.SaveChanges();
+
+
+            //var idx = obj.Id;
+            //var xx = idx;
+            var vw = _interface.getByPayemtId(obj.Id);
+            var result2= _mapper.Map<StudentFeeVw>(vw);
+            return result2;
+           //eturn _interface.getByPayemtId(obj.Id);
+
+
+
+
+
+
+
+        }
+
+        public void Update(int id, StudentFeeVw obj)
     {
         var tab = _mapper.Map<StudentFee>(obj);
         _interface.Update(id, tab);
@@ -85,6 +116,12 @@ namespace School.ServiceLayer.Services.FinancialServices
         public async Task<IEnumerable<object>> FinStudCard(int YearId, int ParentId)
         {
             var v = await _interface.FinStudCard(YearId, ParentId);
+            return v;
+        }
+
+        public async Task<IEnumerable<object>> FinStudCardByStud(int YearId, int StudId)
+        {
+            var v = await _interface.FinStudCardByStud(YearId, StudId);
             return v;
         }
 

@@ -43,8 +43,7 @@ namespace Persistence.FinancialRepo
             return xList;
         }
         public async Task<IEnumerable<object>> GetStudFeesDtl(int yearId, int StudId)
-        {
-            
+        { 
             IList<StudFeeDtlVw> xList = new List<StudFeeDtlVw>();
             try
             {
@@ -62,18 +61,57 @@ namespace Persistence.FinancialRepo
             return xList;
         }
 
-
-        public async Task<IEnumerable<object>> GetChequesListByFeeId(int StudentFeeId)
+        public async Task<IEnumerable<object>> GetPaymentList(int yearId, int StudId)
         {
-            return await _db.PaymentCheques.Where(p => p.StudentFeeId == StudentFeeId).ToListAsync();
+            IList<StudFeeDtlVw> xList = new List<StudFeeDtlVw>();
+            try
+            {
+                xList = _db.StudentFees.Where(p => p.PaymentMethodId > 0 && p.Credit > 0 && p.FinItemId != 9 &&
+                p.YearId == yearId && p.StudentId == StudId).Select(x => new StudFeeDtlVw()
+                {
+                    StudentId = x.StudentId,
+                    FinItemId = x.FinItemId,
+                    FinItemName = _db.FinItems.Where(c => c.Id == x.FinItemId).Select(cc => cc.ArDesc).FirstOrDefault(),
+                    YearId = x.YearId,
+                    Db = x.Debit,
+                    Cr = x.Credit,
+                    FinItemVoucherSequence = x.FinItemVoucherSequence,
+                    VoucherDate = x.VoucherDate,
+                    PaymentId=x.Id,
+                    Note=x.Note
+                    
 
-
+                }).ToList();
+            }
+            catch (Exception e) { }
+            return xList;
         }
+
+
+        //public async task<ienumerable<object>> getchequeslistbyfeeid(int paymentid)
+        //{
+        //    return await _db.paymentcheques.where(p => p.paymentid == paymentid).tolistasync();
+
+
+        //}
 
         public async Task<IEnumerable<object>> FinStudCard(int YearId, int ParentId)
         {
             var Vw = await  _db.FinStudCard.Where(p => p.YearId == YearId && p.ParentId == ParentId).ToListAsync();
             return Vw;
+        }
+
+        public async Task<IEnumerable<object>> FinStudCardByStud(int YearId, int StudId)
+        {
+            var Vw = await _db.FinStudCard.Where(p => p.YearId == YearId && p.StudentId == StudId).ToListAsync();
+            return Vw;
+        }
+
+        public object getByPayemtId(int id)
+        {
+            var result = _db.StudentFees.Where(p => p.Id == id).Include(v=>v.Paymentcheques).FirstOrDefault();
+            return result;
+
         }
 
     }

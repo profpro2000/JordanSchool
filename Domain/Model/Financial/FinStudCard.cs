@@ -18,6 +18,7 @@ namespace Domain.Model.Financial
         public int? sumDepit { get; set; }
         public int? sumCredit { get; set; }
         public int? amtRemainder { get; set; }
+      
 
     }
 }

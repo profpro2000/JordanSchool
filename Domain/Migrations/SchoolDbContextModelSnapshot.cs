@@ -288,6 +288,8 @@ namespace Domain.Migrations
 
                     b.Property<DateTime?>("BirthDate");
 
+                    b.Property<string>("BirthPlace");
+
                     b.Property<int?>("BrotherDescountType");
 
                     b.Property<int?>("BusId");
@@ -296,11 +298,11 @@ namespace Domain.Migrations
 
                     b.Property<int?>("ClassId");
 
-                    b.Property<int>("ClassPrice");
+                    b.Property<int?>("ClassPrice");
 
                     b.Property<int?>("ClassSeqId");
 
-                    b.Property<double>("DescountValue");
+                    b.Property<double?>("DescountValue");
 
                     b.Property<string>("DiseaseName");
 
@@ -550,11 +552,13 @@ namespace Domain.Migrations
 
                     b.Property<int>("ChequeValue");
 
+                    b.Property<string>("ChequeWoner");
+
                     b.Property<DateTime?>("InsertDate");
 
                     b.Property<int?>("InsertUser");
 
-                    b.Property<int>("StudentFeeId");
+                    b.Property<int>("PaymentId");
 
                     b.Property<DateTime?>("UpdateDate");
 
@@ -564,7 +568,7 @@ namespace Domain.Migrations
 
                     b.HasIndex("BankId");
 
-                    b.HasIndex("StudentFeeId");
+                    b.HasIndex("PaymentId");
 
                     b.ToTable("Payment_cheques");
                 });
@@ -619,6 +623,8 @@ namespace Domain.Migrations
                     b.Property<DateTime?>("InsertDate");
 
                     b.Property<int?>("InsertUser");
+
+                    b.Property<string>("Note");
 
                     b.Property<int>("ParentId");
 
@@ -1455,10 +1461,10 @@ namespace Domain.Migrations
                         .HasForeignKey("BankId")
                         .OnDelete(DeleteBehavior.Restrict);
 
-                    b.HasOne("Domain.Model.Financial.StudentFee", "StudentFee")
+                    b.HasOne("Domain.Model.Financial.StudentFee", "StudentFees")
                         .WithMany("Paymentcheques")
-                        .HasForeignKey("StudentFeeId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("PaymentId")
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("Domain.Model.Financial.SchoolFee", b =>
