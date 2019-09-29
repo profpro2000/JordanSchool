@@ -85,6 +85,17 @@ namespace School.Controllers.Financial
         }
 
 
+
+        [HttpPost("GetStudentFeesByParam")]
+        public  Task<IEnumerable<object>> GetStudentFeesByParam([FromBody] StudentFeeFilter studentFeeFilter )
+        {
+            var result = _service.GetStudentFeesByParam(studentFeeFilter);
+            return result;
+        }
+
+
+
+
         [HttpPost]
         public object add(StudentFee obj)
         {

@@ -21,6 +21,7 @@ namespace Model.Financial
         public LkpLookup Year { set; get; }
         public int? FinItemId { set; get; }
         public FinItem FinItem { set; get; }
+        public string FinItemDesc { set; get; }
         public int? Debit { set; get; }
         public int? Credit { set; get; }
         // public int? PaymentId { set; get; }
@@ -50,7 +51,14 @@ namespace Model.Financial
         public string Note { get; set; }
 
         [IgnoreDataMember] public ICollection<PaymentCheque> Paymentcheques { set; get; }
+        public string StudentName {
+            get;
+            set;
+            
+        }
+        public string PaymentMethodDesc { get; set; }
+        public string ParentName { get; set; }
 
-
+         
     }
 }

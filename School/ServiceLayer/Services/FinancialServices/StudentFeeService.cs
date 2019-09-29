@@ -39,7 +39,12 @@ namespace School.ServiceLayer.Services.FinancialServices
             return vw;
         }
 
+        public async Task<IEnumerable<object>> GetStudentFeesByParam(StudentFeeFilter studentFeeFilter)
+        {
+            var vw = await _interface.GetStudentFeesByParam(studentFeeFilter);
 
+            return vw;
+        }
         public StudentFeeVw GetById(int Id)
         {
         var vw = _interface.Get(Id);
