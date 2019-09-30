@@ -2,7 +2,6 @@
 using Core.IFinancial;
 using Domain;
 using Domain.Model.Financial;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Model.Financial;
 using System;
@@ -28,7 +27,7 @@ namespace School.ServiceLayer.Services.FinancialServices
 
         public async Task<List<PaymentChequeVw>> GetByPaymentId(int PaymentId)
         {
-            var v =  _db.PaymentCheques.Include(p => p.Bank).Where(p => p.PaymentId == PaymentId).ToList();
+            var v = _db.PaymentCheques.Include(p => p.Bank).Where(p => p.PaymentId == PaymentId).ToList();
             var result = _mapper.Map<List<PaymentChequeVw>>(v);
             return result;
         }
@@ -43,6 +42,8 @@ namespace School.ServiceLayer.Services.FinancialServices
 
         public void Add(PaymentCheque obj)
         {
+            var ddate = obj.ChequeDate.ToString("dd/MM/yyyy");
+            obj.ChequeDate = DateTime.Parse(ddate);
             var result = _interface.Add(obj);
             _interface.SaveChanges();
         }
