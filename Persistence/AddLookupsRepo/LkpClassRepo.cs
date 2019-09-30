@@ -53,5 +53,20 @@ namespace Persistence.AddLookupsRepo
 
             return values;
         }
+
+
+
+
+        public async Task<IEnumerable<object>> GetClassBySection(int sectionId)
+        {
+            //  var currentYear = _db.LkpYears.Where(p => p.Active == 1).Select(p => p.Id).FirstOrDefault();
+            var result = _db.LkpClasses.Where(p => p.SectionId == sectionId).Select(x => new
+            {
+                Id=x.Id,
+               Aname= x.Aname
+            }).ToList();
+
+            return result;
+        }
     }
 }

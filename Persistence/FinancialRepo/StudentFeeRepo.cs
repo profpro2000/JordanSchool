@@ -60,7 +60,40 @@ namespace Persistence.FinancialRepo
             catch (Exception e) { }
             return xList;
         }
+        public async Task<IEnumerable<object>> GetStudentFeesByParam(StudentFeeFilter studentFeeFilter)
+        {
+            IList<StudentFeeVw> xList = new List<StudentFeeVw>();
 
+            try
+            {
+                
+                xList = await _db.StudentFees.Where(p => 
+                (p.FinItemId == studentFeeFilter.finItemId | studentFeeFilter.finItemId == null) && 
+                (p.ParentId == studentFeeFilter.parentId | studentFeeFilter.parentId ==null) &&
+                (studentFeeFilter.voucherDateTo == null | p.VoucherDate <= studentFeeFilter.voucherDateTo) &&
+                (studentFeeFilter.voucherDateFrom == null | p.VoucherDate >= studentFeeFilter.voucherDateFrom)&&
+                (studentFeeFilter.FinItemVoucherSequenceTo == null | p.FinItemVoucherSequence <= studentFeeFilter.FinItemVoucherSequenceTo) &&
+                (studentFeeFilter.FinItemVoucherSequenceFrom == null | p.FinItemVoucherSequence>= studentFeeFilter.FinItemVoucherSequenceFrom)
+               ).Select(x => new StudentFeeVw()
+                    {
+                        FinItemId = x.FinItemId,
+                        FinItemDesc=_db.FinItems.Where(c=>c.Id==x.FinItemId).Select(b=>b.ArDesc).FirstOrDefault(),
+                        StudentId = x.StudentId,
+                        StudentName = _db.AdmStuds.Where(c => c.Id == x.StudentId).Select(cc => cc.FirstName).FirstOrDefault(),
+                        VoucherDate = x.VoucherDate,
+                        Credit=x.Credit,
+                        FinItemVoucherSequence = x.FinItemVoucherSequence,
+                        PaymentMethodId=x.PaymentMethodId,
+                        PaymentMethodDesc = _db.LkpLookups.Where(c=>c.Id==x.PaymentMethodId).Select(dd=>dd.AName).FirstOrDefault(),
+                        ParentName =_db.RegParents.Where(c=>c.Id==x.ParentId).Select(ee=>ee.FirstName + " " + ee.SecondName + " " + ee.FamilyName).FirstOrDefault()
+                    }).ToListAsync();
+            }
+            catch(Exception e)
+            {
+
+            }
+            return   xList;
+        }
         public async Task<IEnumerable<object>> GetPaymentList(int yearId, int StudId)
         {
             IList<StudFeeDtlVw> xList = new List<StudFeeDtlVw>();

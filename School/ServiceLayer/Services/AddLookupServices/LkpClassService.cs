@@ -45,6 +45,16 @@ namespace School.ServiceLayer.Services.AddLookupServices
             return vw;
 
         }
+
+        public async Task<IEnumerable<object>> GetClassBySection(int sectionId)
+        {
+
+            var vw = await _interface.GetClassBySection(sectionId);
+            // var result = _mapper.Map<List<LkpClassVw>>(vw);
+            return vw;
+
+        }
+
         public void Insert(LkpClassVw obj)
         {
             var tab = _mapper.Map<LkpClass>(obj);

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using Domain.Model.Financial;
+using Model.Financial;
 
 namespace Core.IFinancial
 {
@@ -16,6 +17,7 @@ namespace Core.IFinancial
         Task<IEnumerable<object>> FinStudCard(int YearId, int ParentId);
         Task<IEnumerable<object>> GetPaymentList(int yearId, int StudId);
         Task<IEnumerable<object>> FinStudCardByStud(int YearId, int StudId);
+        Task<IEnumerable<object>> GetStudentFeesByParam(StudentFeeFilter studentFeeFilter);
         object getByPayemtId(int id);
 
 
