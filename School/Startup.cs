@@ -125,7 +125,7 @@ namespace School
             app.UseHttpsRedirection();
             app.UseAuthentication();
             
-            app.UseMvc();
+            app.UseMvc();  
            
 
             //using (IServiceScope serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
