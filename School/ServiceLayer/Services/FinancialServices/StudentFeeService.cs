@@ -38,7 +38,7 @@ namespace School.ServiceLayer.Services.FinancialServices
         {
             var vw = await _interface.GetStudentFeesByParam(studentFeeFilter);
 
-            return vw;
+            return vw; 
         }
         public StudentFeeVw GetById(int Id)
         {

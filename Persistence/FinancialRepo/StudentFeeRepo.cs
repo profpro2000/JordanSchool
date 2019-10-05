@@ -58,7 +58,7 @@ namespace Persistence.FinancialRepo
                 }).ToList();
             }
             catch (Exception e) { }
-            return xList;
+            return xList; 
         }
         public async Task<IEnumerable<object>> GetStudentFeesByParam(StudentFeeFilter studentFeeFilter)
         {
