@@ -59,7 +59,7 @@ namespace Persistence.FinancialRepo
             }
             catch (Exception e) { }
             return xList; 
-        }
+        }   
         public async Task<IEnumerable<object>> GetStudentFeesByParam(StudentFeeFilter studentFeeFilter)
         {
             IList<StudentFeeVw> xList = new List<StudentFeeVw>();

@@ -32,7 +32,7 @@ namespace School.ServiceLayer.Services.FinancialServices
             var vw = await _interface.GetPaymentList(YearId, StudId);
 
             return vw;
-        }
+        } 
 
         public async Task<IEnumerable<object>> GetStudentFeesByParam(StudentFeeFilter studentFeeFilter)
         {
