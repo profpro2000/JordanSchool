@@ -17,7 +17,7 @@ namespace School.Controllers.Financial
         private StudentFeeService _service;
 
         public StudentFeeController(StudentFeeService service)
-        {
+        {   
             _service = service;
         }
 
@@ -68,7 +68,7 @@ namespace School.Controllers.Financial
                 var result = _service.GetStudFeesListByParent(YearId,Id);
             return result;
         }
-
+            
 
         [HttpGet("GetPaymentList/{YearId}/{ParentId}")]
         public async Task<IEnumerable<object>> GetPaymentList(int YearId, int ParentId)
