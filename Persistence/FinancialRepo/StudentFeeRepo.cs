@@ -32,8 +32,8 @@ namespace Persistence.FinancialRepo
                     StudentId = x.Id,
                     StudentName = _db.AdmStuds.Where(c => c.Id == x.Id).Select(cc => cc.FirstName).FirstOrDefault(),
                     YearId = x.YearId,
-                    Db = _db.StudentFees.Where(p => p.StudentId == x.Id && p.YearId == YearId).Sum(xx => xx.Debit),
-                    Cr = _db.StudentFees.Where(p => p.StudentId == x.Id && p.YearId == YearId).Sum(xx => xx.Credit),
+                    Debit = _db.StudentFees.Where(p => p.StudentId == x.Id && p.YearId == YearId).Sum(xx => xx.Debit),
+                    Credit = _db.StudentFees.Where(p => p.StudentId == x.Id && p.YearId == YearId).Sum(xx => xx.Credit),
                     Total = _db.StudentFees.Where(p => p.StudentId == x.Id && p.YearId == YearId).Sum(xx => xx.Debit) -
                    _db.StudentFees.Where(p => p.StudentId == x.Id && p.YearId == YearId).Sum(xx => xx.Credit),
 
@@ -53,8 +53,8 @@ namespace Persistence.FinancialRepo
                     FinItemId = x.FinItemId,
                     FinItemName = _db.FinItems.Where(c => c.Id == x.FinItemId).Select(cc => cc.ArDesc).FirstOrDefault(),
                     YearId = x.YearId,
-                    Db = x.Debit,
-                    Cr = x.Credit
+                    Debit = x.Debit,
+                    Credit = x.Credit
                 }).ToList();
             }
             catch (Exception e) { }
@@ -106,8 +106,8 @@ namespace Persistence.FinancialRepo
                     FinItemId = x.FinItemId,
                     FinItemName = _db.FinItems.Where(c => c.Id == x.FinItemId).Select(cc => cc.ArDesc).FirstOrDefault(),
                     YearId = x.YearId,
-                    Db = x.Debit,
-                    Cr = x.Credit,
+                    Debit = x.Debit,
+                    Credit = x.Credit,
                     FinItemVoucherSequence = x.FinItemVoucherSequence,
                     VoucherDate = x.VoucherDate,
                     PaymentId=x.Id,

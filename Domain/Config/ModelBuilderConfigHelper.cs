@@ -38,6 +38,7 @@ namespace Domain.Config
             modelBuilder.ApplyConfiguration(new LkpClassConfig());
             modelBuilder.ApplyConfiguration(new AdmStudConfig());
             modelBuilder.ApplyConfiguration(new LkpClassFeesConfig());
+            modelBuilder.ApplyConfiguration(new LkpBrothersDiscountRateConfig());
 
             modelBuilder.ApplyConfiguration(new LkpYearConfig());
 

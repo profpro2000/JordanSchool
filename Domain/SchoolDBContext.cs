@@ -58,6 +58,7 @@ namespace Domain
         public DbSet<LkpBus> LkpBusses { get; set; }
         public DbSet<LkpClass> LkpClasses { get; set; }
         public DbSet<LkpYear> LkpYears { get; set; }
+        public DbSet<LkpBrothersDiscountRate>LkpBrothersDiscountRates { get; set; }
 
         //================Stud Module =========================
         public DbSet<RegParent> RegParents { get; set; }

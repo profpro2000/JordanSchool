@@ -307,6 +307,8 @@ namespace School.MiddlewareAndServices.Services
             services.AddScoped<LkpYearService>();
             services.AddScoped<ILkpClassFeesRepo, LkpClassFeesRepo>();
             services.AddScoped<LkpClassFeesService>();
+            services.AddScoped<ILkpBrothersDiscountRateRepo, LkpBrothersDiscountRateRepo>();
+            services.AddScoped<LkpBrothersDiscountRateService>();
 
             //======= Stud Module =============
             services.AddScoped<IRegParentRepo, RegParentRepo>();

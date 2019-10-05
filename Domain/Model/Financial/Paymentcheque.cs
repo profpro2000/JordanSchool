@@ -1,12 +1,10 @@
 ﻿using Domain.Model.Lookups;
 using System;
-using System.Collections.Generic;
 using System.Runtime.Serialization;
-using System.Text;
 
 namespace Domain.Model.Financial
 {
-   public class PaymentCheque:AuditModel
+    public class PaymentCheque : AuditModel
     {
         public int Id { set; get; }
 

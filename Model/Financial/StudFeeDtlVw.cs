@@ -9,8 +9,8 @@ namespace Model.Financial
         public int StudentId { get; set; }
         public string StudentName { get; set; }
         public int? YearId { get; set; }
-        public int? Db { get; set; }
-        public int? Cr { get; set; }
+        public int? Debit { get; set; }
+        public int? Credit { get; set; }
         public int? Total { get; set; }
         public int? FinItemId { get; set; }
         public string FinItemName { get; set; }

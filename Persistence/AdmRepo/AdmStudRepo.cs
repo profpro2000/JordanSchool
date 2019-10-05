@@ -117,7 +117,7 @@ namespace Persistence.AdmRepo
         public async Task<IEnumerable<object>> GetRegChildrensBySchool(int id, int SchoolId)
         {
             var CurrentYear = _db.LkpYears.Where(p => p.Active == 1).Select(x => x.Id).FirstOrDefault();
-            var data = _db.AdmStuds.Where(p => p.ParentId == id && p.YearId == CurrentYear && p.SchoolId==SchoolId).Select(x => new
+            var data = _db.AdmStuds.Where(p => p.ParentId == id && p.YearId == CurrentYear && p.SchoolId == SchoolId).Select(x => new
             {
                 x.Id,
                 x.FirstName,
@@ -133,10 +133,16 @@ namespace Persistence.AdmRepo
                 TourName = x.Tour != null ? x.Tour.Tour.AName : string.Empty,
                 TourTypeName = x.TourType != null ? x.TourType.AName : string.Empty,
                 TourPrice = x.TourType != null ? int.Parse(x.TourType.Value) == 3 ?
-                x.Tour.TourFullPrice : x.Tour.TourHalfPrice : 0,
+                  x.Tour.TourFullPrice : x.Tour.TourHalfPrice : 0,
                 x.StudentBrotherSeq,
-                x.DescountValue
-            });//.Where(p=>p.ClassActive == 1) ;
+                x.DescountValue,
+                DiscountType = _db.LkpBrothersDiscountRates
+                .Where(b => b.BrotherSeq == x.StudentBrotherSeq)
+                .Select(s => s.DiscountType).FirstOrDefault(),
+                DiscountRate = _db.LkpBrothersDiscountRates
+                .Where(b => b.BrotherSeq == x.StudentBrotherSeq)
+                .Select(s => s.Value).FirstOrDefault()
+            }) ;//.Where(p=>p.ClassActive == 1) ;
 
             var result = data.Select(x => new
             {
@@ -156,7 +162,9 @@ namespace Persistence.AdmRepo
                 x.TourPrice,
                 x.StudentBrotherSeq,
                 x.DescountValue,
-                TotalPrice = x.ClassPrice + x.TourPrice - x.DescountValue
+                TotalPrice = x.ClassPrice + x.TourPrice - x.DescountValue,
+                x.DiscountType,
+                x.DiscountRate
 
             }).OrderBy(p => p.StudentBrotherSeq);
 
